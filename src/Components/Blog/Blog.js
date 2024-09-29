@@ -42,88 +42,89 @@ const Blog = () => {
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-  
     if (name === "files") {
-      // Handle file input (store in state)
-      setFormData({
-        ...formData,
-        files: files // Store the file(s) in the formData state
-      });
+      setFormData((prev) => ({ ...prev, files: Array.from(files) })); // Handle file uploads
     } else {
-      // Handle other input fields
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
+      setFormData((prev) => ({ ...prev, [name]: value })); 
     }
   };
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     const postToSend = {
-      nometprenom: formData.nometprenom,
-      domainexpertise: formData.domainexpertise,
-      age: Number(formData.age),
-      email: formData.email,
-      titre: formData.titre,
-      content: [
-        {
-          type: "paragraph",
-          children: [
-            {
-              text: formData.content,
-              type: "text",
-            },
-          ],
-        },
-      ],
-      approved: false,
-    };
-  
-    // Create FormData object
+      data: {
+          id: Date.now(), // or generate an appropriate ID
+          attributes: {
+              nometprenom: formData.nometprenom,
+              domainexpertise: formData.domainexpertise,
+              age: Number(formData.age),
+              email: formData.email,
+              titre: formData.titre,
+              content: [
+                  {
+                      type: "paragraph",
+                      children: [
+                          {
+                              text: formData.content,
+                              type: "text",
+                          },
+                      ],
+                  },
+              ],
+              createdAt: new Date().toISOString(),
+              updatedAt: new Date().toISOString(),
+              publishedAt: new Date().toISOString(),
+              approved: false,
+              file: {
+                  data: formData.files.map((file) => ({
+                      id: Date.now(), // or some unique ID generator
+                      attributes: {
+                          name: file.name,
+                          // Add additional attributes for the file if needed
+                          // Alternative text, caption, etc., can be added here
+                      },
+                  })),
+              },
+          },
+      },
+  };
+    
+    // Use FormData to include files
     const formDataToSend = new FormData();
-    
-    // Append JSON data as a string
-    formDataToSend.append("data", JSON.stringify(postToSend));
-    
-    // Append the file(s) with the correct prefix (use "files.upload" or whatever the backend expects)
-    if (formData.files) {
-      Array.from(formData.files).forEach((file) => {
-        formDataToSend.append("files.upload", file); // Ensure this matches your backend's expected field name
-      });
-    }
-  
+    formDataToSend.append("data", JSON.stringify(postToSend.data));
+    formData.files.forEach((file) => {
+      formDataToSend.append("files", file);
+    });
+
     try {
       const response = await fetch('/api/blogs?populate=*', {
         method: 'POST',
-        body: formDataToSend,
+        body: formDataToSend, // Send FormData
       });
-  
-      if (!response.ok) {
-        const errorData = await response.json();
-        console.error('Error submitting post:', errorData);
-        return;
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Post submitted successfully:', data);
+        setShow(false); // Close modal after successful submission
+        setFormData({ // Reset form data
+          nometprenom: '',
+          domainexpertise: '',
+          age: '',
+          email: '',
+          titre: '',
+          content: '',
+          files: []
+        });
+        // Fetch updated posts
+        fetchPosts(); // Refresh posts without additional fetch
+      } else {
+        console.error('Error submitting post:', response.statusText);
       }
-  
-      const data = await response.json();
-      console.log('Post submitted successfully:', data);
-      setShow(false);
-      setFormData({
-        nometprenom: '',
-        domainexpertise: '',
-        age: '',
-        email: '',
-        titre: '',
-        content: '',
-        files: []
-      });
-      fetchPosts();
     } catch (error) {
       console.error('Error submitting post:', error);
     }
   };
-    
 
   return (
     <>
