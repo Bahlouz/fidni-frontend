@@ -1,0 +1,21 @@
+.hyphen-list {
+    list-style-type: none; /* Remove default list styling */
+    padding-left: 0; /* Remove default padding */
+}
+
+.hyphen-list li::before {
+    content: "- "; /* Add hyphen before each list item */
+    color: black; /* Color of the hyphen */
+    font-weight: bold; /* Optional: make the hyphen bold */
+}
+
+.mission-list {
+    list-style-type: none; /* Remove default list styling */
+    padding-left: 0; /* Remove default padding */
+}
+
+.mission-list li::before {
+    content: "- "; /* Add hyphen before each list item */
+    color: black; /* Color of the hyphen */
+    font-weight: bold; /* Optional: make the hyphen bold */
+}

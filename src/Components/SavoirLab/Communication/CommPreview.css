@@ -1,0 +1,118 @@
+.comm-article-preview-container {
+    text-align: center;
+    margin: 20px;
+  }
+  
+  .comm-article-card {
+    max-width: 90vw;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .comm-image-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 40em;
+  }
+  
+  .comm-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    z-index: 1;
+  }
+  
+  .comm-title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+  }
+  
+  .comm-dots-section {
+    margin-top: 10px;
+  }
+  
+  .comm-dot {
+    height: 15px;
+    width: 15px;
+    margin: 0 5px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+    cursor: pointer;
+  }
+  
+  .comm-dot.comm-active {
+    background-color: #717171;
+  }
+  
+  .comm-article-image {
+    width: 100%;
+    height: auto;
+    transform: scale(1);
+    filter: brightness(70%);
+  }
+  
+  .transition-scale {
+    animation: scaleUp 6s ease-in-out forwards;
+  }
+  
+  @keyframes scaleUp {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.1);
+    }
+  }
+  
+  .card-body-comm {
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+  }
+  
+  .card-body-comm.fade-out {
+    opacity: 0;
+  }
+  
+  .card-body-comm.fade-in {
+    opacity: 1;
+  }
+  
+  .hidden {
+    opacity: 0;
+  }
+  
+  .card-body-comm:hover {
+    transform: none !important;
+  }
+  
+  .card-body-comm .card-text {
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Hide overflowing text */
+    text-overflow: ellipsis; /* Show ellipsis (...) */
+    max-width: 100%; /* Ensure the text doesn't exceed the container width */
+  }
+  
+  .card-body-comm .single-line-content {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  

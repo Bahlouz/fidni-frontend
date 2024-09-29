@@ -1,0 +1,39 @@
+.qui-sommes-nous-container {
+  background: radial-gradient(circle, #ffffff, #f0f0f0);
+  color: rgb(48, 48, 48);
+  padding: 1.25em;
+  font-family: Arial, sans-serif;
+}
+
+.qui-sommes-nous-title {
+  color: #0056b3;
+  font-weight: bold;
+  text-align: center;
+  font-size: 4rem; /* Reduced font size for better readability on smaller screens */
+  font-family: raleway;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.qui-sommes-nous-text {
+  margin: 2em 6em;
+  font-size: 1.3em;
+  text-align: justify;
+  font-family: raleway;
+}
+
+/* Styles for screens 767px and smaller */
+@media (max-width: 767px) {
+  .qui-sommes-nous-container {
+    padding: 1em !important; /* Reduced padding to fit content better */
+  }
+
+  .qui-sommes-nous-title {
+    font-size: 2.5rem !important; /* Further reduced font size for titles */
+  }
+
+  .qui-sommes-nous-text {
+    margin: 1em 2em !important; /* Reduced margins to avoid excessive space on the sides */
+    font-size: 1.1em !important; /* Slightly reduced font size for better text flow */
+    line-height: 1.4 !important; /* Improved line height for readability */
+  }
+}

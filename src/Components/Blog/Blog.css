@@ -1,0 +1,248 @@
+.background-image-blog {
+  background: url('../../Assets/backblog.jpg') no-repeat center center;
+  background-attachment: fixed;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+}
+.background-image-blog::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Adjust color and opacity for tint */
+  z-index: 1;
+}
+
+
+
+.overlay-text-blog-singlepage {
+  font-family: raleway;
+  padding: 1.25em;
+  border-radius: 0.625em;
+  text-align: left;
+  z-index: 2;
+  bottom: 0;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff; /* Text color to contrast with the background tint */
+  padding: 1.25em;
+  width: 100%; /* Optional: Set width to full to make the text container span across the image */
+  
+}
+.blog-container-unique {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.25em;
+  z-index: 2;
+}
+
+.featured-post-container-unique {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.featured-post-unique {
+  flex: 2;
+  position: relative;
+  border-radius: 0.625em;
+  overflow: hidden;
+  margin-right: 1.25em;
+}
+
+.featured-image-unique {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7);
+}
+
+.featured-content-unique {
+  position: absolute;
+  bottom: 1.25em;
+  left: 1.25em;
+  color: white;
+}
+
+.featured-category-unique {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 5px 0.625em;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.featured-title-unique {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-top: 0.625em;
+}
+
+.other-featured-posts-unique {
+  flex: 1;
+}
+
+.other-featured-title-unique {
+  font-size: 1.25em;
+  margin-bottom: 1.25em;
+}
+
+.other-post-unique {
+  display: flex;
+  margin-bottom: 1.25em;
+}
+
+.other-post-image-unique {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 0.625em;
+  margin-right: 0.625em;
+}
+
+.other-post-content-unique {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.other-post-title-unique {
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.all-posts-container-unique {
+  margin-top: 40px;
+}
+
+.all-posts-title-unique {
+  font-size: 24px;
+  margin-bottom: 1.25em;
+}
+
+.all-posts-grid-unique {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.25em;
+}
+
+.post-unique {
+  border-radius: 0.625em;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.post-image-unique {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.post-content-unique {
+  padding: 1.25em;
+}
+.blog-image-card{
+  width: 100%;
+  height: 300px !important;
+  object-fit: cover;
+}
+.post-title-unique {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 0.625em;
+}
+
+.post-description-unique {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 0.625em;
+}
+
+.post-meta-unique {
+  font-size: 14px;
+  color: #666;
+}
+
+.post-author-unique {
+  font-weight: bold;
+}
+
+.post-date-unique {
+  margin-left: 0.625em;
+}
+
+.post-readtime-unique {
+  margin-left: 0.625em;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .featured-post-container-unique {
+    flex-direction: column;
+  }
+
+  .featured-post-unique {
+    margin-right: 0;
+    margin-bottom: 1.25em;
+  }
+
+  .featured-content-unique {
+    font-size: 1em;
+  }
+
+  .other-featured-posts-unique {
+    margin-top: 1.25em;
+  }
+
+  .other-post-unique {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .other-post-image-unique {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    margin-bottom: 0.625em;
+  }
+
+  .post-image-unique {
+    height: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .featured-title-unique {
+    font-size: 24px;
+  }
+
+  .featured-category-unique {
+    font-size: 12px;
+  }
+
+  .other-featured-title-unique {
+    font-size: 18px;
+  }
+
+  .post-title-unique {
+    font-size: 1em;
+  }
+
+  .post-description-unique {
+    font-size: 12px;
+  }
+
+  .post-meta-unique {
+    font-size: 12px;
+  }
+}

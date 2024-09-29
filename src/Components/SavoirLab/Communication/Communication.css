@@ -1,0 +1,289 @@
+
+.Communication-container {
+    padding: 0;
+  }
+  
+  .background-image-Communication {
+    background: url('../../../Assets/backcommunication1.png') no-repeat center center;
+    background-attachment: fixed;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+  }
+  .background-image-Communication::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Adjust color and opacity for tint */
+    z-index: 1;
+  }
+  
+  .overlay-text-Communication {
+    font-family: raleway;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: left;
+    z-index: 2;
+    bottom: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff; /* Text color to contrast with the background tint */
+    width: 100%; /* Optional: Set width to full to make the text container span across the image */
+    padding: 0 5em 0 5em;
+    margin-bottom: 7em;
+    
+  }
+  .Communication-titre{
+    font-size:3em;
+    bottom: 0;
+  }
+  .Communication-description{
+    font-size:1.5em;
+    bottom:0;
+  }
+
+.custom-button {
+  margin-left: 2em;
+  margin-right:2em;
+  width: 25em; /* Responsive width */
+  height: 6em; /* Responsive height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  white-space: normal; /* Allow text to wrap */
+  font-weight: bold;
+}
+/* Communication.css */
+/* Communication.css */
+.custom-button-comm {
+  border-radius: 15px; /* No rounded corners */
+  font-family:raleway ;
+  border-color: #ffffff; /* Purple border color */
+  color: #000000; /* Purple text color */
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  background: linear-gradient(to bottom, #fff 50%, #ffffff 50%); /* Gradient background */
+  background-size: 210%;
+  background-position: 0% 0%;
+  transition: background 550ms ease-in-out, color 750ms ease-in-out, box-shadow 550ms ease-in-out; /* Smooth transitions */
+  transition: scale ease-in-out 0.7s ;
+}
+
+.custom-button-comm:after {
+  content: '';
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 100%;
+  background: #000000; /* Purple background for the pseudo-element */
+  z-index: -1;
+  transition: width 450ms ease-in-out; /* Smooth transition for the pseudo-element */
+}
+
+.custom-button-comm:hover {
+  color: #fff; /* White text color on hover */
+  background-position: 0 100%; /* Move background gradient on hover */
+  scale: 1.1;
+}
+
+.custom-button-comm:hover:after {
+  width: 110%; /* Expands the pseudo-element on hover */
+}
+
+.link-item-comm{
+  display: none;
+}
+
+.custom-button-comm > * {
+  flex: 1;
+}
+.button-container-comm {
+  position: absolute;
+  bottom: 0; /* Distance from the bottom of the screen */
+  left: 50%;
+  transform: translateX(-50%); /* Center horizontally */
+  display: flex;
+  gap: 0; /* No gap between buttons */
+  width: 100%; /* Full width of the screen */
+  z-index: 2;
+  
+
+}
+
+.wikid-button-comm {
+  background-color: rgba(0, 64, 224, 0.7);
+  color: #fff;
+  font-size: 1.2em;
+  border: none;
+  flex: 1; /* Make each button grow equally */
+  padding: 15px 0; /* Adjust padding for readability */
+  transition: opacity 0.3s ease;
+  text-align: center;
+  white-space: wrap; /* Prevent button text from wrapping */
+  border-radius:0;
+  transition:all ease-in-out 0.5s ;
+  padding: 1em;
+  border-right: solid 1px rgb(255, 255, 255);
+}
+
+.wikid-button-comm:hover {
+  cursor: pointer;
+  background-color:rgba(255, 255, 255, 0.9);
+  color: rgb(0, 0, 0);
+}
+.wikid-button-comm.active {
+  background-color: rgb(255, 255, 255); /* Transparent background for active button */
+  color: rgb(0, 0, 0); /* Optional: Change text color if needed */
+}
+@media (max-width: 1350px) {
+  .overlay-text-Communication {
+    font-family: raleway;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: left;
+    z-index: 2;
+    bottom: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff; /* Text color to contrast with the background tint */
+    width: 100%; /* Optional: Set width to full to make the text container span across the image */
+    padding: 0 5em 0 5em;
+    margin-bottom: 9em;
+    
+  }
+  .link-item-comm{
+    display: none;
+  }
+}
+@media (max-width: 1024px) {
+  .overlay-text-Communication {
+    font-family: raleway;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: left;
+    z-index: 2;
+    bottom: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff; /* Text color to contrast with the background tint */
+    width: 100%; /* Optional: Set width to full to make the text container span across the image */
+    padding: 0 5em 0 5em;
+    margin-bottom: 10em;
+    
+  }
+  .link-item-comm{
+    display: none;
+  }
+  .Communication-titre{
+    font-size:2em;
+    bottom: 0;
+  }
+  .Communication-description{
+    font-size:1em;
+    bottom:0;
+  }
+  .link-item-comm{
+    display: none;
+  }
+  .wikid-button-comm {
+       font-size: 1em;
+  }
+}
+@media (max-width: 768px) {
+  .overlay-text-Communication {
+    font-family: raleway;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: left;
+    z-index: 2;
+    bottom: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff; /* Text color to contrast with the background tint */
+    width: 100%; /* Optional: Set width to full to make the text container span across the image */
+    padding: 0 5em 0 5em;
+    margin-bottom: 0em;
+    
+  }
+  .Communication-titre{
+    font-size:2em;
+    bottom: 0;
+  }
+  .Communication-description{
+    font-size:1em;
+    bottom:0;
+  }
+
+  .wikid-button-comm{
+    display: none;
+  }
+  .link-item-comm{
+    align-items: center;
+    font-size: 1.5em;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    margin: 0.5em 1em 0.5em 1em;
+    border-radius: 15px;
+  }
+} 
+@media (max-width: 768px) {
+  .overlay-text-Communication {
+    font-family: raleway;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: left;
+    z-index: 2;
+    bottom: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff; /* Text color to contrast with the background tint */
+    width: 100%; /* Optional: Set width to full to make the text container span across the image */
+    padding:0.5em !important;
+    margin-bottom: 0em;
+    text-align: justify !important;
+    
+  }
+  .Communication-titre{
+    font-size:2em !important;
+    bottom: 0;
+  }
+  .Communication-description{
+    font-size:0.8em !important;
+    bottom:0;
+  }
+
+  .wikid-button-comm{
+    display: none;
+  }
+  .link-item-comm{
+    align-items: center;
+    font-size: 1em !important;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    margin: 0.5em 1em 0.5em 1em;
+    border-radius: 15px;
+  }
+} 

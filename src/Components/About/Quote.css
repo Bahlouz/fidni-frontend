@@ -1,0 +1,151 @@
+/* Import fonts from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&family=Roboto:wght@400;700&family=Merriweather:wght@400;700&display=swap');
+
+/* Basic styles */
+.quote-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: radial-gradient(circle, #ffffff, #f0f0f0);
+    padding: 1em;
+    box-sizing: border-box; /* Ensure padding is included in element's width */
+    font-family: 'Raleway', sans-serif; /* Apply Raleway as default */
+}
+
+/* Specific styles for the QuoteComponent */
+.quote-container-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em;
+}
+
+.quote-mot {
+    font-size: 1.5em;
+    font-family: 'Merriweather', serif; /* Complementary serif font */
+    color: #ff6600; /* Vibrant orange for contrast */
+}
+
+.quote-author {
+    font-size: 1.4em;
+    font-family: 'Roboto', sans-serif; /* Complementary sans-serif font */
+    color: #7d4c3a; /* Warm brown for a softer look */
+    text-align: center;
+}
+
+.unesco-logo {
+    width: 100%;
+    max-width: 27em;
+    aspect-ratio: 1 / 1; /* Ensures a 1:1 aspect ratio */
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 20px auto;
+}
+
+.quote-content {
+    padding: 1em;
+    margin: 3em;
+}
+.quote-text {
+    color: #0056b3;
+    font-weight: bold;
+    text-align: center;
+    font-size: 3rem; /* Reduced font size for better readability on smaller screens */
+    font-family: raleway;
+}
+.quote-body {
+    font-size: 1.3rem;
+    color: #003366; /* Dark blue for a professional look */
+    line-height: 1.5;
+    position: relative;
+    padding: 0 1em; /* Adjust padding for better responsiveness */
+    margin-top: 1.2em;
+    font-family: 'Raleway', sans-serif; /* Apply Raleway for body text */
+    text-align: justify;
+}
+
+.quote-body::before,
+.quote-body::after {
+    font-size: 3em;
+    color: #cccccc; /* Light gray for subtle emphasis */
+    position: absolute;
+    font-size: 7em;
+}
+
+.quote-body::before {
+    content: '\201C';
+    top: -0.5em;
+    left: -0.3em;
+}
+
+.quote-body::after {
+    content: '\201D';
+    bottom: -1em;
+    right: 0em;
+}
+.before-footer {
+    display: inline-block;
+    width: 100%; /* This should be twice the width of the container */
+    height: 70vh;
+    background-image: url('../../Assets/beforefooter.svg');
+    background-repeat: no-repeat;
+    background-size: contain; /* Ensure the image scales properly */
+
+  }
+  
+
+  
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .quote-text {
+        font-size: 20px !important;
+    }
+
+    .quote-author {
+        font-size: 1.2em !important;
+    }
+
+    .quote-body {
+        font-size: 1em !important;
+    }
+
+    .unesco-logo {
+        max-width: 15em !important;
+    }
+
+    /* Ensure the image appears before the paragraphs */
+    .quote-container-left {
+        order: 1 !important;
+    }
+
+    .quote-content {
+        order: 2 !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .quote-text {
+        font-size: 18px !important;
+    }
+
+    .quote-author {
+        font-size: 1em !important;
+    }
+
+    .quote-body {
+        font-size: 0.9em !important;
+    }
+
+    .unesco-logo {
+        max-width: 10em !important;
+    }
+
+    /* Ensure the image appears before the paragraphs */
+    .quote-container-left {
+        order: 1 !important;
+    }
+
+    .quote-content {
+        order: 2 !important;
+    }
+}

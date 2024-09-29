@@ -1,0 +1,20 @@
+/* src/App.css */
+.app {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: white;
+    overflow-x: hidden;
+
+  }
+  
+  .app-header {
+    background-color: #ffffff;
+    padding: 1rem;
+    color: white;
+  }
+  
+  .app-content {
+    flex: 1;
+    padding: 1rem;
+  }

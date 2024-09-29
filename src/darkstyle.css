@@ -1,0 +1,18 @@
+.header.dark {
+    color: white !important;
+    background-color: black;
+  }
+
+.navbar.dark{
+  background-color:black;
+}
+
+.app.dark{
+  background-color:black;
+}
+h1.dark{
+  color: black;
+}
+:root.dark{
+  background-color:black;
+}

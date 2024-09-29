@@ -1,0 +1,103 @@
+/* Basic Reset */
+
+/* Container Styling */
+.accessibility-features {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+/* Heading Styling */
+.accessible-heading {
+  font-size: 1.5em;
+  color: #333;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #007BFF;
+  padding-bottom: 5px;
+}
+
+/* Paragraph Styling */
+.w3c-measures {
+  font-size: 1.1em;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* Features List Styling */
+.features-list {
+  list-style-type: none;
+  margin-bottom: 20px;
+}
+
+.feature-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.feature-name {
+  font-weight: bold;
+  color: #444;
+}
+
+.feature-shortcut {
+  font-family: 'Courier New', Courier, monospace;
+  color: #007BFF;
+}
+
+/* Apps List Styling */
+.apps-list {
+  list-style-type: none;
+}
+
+.app-item {
+  background-color: #e9ecef;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.app-name {
+  font-weight: bold;
+  color: #444;
+}
+
+/* Accessibility Styles */
+.accessibility-container body {
+  font-size: 1.2em;
+  line-height: 1.5;
+}
+
+.accessibility-features {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.accessible-heading,
+.app-name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.w3c-measures,
+.feature-name,
+.feature-shortcut {
+  font-size: 16px;
+}
+
+@media (max-width: 600px) {
+  .feature-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

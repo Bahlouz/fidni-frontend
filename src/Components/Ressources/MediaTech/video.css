@@ -1,0 +1,98 @@
+/* VideoPlayerList.css */
+
+/* Centering the page title and description */
+.page-header {
+  text-align: center;
+  margin: 0 auto;
+  padding: 20px;
+
+}
+
+.video-page-title {
+  font-size: 4rem; /* Adjust font size as needed */
+  margin-bottom: 10px;
+  color: #0056b3;
+  font-weight: bold;
+}
+
+.video-page-description {
+  font-size: 2rem; /* Adjust font size as needed */
+  color: #555; /* Medium gray color for descriptions */
+  max-width: 800px; /* Limit width for readability */
+  margin: 0 auto; /* Center horizontally */
+}
+
+
+.container {
+  max-width: 1200px; /* Maximum width of the container */
+  margin: 0 auto; /* Center container horizontally */
+  padding: 15px; /* Padding inside container */
+}
+
+.videos-list {
+  flex: 1 1 calc(50% - 16px); /* Flex basis to take up half the width minus gap */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px; /* Space between items */
+  min-height: 1000px;
+}
+
+.video-item {
+  flex: 1;
+  box-sizing: border-box;
+}
+
+.video-player {
+  border: 1px solid #ddd; /* Light gray border for a formal look */
+  border-radius: 8px; /* Rounded corners */
+  padding: 16px;
+  background-color: #f9f9f9; /* Light background color */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.description-container {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.description-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limit to 3 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Add ellipsis at the end of the truncated text */
+  transition: max-height 0.3s ease; /* Smooth transition for expanding/collapsing */
+  max-height: 4.5em; /* Approximate height for 3 lines */
+}
+
+.description-text.expanded {
+  -webkit-line-clamp: unset; /* Remove line clamp when expanded */
+  max-height: none; /* Remove max height restriction */
+}
+
+.video-player button {
+  margin-top: 8px;
+  color: #007bff; /* Blue color for the button text */
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.video-player button:hover {
+  color: #0056b3; /* Darker blue for hover effect */
+}
+.clamped-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.expanded-description {
+  display: block;
+  -webkit-line-clamp: unset;
+}

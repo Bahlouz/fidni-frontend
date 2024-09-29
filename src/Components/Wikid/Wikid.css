@@ -1,0 +1,108 @@
+.Wikid-title {
+    margin-top: 20px;
+    color: #333;
+}
+
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    background-color: #fff;
+    border-radius: 5px;
+}
+.background-image-wikiphedia {
+    background: url('../../Assets/backwikid.jpg') no-repeat center center;
+    background-attachment: fixed;
+    background-size: cover;
+    width: 100vw;   
+    height: 100vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+  }
+  .background-image-wikiphedia::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Adjust the opacity as needed */
+    z-index: 1;
+}
+.overlay-text-wikiphedia{
+    color: white;
+    z-index: 2;
+}
+.wikiphedia-description{
+    font-size:1.3em;
+}
+
+.button-container {
+    position: absolute;
+    bottom: 0; /* Distance from the bottom of the screen */
+    left: 50%;
+    transform: translateX(-50%); /* Center horizontally */
+    display: flex;
+    gap: 0; /* No gap between buttons */
+    width: 100%; /* Full width of the screen */
+    z-index: 2;
+
+
+}
+
+.wikid-button {
+    background-color: rgba(0, 0, 49, 0.9);
+    color: #fff;
+    font-size: 1.2em;
+    border: none;
+    flex: 1; /* Make each button grow equally */
+    padding: 15px 0; /* Adjust padding for readability */
+    transition: opacity 0.3s ease;
+    text-align: center;
+    white-space: nowrap; /* Prevent button text from wrapping */
+    border-radius:0;
+    transition:all ease-in-out 0.5s ;
+}
+
+
+
+.wikid-button:hover {
+    cursor: pointer;
+    background-color:rgba(18, 18, 60, 0.9);
+    color: rgb(255, 255, 255);
+}
+.wikid-button.active {
+    background-color: rgb(255, 255, 255); /* Transparent background for active button */
+    color: rgb(0, 0, 0); /* Optional: Change text color if needed */
+}
+@media (max-width: 768px) {
+    .overlay-text-wikiphedia {
+        margin-bottom: 180px; /* Increase margin to ensure text does not overlap with buttons */
+    }
+    .button-container {
+        flex-direction: column; /* Stack buttons vertically */
+        align-items: center; /* Center buttons horizontally */
+    }
+    .wikid-button {
+        width: 100%; /* Full width of the container */
+        margin-bottom: 10px; /* Space between stacked buttons */
+        font-size: 0.8rem; /* Adjust font size for smaller screens */
+        padding: 12px 0; /* Adjust padding for smaller screens */
+    }
+}
+
+/* When the screen width is 480px or less, further adjust button styles */
+@media (max-width: 480px) {
+    .overlay-text-wikiphedia {
+        margin-bottom: 200px; /* Increase margin further if needed */
+    }
+    .wikid-button {
+        font-size: 0.7rem; /* Further adjust font size for very small screens */
+        padding: 10px 0; /* Further adjust padding for very small screens */
+    }
+}

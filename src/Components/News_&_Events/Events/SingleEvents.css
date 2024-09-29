@@ -1,0 +1,59 @@
+/* SingleNews.css */
+
+/* Typography */
+@import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora&family=Ubuntu:wght@300;400;700&display=swap');
+
+.single-news-container body {
+  margin: 0;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 300;
+}
+
+.single-news-container h1, h2, h3.dark {
+  font-family: 'Lora', serif;
+  font-weight: 400;
+  color: #143774;
+  margin-top: 0;
+}
+
+.single-news-container h1.dark {
+  font-size: 2rem;
+  margin-bottom: 1em;
+}
+
+
+.single-news-container strong {
+  font-weight: 700;
+}
+
+.single-news-container {
+  max-width: 95vw;
+  margin: 0 auto;
+  padding: 2em 1em;
+}
+
+.single-news-image {
+  max-width: 100%;
+  display: block;
+  margin-bottom: 1em;
+}
+
+.single-news-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.5em;
+}
+
+.single-news-content {
+  text-align: justify;
+  line-height: 1.6;
+  margin-bottom: 2em;
+}
+
+@media (max-width: 768px) {
+  .single-news-content {
+    font-size: 1rem;
+  }
+}

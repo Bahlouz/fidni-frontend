@@ -1,0 +1,58 @@
+.img-news{
+    width: auto;
+    height:19em;
+    object-fit: cover !important;
+}
+.news-content-desc {
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limits text to 3 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.news-content.collapsed {
+    -webkit-line-clamp: 3; /* Limit to 3 lines when collapsed */
+}
+.news-container {
+    background-image: url("../../../Assets/back navhead.jpg");
+    background-size: cover;       /* Ensures the image covers the entire container */
+    background-position: center;  /* Centers the image */
+    background-repeat: no-repeat;    /* Prevents the image from repeating */
+    color: white; 
+    z-index: 1;               
+}
+.news-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Optional: add overlay color */
+    z-index: -1;
+}
+.news-content{
+    margin-top:170px
+}
+.news-description{
+    font-size: 1.2em;
+}
+.news-title {
+    margin-top: 20px;
+    color: #ffffff;
+}
+.news-une{
+    color: white;
+    margin-top:2em;
+}
+
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    background-color: #fff;
+    border-radius: 5px;
+}

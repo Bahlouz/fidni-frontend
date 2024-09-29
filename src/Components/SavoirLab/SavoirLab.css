@@ -1,0 +1,30 @@
+.savoirlab-container {
+    padding: 0;
+  }
+  
+  .background-image-savoir-lab {
+    background: url('../../Assets/backsavoir.png') no-repeat center center;
+    background-attachment: fixed;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+  }
+  
+  .overlay-text {
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .pdf-list {
+    
+    padding: 20px;
+  }
+  .savoirlab-titre{
+    color:white;
+  }
