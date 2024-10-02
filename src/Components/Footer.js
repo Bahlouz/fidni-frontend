@@ -142,10 +142,10 @@ function Footer() {
               <h2 className="footer-menu-name">Mediathèque</h2>
               <ul id="menu-company" className="footer-menu-list">
                 <li className="menu-item menu-item-type-post_type menu-item-object-page">
-                  <a href="/resources/media/audio-podcast">Audio & Podcast</a>
+                  <a href="/mediatheque/audio-podcast">Audio & Podcast</a>
                 </li>
                 <li className="menu-item menu-item-type-taxonomy menu-item-object-category">
-                  <a href="/resources/media/video">Vidéo</a>
+                  <a href="/mediatheque/video">Vidéo</a>
                 </li>
               </ul>
             </div>
@@ -178,7 +178,10 @@ function Footer() {
                   <a href="/savoir-lab/wikiphedia">WikiPHédia</a>
                 </li>
                 <li className="menu-item menu-item-type-post_type menu-item-object-page">
-                  <a href="/news-events/news">Actualités</a>
+                  <a href="/actualites-et-evenements/actualites">Actualités</a>
+                </li>
+                <li className="menu-item menu-item-type-post_type menu-item-object-page">
+                  <a href="/actualites-et-evenements/evenements">Événements</a>
                 </li>
               </ul>
             </div>

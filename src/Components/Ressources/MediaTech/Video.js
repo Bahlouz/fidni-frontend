@@ -162,7 +162,7 @@ const VideoPlayer = ({ url, title, description, isExpanded, onToggle }) => {
 const VideoPlayerList = () => {
   const [videos, setVideos] = useState([]);
   const [expanded, setExpanded] = useState({});
-
+  const BASE_URL = 'https://admin.fidni.tn';
   const toggleDescription = (index) => {
     setExpanded(prev => ({
       ...prev,

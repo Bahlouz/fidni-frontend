@@ -12,7 +12,7 @@ const SingleEvents = () => {
     const [event, setEvent] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
+    const BASE_URL = 'https://admin.fidni.tn';
     useEffect(() => {
         const fetchEvent = async () => {
             try {

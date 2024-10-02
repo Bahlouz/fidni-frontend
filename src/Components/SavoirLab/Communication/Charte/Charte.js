@@ -5,7 +5,7 @@ import './Charte.css';
 const Charte = () => {
   const [apiData, setApiData] = useState([]);
   const [combinedData, setCombinedData] = useState([]);
-
+  const BASE_URL = 'https://admin.fidni.tn';
   const cardData = [
     {
       title: "Découvrez la Charte pour l'Inclusion et l'Accessibilité des Personnes Handicapées dans les Médias Tunisiens",
@@ -17,7 +17,7 @@ const Charte = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('/api/post-blogs?populate=*');
+        const response = await fetch(`/api/post-blogs?populate=*`);
         const data = await response.json();
         console.log('API Response:', JSON.stringify(data, null, 2)); // Log detailed API response
 

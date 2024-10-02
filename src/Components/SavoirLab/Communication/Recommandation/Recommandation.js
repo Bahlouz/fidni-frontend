@@ -5,7 +5,7 @@ import './Recommandation.css';
 const Recommandation = () => {
   const [apiData, setApiData] = useState([]);
   const [combinedData, setCombinedData] = useState([]);
-
+  const BASE_URL = 'https://admin.fidni.tn';
   const cardData = [
     {
       title: "Accéder aux Recommandations Stratégiques pour l'Inclusion Médiatique des Personnes Handicapées",
@@ -17,7 +17,7 @@ const Recommandation = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('/api/post-blogs?populate=*');
+        const response = await fetch(`$/api/post-blogs?populate=*`);
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }

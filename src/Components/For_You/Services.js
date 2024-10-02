@@ -5,7 +5,7 @@ import downloadbutton from '../../Assets/downloadimg.png';
 
 const Services = () => {
   const [apiCardData, setApiCardData] = useState([]);
-
+  const BASE_URL = 'https://admin.fidni.tn';
   
   const cardData = [
     {
@@ -51,9 +51,9 @@ const Services = () => {
   ];
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchApiCardData = async () => {
       try {
-        const response = await fetch('/api/post-blogs?populate=*');
+        const response = await fetch(`/api/post-blogs?populate=*`);
         const result = await response.json();
 
         // Filter by subcategory "Services"
@@ -80,16 +80,16 @@ const Services = () => {
             const thumbnailImage = mediaFiles.find(media => media.attributes.mime.startsWith('image'))?.attributes.url || '';
 
             // Properly construct the full image URL if the image exists
-            const previewImage = thumbnailImage ? `${thumbnailImage}` : '';
+            const previewImage = thumbnailImage ? `${BASE_URL}${thumbnailImage}` : '';
 
             // Extract PDF links
             const pdfLinks = mediaFiles.reduce(
               (acc, media) => {
                 const fileName = media.attributes.name.toLowerCase();
                 if (fileName.includes('fr')) {
-                  acc.pdfLinkFrench = `${media.attributes.url}`;
+                  acc.pdfLinkFrench = `${BASE_URL}${media.attributes.url}`;
                 } else if (fileName.includes('ar')) {
-                  acc.pdfLinkArabic = `${media.attributes.url}`;
+                  acc.pdfLinkArabic = `${BASE_URL}${media.attributes.url}`;
                 }
                 return acc;
               },
@@ -98,9 +98,9 @@ const Services = () => {
 
             return {
               title: attributes.Title,
-              documentTitleFrench: documentTitleFrench,
-              documentTitleArabic: documentTitleArabic,
-              previewImage: previewImage,  // Use the properly constructed preview image URL
+              documentTitleFrench,
+              documentTitleArabic,
+              previewImage,
               pdfLinkFrench: pdfLinks.pdfLinkFrench,
               pdfLinkArabic: pdfLinks.pdfLinkArabic,
             };
@@ -113,9 +113,10 @@ const Services = () => {
       }
     };
 
-    fetchData();
+    fetchApiCardData();
   }, []);
 
+  // Combine static and API data for rendering
   const combinedData = [...cardData, ...apiCardData];
 
   return (
@@ -137,7 +138,7 @@ const Services = () => {
                     href={card.pdfLinkFrench} 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    download  // Add download attribute
+                    download
                   >
                     <div className="preview-row">
                       <div className="document-title">{card.documentTitleFrench}</div>
@@ -155,7 +156,7 @@ const Services = () => {
                     href={card.pdfLinkArabic} 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    download  // Add download attribute
+                    download
                   >
                     <div className="preview-row">
                       <div className="document-title">{card.documentTitleArabic}</div>

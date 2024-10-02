@@ -37,9 +37,9 @@
 }
 
 .opportunity-image {
-    width: 100%;
-    height: auto; /* Maintains the aspect ratio */
-    object-fit: cover; /* Ensures the image covers the entire space */
+    width: auto;
+    height:20em; /* Maintains the aspect ratio */
+    object-fit: cover !important; /* Ensures the image covers the entire space */
 }
 .card-text {
     font-size: 1rem;

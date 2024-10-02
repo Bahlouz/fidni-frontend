@@ -1,6 +1,6 @@
 {
   "name": "front-handihub",
-  "proxy": "http://fidni.tn:1338",
+  "proxy": "https://admin.fidni.tn",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -15,6 +15,7 @@
     "accessibility-react-widget": "^1.0.5",
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
+    "cors": "^2.8.5",
     "jquery": "^3.7.1",
     "meilisearch": "^0.42.0",
     "plyr": "^3.7.8",

@@ -70,7 +70,7 @@ function NavBar() {
   
     try {
       if (query.trim() !== '') {
-        const response = await axios.get('/api/post-blogs?populate=*'); // Replace with your API endpoint
+        const response = await axios.get(`/api/post-blogs?populate=*`); // Replace with your API endpoint
         const blogPosts = response.data.data; // Adjust according to API response structure
   
         // Filter blog posts by title and include subcategory

@@ -5,11 +5,11 @@ import { useParams } from 'react-router-dom';
 const SingleCharte = () => {
   const { title } = useParams(); // Extract the title from the URL parameters
   const [charte, setCharte] = useState(null);
-
+  const BASE_URL = 'https://admin.fidni.tn';
   useEffect(() => {
     const fetchCharte = async () => {
       try {
-        const response = await fetch(`http://localhost:1337/api/post-blogs?populate[subcategory][populate]=*&filters[Title][$eq]=${title}`);
+        const response = await fetch(`/api/post-blogs?populate[subcategory][populate]=*&filters[Title][$eq]=${title}`);
         const data = await response.json();
         const fetchedChartes = data.data; // Array of chartes
 

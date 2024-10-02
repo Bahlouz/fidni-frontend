@@ -111,7 +111,7 @@ const podcastEpisodes = [
 const Podcast = () => {
   const [episodes, setEpisodes] = useState([]);
   const [expandedDescriptionId, setExpandedDescriptionId] = useState(null);
-
+  const BASE_URL = 'https://admin.fidni.tn';
   useEffect(() => {
       const fetchPodcasts = async () => {
           try {

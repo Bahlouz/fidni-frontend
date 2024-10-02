@@ -4,7 +4,7 @@ import './Droits.css';
 
 const Droits = () => {
   const [apiData, setApiData] = useState([]);
-
+  const BASE_URL = 'https://admin.fidni.tn';
   const cardData = [
     {
       title: "Convention relative aux Droits des Personnes Handicapées (CDPH)",
@@ -21,7 +21,7 @@ const Droits = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('/api/post-blogs?populate=*');
+        const response = await fetch(`/api/post-blogs?populate=*`);
         const data = await response.json();
 
         // Function to extract text content from the nested Description

@@ -40,12 +40,12 @@ const Artistes = () => {
     const [apiItems, setApiItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
+    const BASE_URL = 'https://admin.fidni.tn';
     // Fetch data from API
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('/api/post-blogs?populate=*');
+                const response = await fetch(`/api/post-blogs?populate=*`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }

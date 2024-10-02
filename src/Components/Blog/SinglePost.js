@@ -1,15 +1,68 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import blogPosts from './blogPosts.jsx'; // Ensure correct path and file extension
 import backnavhead from "../../Assets/back navhead.jpg";
 import "./SinglePost.css";
 
 const SinglePost = () => {
-  const { postId } = useParams();
-  const post = blogPosts.find(post => post.id === String(postId)); // Ensure correct comparison
+  const { postTitle } = useParams(); 
+  const [post, setPost] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const BASE_URL = 'https://admin.fidni.tn';
+
+  const fetchPost = async () => {
+    setLoading(true); // Start loading
+    setError(null); // Reset error state
+    try {
+      const response = await fetch(`/api/blogs?filters[titre][$eq]=${postTitle}&populate=*`);
+      if (!response.ok) {
+        throw new Error('Post not found');
+      }
+      const data = await response.json();
+      
+      // Check if the post exists
+      if (data.data.length > 0) {
+        const apiPost = data.data[0].attributes;
+        const postData = {
+          id: data.data[0].id,
+          title: apiPost.titre || 'Untitled Post',
+          createdAt: new Date(apiPost.createdAt).toLocaleDateString(),
+          author: apiPost.nometprenom || 'Unknown',
+          content: apiPost.content || [],
+          imageUrl: apiPost.file?.data?.[0]?.attributes?.formats?.large?.url || '',
+        };
+        setPost(postData); // Set the post data
+      } else {
+        throw new Error('Post not found');
+      }
+    } catch (error) {
+      console.error('Error fetching post:', error);
+      setError(error.message);
+    } finally {
+      setLoading(false); // End loading
+    }
+  };
+
+  useEffect(() => {
+    fetchPost();
+  }, [postTitle]);
+
+  if (loading) {
+    return <div className="loading-spinner">Loading...</div>; // Use a spinner here
+  }
+
+  if (error) {
+    return (
+      <div className="error-container">
+        <h2>Error Fetching Post</h2>
+        <p>{error}</p>
+        <button className="retry-button" onClick={fetchPost}>Retry</button>
+      </div>
+    ); // Enhanced error message with retry option
+  }
 
   if (!post) {
-    return <div>Post not found</div>;
+    return <div>Post not found</div>; // Handle if post is not found
   }
 
   return (
@@ -17,13 +70,30 @@ const SinglePost = () => {
       <img className="backnavhead" src={backnavhead} alt="Background" aria-hidden="true" />
       <div className="single-post-container">
         <h1 className="single-post-title">{post.title}</h1>
-        <img src={post.image} alt={post.alt} className="single-post-image" />
-        <p className="single-post-info">{post.date} | {post.postedBy}</p>
-        <p className="single-post-body">{post.body}</p>
-        {/* Add any other content or styling for the single post page */}
+        {post.imageUrl ? (
+          <img 
+            src={post.imageUrl} 
+            alt={post.title} 
+            className="single-post-image" 
+          />
+        ) : (
+          <div className="no-image-placeholder">No Image Available</div>
+        )}
+        <p className="single-post-info">
+          {post.createdAt} | {post.author}
+        </p>
+        <div className="single-post-body">
+          {post.content.length > 0 ? (
+            post.content.map((paragraph, index) => (
+              <p key={index}>{paragraph.children.map(child => child.text).join(' ')}</p>
+            ))
+          ) : (
+            <p>No content available</p>
+          )}
+        </div>
       </div>
     </>
   );
-}
+};
 
 export default SinglePost;

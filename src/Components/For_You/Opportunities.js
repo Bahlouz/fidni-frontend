@@ -3,7 +3,7 @@ import { Container, Row, Col, Card } from 'react-bootstrap';
 import './Opportunities.css';
 import backnavhead from "../../Assets/back navhead.jpg";
 
-// Base URL for image paths
+const BASE_URL = 'https://admin.fidni.tn';
 
 
 const volunteerOpportunities = [
@@ -37,7 +37,7 @@ const Opportunities = () => {
 
     useEffect(() => {
         // Fetch data from the API
-        fetch('/api/post-blogs?populate=*')
+        fetch(`/api/post-blogs?populate=*`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -99,29 +99,24 @@ const Opportunities = () => {
                     </Col>
                 </Row>
                 <Row>
-                    {opportunities.map((opportunity, index) => (
-                        <Col md={4} key={index} className="mb-4">
-                            <Card className="h-100 opportunity-card">
-                                <Card.Body>
-                                    <Row className="align-items-center">
-                                        <Col xs="auto">
-                                            {opportunity.imageUrl ? (
-                                                <img src={opportunity.imageUrl} alt={opportunity.title} className="opportunity-image" />
-                                            ) : (
-                                                <p>No image available</p>
-                                            )}
-                                        </Col>
-                                        <Col>
-                                            <Card.Title>{opportunity.title}</Card.Title>
-                                            <Card.Text>{opportunity.organization}</Card.Text>
-                                            <Card.Text>{opportunity.description}</Card.Text>
-                                        </Col>
-                                    </Row>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    ))}
-                </Row>
+  {opportunities.map((opportunity, index) => (
+    <Col md={4} key={index} className="mb-4">
+      <Card className="h-100 opportunity-card">
+        {opportunity.imageUrl ? (
+          <Card.Img variant="top" src={opportunity.imageUrl} alt={opportunity.title} className="opportunity-image" />
+        ) : (
+          <p className="text-center mt-3">No image available</p>
+        )}
+        <Card.Body>
+          <Card.Title>{opportunity.title}</Card.Title>
+          <Card.Text>{opportunity.organization}</Card.Text>
+          <Card.Text>{opportunity.description}</Card.Text>
+        </Card.Body>
+      </Card>
+    </Col>
+  ))}
+</Row>
+
             </Container>
         </>
     );

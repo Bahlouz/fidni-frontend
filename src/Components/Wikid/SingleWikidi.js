@@ -34,7 +34,7 @@ const SingleWikidi = () => {
   const [storyItem, setStoryItem] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const BASE_URL = 'https://admin.fidni.tn';
   useEffect(() => {
     const fetchData = async () => {
       try {

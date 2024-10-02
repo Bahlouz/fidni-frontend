@@ -1,42 +1,22 @@
-.preloader-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+/* Preloader.css */
+.Preloader-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.9); /* semi-transparent background */
-  z-index: 9999; /* Make sure the preloader is above all other content */
+  height: 100vh;
 }
 
-.preloader-logo-container {
-  position: relative;
-  width: 200px; /* Adjust the width of the logo as needed */
-  height: 200px; /* Adjust the height of the logo as needed */
-  overflow: hidden;
-}
-
-.preloader-logo {
-  background-image: url('./FIDNI__1.svg'); /* Path to your logo */
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  animation: spin 3s linear infinite; /* Spin animation */
-  z-index: 10000;
+.Preloader {
+  border: 8px solid #f3f3f3; /* Light grey */
+  border-top: 8px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 2s linear infinite;
 }
 
 @keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

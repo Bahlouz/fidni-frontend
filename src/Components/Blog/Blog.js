@@ -6,6 +6,7 @@ import blogPosts from './blogPosts'; // Local data for demo
 
 const Blog = () => {
   const [posts, setPosts] = useState([]);
+  const BASE_URL = 'https://admin.fidni.tn';
   const [show, setShow] = useState(false);
   const [formData, setFormData] = useState({
     nometprenom: '',
@@ -20,7 +21,7 @@ const Blog = () => {
   // Fetch existing posts from the API or fallback to local data
   const fetchPosts = async () => {
     try {
-      const response = await fetch('/api/blogs?populate=*');
+      const response = await fetch(`/api/blogs?populate=*`);
       const data = await response.json();
   
       // Filter posts by 'approved' status before setting state
@@ -51,63 +52,52 @@ const Blog = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
+    // Prepare the post data without the files
     const postToSend = {
       data: {
-          id: Date.now(), // or generate an appropriate ID
-          attributes: {
-              nometprenom: formData.nometprenom,
-              domainexpertise: formData.domainexpertise,
-              age: Number(formData.age),
-              email: formData.email,
-              titre: formData.titre,
-              content: [
-                  {
-                      type: "paragraph",
-                      children: [
-                          {
-                              text: formData.content,
-                              type: "text",
-                          },
-                      ],
-                  },
-              ],
-              createdAt: new Date().toISOString(),
-              updatedAt: new Date().toISOString(),
-              publishedAt: new Date().toISOString(),
-              approved: false,
-              file: {
-                  data: formData.files.map((file) => ({
-                      id: Date.now(), // or some unique ID generator
-                      attributes: {
-                          name: file.name,
-                          // Add additional attributes for the file if needed
-                          // Alternative text, caption, etc., can be added here
-                      },
-                  })),
+        nometprenom: formData.nometprenom,
+        domainexpertise: formData.domainexpertise,
+        age: Number(formData.age),
+        email: formData.email,
+        titre: formData.titre,
+        content: [
+          {
+            type: "paragraph",
+            children: [
+              {
+                text: formData.content,
+                type: "text",
               },
+            ],
           },
+        ],
+        approved: false,
       },
-  };
-    
-    // Use FormData to include files
+    };
+  
+    // Use FormData to send both post data and files
     const formDataToSend = new FormData();
+    
+    // Append JSON data as string
     formDataToSend.append("data", JSON.stringify(postToSend.data));
+  
+    // Append each file in the 'files' array
     formData.files.forEach((file) => {
-      formDataToSend.append("files", file);
+      formDataToSend.append("files.file", file);  // 'files.file' depends on the API's expected field name
     });
-
+  
     try {
-      const response = await fetch('/api/blogs?populate=*', {
+      const response = await fetch(`/api/blogs?populate=*`, {
         method: 'POST',
         body: formDataToSend, // Send FormData
       });
-
+  
       if (response.ok) {
         const data = await response.json();
         console.log('Post submitted successfully:', data);
         setShow(false); // Close modal after successful submission
-        setFormData({ // Reset form data
+        setFormData({
           nometprenom: '',
           domainexpertise: '',
           age: '',
@@ -116,7 +106,6 @@ const Blog = () => {
           content: '',
           files: []
         });
-        // Fetch updated posts
         fetchPosts(); // Refresh posts without additional fetch
       } else {
         console.error('Error submitting post:', response.statusText);
@@ -141,17 +130,17 @@ const Blog = () => {
           <h2 className="all-posts-title-unique">All Posts</h2>
           <div className="all-posts-grid-unique">
             {posts.map((post) => (
-              <Card key={post.id} className="post-card">
+              <Card key={post.attributes.titre} className="post-unique">
                 {post.attributes.file?.data?.[0]?.attributes?.formats?.large?.url ? (
-                <Card.Img className="blog-image-card" variant="top" src={post.attributes.file.data[0].attributes.formats.large.url} />
-              ) : post.attributes.file?.data?.[0]?.attributes?.formats?.thumbnail?.url ? (
-                <Card.Img className="blog-image-card" variant="top" src={post.attributes.file.data[0].attributes.formats.thumbnail.url} />
-              ) : (
-                <div className="no-image-placeholder">No Image</div>
-              )}
-                <Card.Body>
-                  <Link to={`/blog/${post.id}`} className="post-link">
-                    <Card.Title>{post.attributes.titre || "Untitled Post"}</Card.Title>
+                  <Card.Img className="post-image-unique" variant="top" src={post.attributes.file.data[0].attributes.formats.large.url} />
+                ) : post.attributes.file?.data?.[0]?.attributes?.formats?.thumbnail?.url ? (
+                  <Card.Img className="post-image-unique" variant="top" src={post.attributes.file.data[0].attributes.formats.thumbnail.url} />
+                ) : (
+                  <div className="no-image-placeholder">No Image</div>
+                )}
+                <Card.Body className="post-content-unique">
+                  <Link to={`/blog/${post.attributes.titre}`} className="post-link">
+                    <Card.Title className="post-title-unique">{post.attributes.titre || "Untitled Post"}</Card.Title>
                   </Link>
                   <Card.Text>
                     {post.attributes.content && post.attributes.content.length > 0 ? (

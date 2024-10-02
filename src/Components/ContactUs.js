@@ -5,7 +5,6 @@ import backnavhead from "../Assets/back navhead.jpg";
 
 const ContactUs = () => {
   const [alert, setAlert] = useState({ show: false, message: '', variant: '' });
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -21,29 +20,24 @@ const ContactUs = () => {
       return;
     }
 
-    // Create the request body object
+    // Create the request body object for the new API
     const requestBody = {
-      name: name,
-      email: email,
-      passwordPlaintext: 'defaultPassword', // Replace with actual password if needed
-      disabled: false, // Adjust as needed
-      superAdmin: false, // Adjust as needed
-      redirectTo: organization ? [organization] : [], // Ensure organization is an array
-      referenceId: subject
+      to: "support@fidni.tn",
+      subject: subject,
+      html: `<p>Nom et Prénom: ${name}</p>
+             <p>Organisation/Individu: ${organization}</p>
+             <p>Adresse Email: ${email}</p>
+             <p>Message: ${message}</p>`,
     };
 
     // Log the request body for debugging
     console.log('Request Body:', requestBody);
 
-    // Base64 encode for Basic Auth
-    const basicAuth = btoa('support@fidni.tn:QKG6HwXGHN');
-
     try {
-      const response = await fetch('https://mail.fidni.tn:5502/admin/api/v1/boxes', {
+      const response = await fetch(`/api/email`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Basic ${basicAuth}`,
           'Accept': '*/*'
         },
         body: JSON.stringify(requestBody),

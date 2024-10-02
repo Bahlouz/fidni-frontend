@@ -164,11 +164,11 @@ L’article soumis au concours doit avoir été publié dans la presse écrite i
 
 const Events = () => {
   const [events, setEvents] = useState([]);
-
+  const BASE_URL = 'https://admin.fidni.tn';
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch('/api/post-blogs?populate=*');
+        const response = await fetch(`/api/post-blogs?populate=*`);
         const data = await response.json();
 
         const apiEvents = data.data.map((item) => {

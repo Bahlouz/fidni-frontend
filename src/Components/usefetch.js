@@ -6,13 +6,13 @@ const useCategoriesAndSubCategories = () => {
   const [subcategoriesNoCategory, setSubcategoriesNoCategory] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  
   useEffect(() => {
     const fetchCategoriesAndSubCategories = async () => {
       setLoading(true);
       try {
         // Fetching categories
-        const categoriesResponse = await axios.get('/api/categories?populate=*');
+        const categoriesResponse = await axios.get(`/api/categories?populate=*`);
         const categoriesData = categoriesResponse.data.data.map(category => ({
           id: category.id,
           name: category.attributes.name,

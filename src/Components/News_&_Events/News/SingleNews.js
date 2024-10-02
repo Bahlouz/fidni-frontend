@@ -12,7 +12,7 @@ const SingleNews = () => {
     const [newsItem, setNewsItem] = useState(null); // State to store the news item
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
+    const BASE_URL = 'https://admin.fidni.tn';
     useEffect(() => {
         const fetchNews = async () => {
             try {

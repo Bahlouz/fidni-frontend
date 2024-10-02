@@ -12,7 +12,7 @@ const staticAudioEpisodes = [
 const Audio = () => {
   const [episodes, setEpisodes] = useState([]);
   const [expandedDescriptionId, setExpandedDescriptionId] = useState(null);
-
+  const BASE_URL = 'https://admin.fidni.tn';
   useEffect(() => {
     const fetchAudioEpisodes = async () => {
       try {
@@ -84,13 +84,12 @@ const Audio = () => {
                     Votre navigateur ne prend pas en charge l'élément audio.
                   </audio>
                   <Button 
-                    variant="primary" 
-                    href={episode.downloadUrl} 
-                    download
-                    target="_blank"
-                  >
-                    Télécharger
-                  </Button>
+                  variant="primary" 
+                  href={`${BASE_URL}${episode.downloadUrl}`}  // Full URL of the file
+                  download={`${episode.title}.mp3`}  // Ensure download attribute has a filename
+                >
+                  Télécharger
+                </Button>
                 </Card.Body>
               </Card>
             </Col>

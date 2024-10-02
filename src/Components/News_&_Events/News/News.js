@@ -40,11 +40,11 @@ const News = () => {
     const [latestNews, setLatestNews] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
+    const BASE_URL = 'https://admin.fidni.tn';
     useEffect(() => {
         const fetchNews = async () => {
             try {
-                const response = await fetch('/api/post-blogs?populate=*');
+                const response = await fetch(`/api/post-blogs?populate=*`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }

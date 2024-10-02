@@ -1,4 +1,72 @@
 /* styles.css */
+/* NotFound.css */
+.not-found-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #0e0e0e 0%, #1f88f9 100%);
+  color: #333;
+  text-align: center;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.not-found-content {
+  animation: bounce 5s infinite;
+}
+
+.not-found-title {
+  font-size: 72px;
+  font-weight: bold;
+  margin: 0;
+  color: white;
+}
+
+.not-found-subtitle {
+  font-size: 24px;
+  margin: 10px 0;
+  color: rgb(199, 199, 199);
+}
+
+.not-found-description {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: white  ;
+}
+
+.not-found-home-link {
+  padding: 10px 20px;
+  background-color: #0b99f2;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.not-found-home-link:hover {
+  background-color: #0019b9;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-20px);
+  }
+  60% {
+    transform: translateY(-10px);
+  }
+}
 
 h2,h1{
   font-family: raleway !important;

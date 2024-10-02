@@ -58,27 +58,33 @@ import SingleDroits from './Components/For_You/SingleDroit';
 import SingleAccessibility from './Components/SavoirLab/Accessibility/SingleAccessibility';
 import SingleCharte from './Components/SavoirLab/Communication/Charte/SingleCharte';
 import SingleRecommendation from './Components/SavoirLab/Communication/Recommandation/SingleRecommendation';
+import NotFound from './Components/NotFound';
 
 
 function App() {
   const { toggleTheme, theme } = useTheme();
   const [loading, setLoading] = useState(true);
   const [dataFetched, setDataFetched] = useState(false);
-
+  const BASE_URL = 'https://admin.fidni.tn';
   useEffect(() => {
     const fetchData = async () => {
       try {
         const [blogsResponse, categoriesResponse, subcategoriesResponse] = await Promise.all([
-          fetch('/api/post-blogs?populate=*'),
-          fetch('/api/categories?populate=*'),
-          fetch('/api/subcategories?populate=*&filters[category][$null]=true')
+          fetch(`/api/post-blogs?populate=*`),
+          fetch(`/api/categories?populate=*`),
+          fetch(`/api/subcategories?populate=*&filters[category][$null]=true`)
         ]);
+  
+        // Check if the responses are OK (status code 200-299)
+        if (!blogsResponse.ok || !categoriesResponse.ok || !subcategoriesResponse.ok) {
+          throw new Error('Failed to fetch data. One of the responses was not OK.');
+        }
+  
         const blogsData = await blogsResponse.json();
         const categoriesData = await categoriesResponse.json();
         const subcategoriesData = await subcategoriesResponse.json();
-
+  
         // Perform any data handling if needed
-
         setDataFetched(true);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -86,17 +92,19 @@ function App() {
         setLoading(false);
       }
     };
-
+  
     fetchData();
   }, []);
+  
 
   return (
     <div className={`app ${theme}`}>
       {loading ? <Preloader /> : null}
-        <Router>
+        <Router> 
           <AccessibilityIcon />
           <NavBar />
           <Routes>
+          <Route path="*" element={<NotFound />} />
           <Route path="/accessibility" Component={AccessibilityFeatures} />
           <Route path='/savoir-lab/wikiphedia' Component={Wikid} />
           <Route path="/savoir-lab/wikiphedia/acteurs-sociaux-politiques" Component={ActeurScPl} />
@@ -139,8 +147,7 @@ function App() {
           <Route path="/mediatheque/video" Component={VideoPlayerList} />
           <Route path="/mediatheque/audio-podcast" Component={AudioPodcast} />
           <Route path="/blog" Component={Blog} />
-          <Route path="/blog/:postId" element={<SinglePost />} />
-          <Route path="/post/:postId" Component={SinglePost} />
+          <Route path="/posts/:postTitle" element={<SinglePost />} />
           <Route path="/actualites-et-evenements/actualites" Component={News} />
           <Route path="/actualites-et-evenements/actualites/:newsTitle" Component={SingleNews} />
           <Route path="/actualites-et-evenements/evenements" Component={Events} />

@@ -6,7 +6,7 @@ import './Accessibility.css'; // Ensure this file includes styles for your compo
 const SingleAccessibility = () => {
   const { title } = useParams(); // Extract the title from the URL parameters
   const [post, setPost] = useState(null);
-
+  const BASE_URL = 'https://admin.fidni.tn';
   useEffect(() => {
     const fetchPost = async () => {
       try {

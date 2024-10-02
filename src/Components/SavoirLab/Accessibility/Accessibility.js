@@ -4,7 +4,7 @@ import './Accessibility.css';
 
 const Accessibility = () => {
   const [apiData, setApiData] = useState([]);
-
+  const BASE_URL = 'https://admin.fidni.tn';
   const cardData = [
     {
       title: 'Accessibilité aux médias et à l’information',
@@ -21,7 +21,7 @@ const Accessibility = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('/api/post-blogs?populate=*');
+        const response = await fetch(`/api/post-blogs?populate=*`);
         const data = await response.json();
         console.log('API Response:', JSON.stringify(data, null, 2)); // Log detailed API response
 

@@ -1,12 +1,12 @@
+// Preloader.js
 import React from 'react';
-import './Preloader.css'; // Import the CSS file for the preloader styles
+import './Preloader.css'; // Create a CSS file for styling
 
 const Preloader = () => {
   return (
-    <div className="preloader-container">
-      <div className="preloader-logo-container">
-        <div className="preloader-logo"></div>
-      </div>
+    <div className="Preloader-container">
+      <div className="Preloader"></div>
+      <p>Loading...</p>
     </div>
   );
 };
