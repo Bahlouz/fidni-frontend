@@ -115,7 +115,7 @@ const Podcast = () => {
   useEffect(() => {
       const fetchPodcasts = async () => {
           try {
-              const response = await fetch(`/api/post-blogs?populate=*`);
+              const response = await fetch(`${BASE_URL}/api/post-blogs?populate=*`);
               const data = await response.json();
 
               const filteredEpisodes = data.data
@@ -177,7 +177,7 @@ const Podcast = () => {
                   {episodes.map((episode) => (
                       <Col md={4} key={episode.id} className="mb-4">
                           <Card className="h-100">
-                              <Card.Img className="podcast-img-card" src={episode.imageUrl} alt={episode.title} />
+                              <Card.Img className="podcast-img-card" src={`${BASE_URL}${episode.imageUrl}`} alt={episode.title} />
                               <Card.Body>
                                   <Card.Title>{episode.title}</Card.Title>
                                   <Card.Subtitle className="mb-2 text-muted">{episode.date}</Card.Subtitle>
@@ -188,10 +188,13 @@ const Podcast = () => {
                                       {expandedDescriptionId === episode.id ? 'Afficher moins' : 'Afficher plus'}
                                   </Button>
                                   <audio controls className="audio-player-podcast-audio">
-                                      <source src={episode.audioUrl} type="audio/mpeg" />
+                                      <source src={`${BASE_URL}${episode.audioUrl}`} type="audio/mpeg" />
                                       Votre navigateur ne prend pas en charge l'élément audio.
                                   </audio>
-                                  <Button variant="primary" href={episode.downloadUrl} download>Télécharger</Button>
+                                <Button variant="primary" 
+                                    href={`${BASE_URL}${episode.downloadUrl}`}  // Full URL of the file
+                                    download={`${BASE_URL}${episode.downloadUrl}`}  >Télécharger
+                                </Button>
                               </Card.Body>
                           </Card>
                       </Col>

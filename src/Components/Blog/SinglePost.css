@@ -20,7 +20,8 @@
   margin-bottom: 2em;
 }
 .single-post-image{
-  width: 70vw !important;
+  width:100vh !important;
+  height: auto !important;
 }
 
 @media (max-width: 768px) {

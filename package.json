@@ -1,6 +1,6 @@
 {
   "name": "front-handihub",
-  "proxy": "https://admin.fidni.tn",
+
   "version": "0.1.0",
   "private": true,
   "dependencies": {

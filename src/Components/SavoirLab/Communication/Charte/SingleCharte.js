@@ -9,7 +9,7 @@ const SingleCharte = () => {
   useEffect(() => {
     const fetchCharte = async () => {
       try {
-        const response = await fetch(`/api/post-blogs?populate[subcategory][populate]=*&filters[Title][$eq]=${title}`);
+        const response = await fetch(`${BASE_URL}/api/post-blogs?populate[subcategory][populate]=*&filters[Title][$eq]=${title}`);
         const data = await response.json();
         const fetchedChartes = data.data; // Array of chartes
 

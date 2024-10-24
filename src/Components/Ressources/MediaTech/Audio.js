@@ -16,7 +16,7 @@ const Audio = () => {
   useEffect(() => {
     const fetchAudioEpisodes = async () => {
       try {
-        const response = await fetch(`/api/post-blogs?populate=*`);
+        const response = await fetch(`${BASE_URL}/api/post-blogs?populate=*`);
         const data = await response.json();
 
         const filteredEpisodes = data.data
@@ -69,7 +69,7 @@ const Audio = () => {
           {episodes.map((episode) => (
             <Col md={4} key={episode.id} className="mb-4">
               <Card className="h-100">
-                <Card.Img className="podcast-img-card" variant="top" src={episode.imageUrl} alt={episode.title} />
+                <Card.Img className="podcast-img-card" variant="top" src={`${BASE_URL}${episode.imageUrl}`} alt={episode.title} />
                 <Card.Body>
                   <Card.Title>{episode.title}</Card.Title>
                   <Card.Subtitle className="mb-2 text-muted">{episode.date}</Card.Subtitle>
@@ -80,13 +80,13 @@ const Audio = () => {
                     {expandedDescriptionId === episode.id ? 'Afficher moins' : 'Afficher plus'}
                   </Button>
                   <audio controls className="audio-player-podcast-audio">
-                    <source src={episode.audioUrl} type="audio/mpeg" />
+                    <source src={`${BASE_URL}${episode.audioUrl}`} type="audio/mpeg" />
                     Votre navigateur ne prend pas en charge l'élément audio.
                   </audio>
                   <Button 
                   variant="primary" 
                   href={`${BASE_URL}${episode.downloadUrl}`}  // Full URL of the file
-                  download={`${episode.title}.mp3`}  // Ensure download attribute has a filename
+                  download={`${BASE_URL}${episode.downloadUrl}`}  // Ensure download attribute has a filename
                 >
                   Télécharger
                 </Button>

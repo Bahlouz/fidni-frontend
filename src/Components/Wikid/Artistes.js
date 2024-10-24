@@ -45,7 +45,7 @@ const Artistes = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`/api/post-blogs?populate=*`);
+                const response = await fetch(`${BASE_URL}/api/post-blogs?populate=*`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }

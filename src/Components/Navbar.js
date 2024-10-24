@@ -10,7 +10,19 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { useTheme } from '../Context/ThemeContext';
 import useCategoriesAndSubCategories from "./usefetch";
 import Header from "./Header";
-
+import { ActeurScPlitems } from './Wikid/ActeurScPlitems';
+import { Artistesitems } from './Wikid/Artistesitems';
+import { Chercheursitems } from './Wikid/Chercheursitems';
+import { Entrepreneursitems } from './Wikid/Entrepreneursitems';
+import { Sportifsitems } from './Wikid/Sportifsitems';
+import {cardData as droitsdata } from './For_You/Droits';
+import {cardData as servicesdata} from './For_You/Services';
+import { staticEvents } from "./News_&_Events/Events/Events";
+import { newsItems } from "./News_&_Events/News/newsItems";
+import {volunteerOpportunities} from "./For_You/Opportunities";
+import {cardData as chartedata} from "./SavoirLab/Communication/Charte/Charte";
+import {cardData as recommandtaionsdata} from "./SavoirLab/Communication/Recommandation/Recommandation";
+import {pdfList} from "./SavoirLab/DocumentsPl/DocumentPl";
 // Define your manual links here
 const manualLinks = {
   "Acceuil": "/",
@@ -46,7 +58,7 @@ function NavBar() {
   const { loading, error, categories = [], subcategoriesNoCategory = [] } = useCategoriesAndSubCategories();
   const location = useLocation();
   const searchInputRef = useRef(null);
-
+  const BASE_URL = 'https://admin.fidni.tn';
 
   const getSubcategoryLink = (subcategoryName) => {
     for (const [category, links] of Object.entries(manualLinks)) {
@@ -69,38 +81,66 @@ function NavBar() {
     setSearchQuery(query);
   
     try {
+      let apiSuggestions = [];
       if (query.trim() !== '') {
-        const response = await axios.get(`/api/post-blogs?populate=*`); // Replace with your API endpoint
-        const blogPosts = response.data.data; // Adjust according to API response structure
+        // Fetch from API
+        const response = await axios.get(`${BASE_URL}/api/post-blogs?populate=*`);
+        const blogPosts = response.data.data;
   
-        // Filter blog posts by title and include subcategory
+        // Filter blog posts by title
         const filteredPosts = blogPosts.filter(post =>
           post.attributes.Title.toLowerCase().includes(query.toLowerCase())
         );
   
-        const suggestions = filteredPosts.map(post => {
-          const subcategory = post.attributes.subcategory?.data?.attributes?.name || 'No Subcategory'; // Access subcategory
-          const subLink = getSubcategoryLink(subcategory); // Get the corresponding link
-          const formattedTitle = formatTitleForURL(post.attributes.Title); // Format title for URL
+        apiSuggestions = filteredPosts.map(post => {
+          const subcategory = post.attributes.subcategory?.data?.attributes?.name || 'No Subcategory';
+          const subLink = getSubcategoryLink(subcategory);
+          const formattedTitle = formatTitleForURL(post.attributes.Title);
   
           return {
             title: post.attributes.Title,
             subcategory: subcategory,
-            link: `${subLink}/${formattedTitle}` // Construct the full URL
+            link: `${subLink}/${formattedTitle}`
           };
         });
-  
-        setSuggestions(suggestions);
-        setSearchOpen(true);
-      } else {
-        setSuggestions([]);
-        setSearchOpen(false);
       }
+  
+      // Search in static data
+      const staticSuggestions = [
+        ...ActeurScPlitems,
+        ...Artistesitems,
+        ...Chercheursitems,
+        ...Entrepreneursitems,
+        ...Sportifsitems,
+        ...droitsdata,
+        ...servicesdata,
+        ...staticEvents,
+        ...newsItems,
+        ...volunteerOpportunities,
+        ...chartedata,
+        ...recommandtaionsdata,
+        ...pdfList
+      ]
+        .filter(item =>
+          item.title.toLowerCase().includes(query.toLowerCase())
+        )
+        .map(item => ({
+          title: item.title,
+          subcategory: item.subcategory || 'Static Data',
+          link: item.link || '#' // Update with actual link logic if available
+        }));
+  
+      // Combine API and static data suggestions
+      const combinedSuggestions = [...staticSuggestions, ...apiSuggestions];
+  
+      setSuggestions(combinedSuggestions);
+      setSearchOpen(true);
     } catch (error) {
       console.error('Error fetching suggestions:', error);
       setSuggestions([]);
     }
   };
+  
   
 
   const handleSearchSubmit = (event) => {

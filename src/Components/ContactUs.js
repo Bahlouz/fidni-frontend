@@ -5,22 +5,17 @@ import backnavhead from "../Assets/back navhead.jpg";
 
 const ContactUs = () => {
   const [alert, setAlert] = useState({ show: false, message: '', variant: '' });
+  const BASE_URL = 'https://admin.fidni.tn';
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const name = e.target.formName.value;
     const email = e.target.formEmail.value;
     const organization = e.target.formOrganization.value;
     const subject = e.target.formSubject.value;
     const message = e.target.formMessage.value;
-
-    // Check for required fields
-    if (!name || !email || !subject || !message) {
-      setAlert({ show: true, message: 'Veuillez remplir tous les champs.', variant: 'danger' });
-      return;
-    }
-
-    // Create the request body object for the new API
+  
     const requestBody = {
       to: "support@fidni.tn",
       subject: subject,
@@ -29,35 +24,36 @@ const ContactUs = () => {
              <p>Adresse Email: ${email}</p>
              <p>Message: ${message}</p>`,
     };
-
-    // Log the request body for debugging
-    console.log('Request Body:', requestBody);
-
+  
+    const username = 'support@fidni.tn'; // Replace with your username
+    const password = 'QKG6HwXGHN'; // Replace with your password
+    const headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic ' + btoa(`${username}:${password}`),
+    });
+  
     try {
-      const response = await fetch(`/api/email`, {
+      const response = await fetch(`${BASE_URL}/api/email`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': '*/*'
-        },
+        headers: headers,
         body: JSON.stringify(requestBody),
       });
-
-      // Log the response for debugging
-      console.log('Response:', response);
-
+  
+      // Handle the response
       if (response.ok) {
         setAlert({ show: true, message: 'Votre message a été envoyé avec succès!', variant: 'success' });
       } else {
         const errorData = await response.json();
-        console.error('Error Response:', errorData);
-        setAlert({ show: true, message: `Erreur: ${errorData.message || 'Erreur lors de l\'envoi du message.'}`, variant: 'danger' });
+        setAlert({ show: true, message: errorData.message || 'Erreur lors de l\'envoi du message.', variant: 'danger' });
       }
     } catch (error) {
       console.error('Erreur:', error);
       setAlert({ show: true, message: 'Erreur lors de l\'envoi du message.', variant: 'danger' });
     }
   };
+  
+    
+
 
   return (
     <>

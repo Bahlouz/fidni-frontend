@@ -2,22 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Card, Button } from 'react-bootstrap';
 import './Recommandation.css';
 
+export const cardData = [
+  {
+    title: "Accéder aux Recommandations Stratégiques pour l'Inclusion Médiatique des Personnes Handicapées",
+    description: "Cette section présente une première feuille de route de recommandations stratégiques développée dans le cadre de la dynamique de développement du Guide « … », qui s’adressent aux acteurs nationaux, aux institutions éducatives, aux organes de régulation, et impliquent la création de partenariats innovants et de programmes de formation adaptés. L'objectif est double : améliorer la représentation des personnes handicapées dans les médias et assurer leur participation active et équitable dans tous les aspects de la vie médiatique.",
+    link: '/savoir-lab/recommandations/adoption'
+  },
+];
 const Recommandation = () => {
   const [apiData, setApiData] = useState([]);
   const [combinedData, setCombinedData] = useState([]);
   const BASE_URL = 'https://admin.fidni.tn';
-  const cardData = [
-    {
-      title: "Accéder aux Recommandations Stratégiques pour l'Inclusion Médiatique des Personnes Handicapées",
-      description: "Cette section présente une première feuille de route de recommandations stratégiques développée dans le cadre de la dynamique de développement du Guide « … », qui s’adressent aux acteurs nationaux, aux institutions éducatives, aux organes de régulation, et impliquent la création de partenariats innovants et de programmes de formation adaptés. L'objectif est double : améliorer la représentation des personnes handicapées dans les médias et assurer leur participation active et équitable dans tous les aspects de la vie médiatique.",
-      link: '/savoir-lab/recommandations/adoption'
-    },
-  ];
+  
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`$/api/post-blogs?populate=*`);
+        const response = await fetch(`${BASE_URL}/api/post-blogs?populate=*`);
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }

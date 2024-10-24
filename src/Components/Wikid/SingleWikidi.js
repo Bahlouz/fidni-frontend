@@ -39,7 +39,7 @@ const SingleWikidi = () => {
     const fetchData = async () => {
       try {
         // Fetch data from the API
-        const response = await fetch(`/api/post-blogs?populate=*`);
+        const response = await fetch(`${BASE_URL}/api/post-blogs?populate=*`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }

@@ -2,22 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Card, Button } from 'react-bootstrap';
 import './Charte.css';
 
+export const cardData = [
+  {
+    title: "Découvrez la Charte pour l'Inclusion et l'Accessibilité des Personnes Handicapées dans les Médias Tunisiens",
+    description: "Adoptée par la « Coalition nationale pour des médias inclusifs et accessibles aux personnes handicapées », la charte vise à promouvoir l'inclusion et l'accessibilité des personnes handicapées dans les médias tunisiens. Les principaux acteurs de cette initiative comprennent des institutions de recherche et de formation, des organisations professionnelles, des organismes de régulation et d'autorégulation des médias, des associations de défense des droits des personnes handicapées, des organisations internationales et de nombreux médias tunisiens, ainsi que des personnalités médiatiques et des membres de l'Assemblée des représentants du peuple. Avec pour objectifs clés la création d'un comité de suivi du traitement médiatique des questions liées au handicap, l'organisation de campagnes de plaidoyer régulières et l'institution d'un prix professionnel annuel, le 'Prix de l'accessibilité et de l'inclusion', pour honorer les initiatives médiatiques exemplaires.",
+    link: '/savoir-lab/communication-inclusive/charte-nationale/coalition'
+  },
+];
 const Charte = () => {
   const [apiData, setApiData] = useState([]);
   const [combinedData, setCombinedData] = useState([]);
   const BASE_URL = 'https://admin.fidni.tn';
-  const cardData = [
-    {
-      title: "Découvrez la Charte pour l'Inclusion et l'Accessibilité des Personnes Handicapées dans les Médias Tunisiens",
-      description: "Adoptée par la « Coalition nationale pour des médias inclusifs et accessibles aux personnes handicapées », la charte vise à promouvoir l'inclusion et l'accessibilité des personnes handicapées dans les médias tunisiens. Les principaux acteurs de cette initiative comprennent des institutions de recherche et de formation, des organisations professionnelles, des organismes de régulation et d'autorégulation des médias, des associations de défense des droits des personnes handicapées, des organisations internationales et de nombreux médias tunisiens, ainsi que des personnalités médiatiques et des membres de l'Assemblée des représentants du peuple. Avec pour objectifs clés la création d'un comité de suivi du traitement médiatique des questions liées au handicap, l'organisation de campagnes de plaidoyer régulières et l'institution d'un prix professionnel annuel, le 'Prix de l'accessibilité et de l'inclusion', pour honorer les initiatives médiatiques exemplaires.",
-      link: '/savoir-lab/communication-inclusive/charte-nationale/coalition'
-    },
-  ];
+ 
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`/api/post-blogs?populate=*`);
+        const response = await fetch(`${BASE_URL}/api/post-blogs?populate=*`);
         const data = await response.json();
         console.log('API Response:', JSON.stringify(data, null, 2)); // Log detailed API response
 

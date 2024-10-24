@@ -17,7 +17,7 @@ const SingleNews = () => {
         const fetchNews = async () => {
             try {
                 // Fetch from the API
-                const response = await fetch(`/api/post-blogs?populate=*`);
+                const response = await fetch(`${BASE_URL}/api/post-blogs?populate=*`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }

@@ -14,12 +14,14 @@ const SinglePost = () => {
     setLoading(true); // Start loading
     setError(null); // Reset error state
     try {
-      const response = await fetch(`/api/blogs?filters[titre][$eq]=${postTitle}&populate=*`);
+      const response = await fetch(`${BASE_URL}/api/blogs?filters[titre][$eq]=${postTitle}&populate=*`);
       if (!response.ok) {
         throw new Error('Post not found');
       }
       const data = await response.json();
-      
+  
+      console.log('API Response:', data); // Check the API response
+  
       // Check if the post exists
       if (data.data.length > 0) {
         const apiPost = data.data[0].attributes;
@@ -29,7 +31,8 @@ const SinglePost = () => {
           createdAt: new Date(apiPost.createdAt).toLocaleDateString(),
           author: apiPost.nometprenom || 'Unknown',
           content: apiPost.content || [],
-          imageUrl: apiPost.file?.data?.[0]?.attributes?.formats?.large?.url || '',
+          // Extract the image URL from the 'thumbnail' format
+          imageUrl: apiPost.file?.data?.[0]?.attributes?.formats?.thumbnail?.url || '',
         };
         setPost(postData); // Set the post data
       } else {
@@ -42,6 +45,7 @@ const SinglePost = () => {
       setLoading(false); // End loading
     }
   };
+  
 
   useEffect(() => {
     fetchPost();
@@ -72,7 +76,7 @@ const SinglePost = () => {
         <h1 className="single-post-title">{post.title}</h1>
         {post.imageUrl ? (
           <img 
-            src={post.imageUrl} 
+            src={`${BASE_URL}${post.imageUrl}`} 
             alt={post.title} 
             className="single-post-image" 
           />

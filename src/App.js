@@ -70,9 +70,9 @@ function App() {
     const fetchData = async () => {
       try {
         const [blogsResponse, categoriesResponse, subcategoriesResponse] = await Promise.all([
-          fetch(`/api/post-blogs?populate=*`),
-          fetch(`/api/categories?populate=*`),
-          fetch(`/api/subcategories?populate=*&filters[category][$null]=true`)
+          fetch(`${BASE_URL}/api/post-blogs?populate=*`),
+          fetch(`${BASE_URL}/api/categories?populate=*`),
+          fetch(`${BASE_URL}/api/subcategories?populate=*&filters[category][$null]=true`)
         ]);
   
         // Check if the responses are OK (status code 200-299)
@@ -147,7 +147,7 @@ function App() {
           <Route path="/mediatheque/video" Component={VideoPlayerList} />
           <Route path="/mediatheque/audio-podcast" Component={AudioPodcast} />
           <Route path="/blog" Component={Blog} />
-          <Route path="/posts/:postTitle" element={<SinglePost />} />
+          <Route path="/blog/:postTitle" element={<SinglePost />} />
           <Route path="/actualites-et-evenements/actualites" Component={News} />
           <Route path="/actualites-et-evenements/actualites/:newsTitle" Component={SingleNews} />
           <Route path="/actualites-et-evenements/evenements" Component={Events} />

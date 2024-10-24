@@ -3,57 +3,58 @@ import { Container, Row, Col } from 'react-bootstrap';
 import './Services.css';
 import downloadbutton from '../../Assets/downloadimg.png';
 
+export const cardData = [
+  {
+    title: "Comment obtenir une carte d'handicap ?",
+    documentTitleFrench: "Délivrance d'une carte d'handicap",
+    documentTitleArabic: "إسناد بطاقة الإعاقة",
+    previewImage: `${process.env.PUBLIC_URL}/services/Delivrance.png`,
+    pdfLinkFrench: `${process.env.PUBLIC_URL}/services/Délivrance_d'une_carte_d'handicap.docx`,
+    pdfLinkArabic: `${process.env.PUBLIC_URL}/services/إسناد بطاقة الإعاقة.docx`
+  },
+  {
+    title: "Comment renouveler la carte d'handicap ?",
+    documentTitleFrench: "Renouvellement de la carte d'handicap",
+    documentTitleArabic: "تجديد بطاقة الإعاقة",
+    previewImage: `${process.env.PUBLIC_URL}/services/Renouvellement.png`,
+    pdfLinkFrench: `${process.env.PUBLIC_URL}/services/Renouvellement_de_la_carte_d'handicap.docx`,
+    pdfLinkArabic: `${process.env.PUBLIC_URL}/services/تجديد بطاقة الإعاقة.docx`
+  },
+  {
+    title: "Quelles sont les adresses des services de santé sexuelle et reproductive fournis par l'Office national de la famille ?",
+    documentTitleFrench: "Adresses des services de santé sexuelle et reproductive fournis par l'Office national de la famille",
+    documentTitleArabic: "هياكل الصحة الجنسية و الإنجابية حسب الجهات",
+    previewImage: `${process.env.PUBLIC_URL}/services/Adresses.png`,
+    pdfLinkFrench: `${process.env.PUBLIC_URL}/services/Adresses_des_services_de_santé_sexuelle_et_reproductive_fournis_par_l'Office_national_de_la_famille.docx`,
+    pdfLinkArabic: `${process.env.PUBLIC_URL}/services/هياكل الصحة الجنسية و الإنجابية حسب الجهات.docx`
+  },
+  {
+    title: "Quel est le répertoire des structures œuvrant dans le domaine du handicap en Tunisie ?",
+    documentTitleFrench: "Répertoire des structures œuvrant dans le domaine du handicap en Tunisie",
+    documentTitleArabic: "دليل الهياكل العاملة في مجال الإعاقة في تونس",
+    previewImage: `${process.env.PUBLIC_URL}/services/Repertoire.png`,
+    pdfLinkFrench: `${process.env.PUBLIC_URL}/services/Répertoire_des_structures_œuvrant_dans_le_domaine_du_handicap_en_Tunisie.docx`,
+    pdfLinkArabic: `${process.env.PUBLIC_URL}/services/دليل الهياكل العاملة في مجال الإعاقة في تونس.docx`
+  },
+  {
+    title: "Découvrez le guide des services de santé reproductive et sexuelle pour les personnes en situation de handicap.",
+    documentTitleFrench: "Guide des services de santé reproductive et sexuelle pour les personnes en situation de handicap",
+    documentTitleArabic: "دﻟﻴﻞ ﺗﻮﺟﻴﻬﻲ ﻟﺨﺪﻣﺎت اﻟﺼﺤﺔ اﻹﻧﺠﺎﺑﻴﺔ واﻟﺠﻨﺴﻴﺔ ﻟﻸﺷﺨﺎص ذوي وذوات اﻹﻋﺎﻗﺔ",
+    previewImage: `${process.env.PUBLIC_URL}/services/ssr.png`,
+    pdfLinkFrench: `${process.env.PUBLIC_URL}/services/Carte_des_Services_de_Santé_Reproductive_et_Sexuelle_Accessibles.docx`,
+    pdfLinkArabic: `${process.env.PUBLIC_URL}/services/Carto_SSR_accessible_ar.docx`
+  },
+];
 const Services = () => {
   const [apiCardData, setApiCardData] = useState([]);
   const BASE_URL = 'https://admin.fidni.tn';
   
-  const cardData = [
-    {
-      title: "Comment obtenir une carte d'handicap ?",
-      documentTitleFrench: "Délivrance d'une carte d'handicap",
-      documentTitleArabic: "إسناد بطاقة الإعاقة",
-      previewImage: `${process.env.PUBLIC_URL}/services/Delivrance.png`,
-      pdfLinkFrench: `${process.env.PUBLIC_URL}/services/Délivrance_d'une_carte_d'handicap.docx`,
-      pdfLinkArabic: `${process.env.PUBLIC_URL}/services/إسناد بطاقة الإعاقة.docx`
-    },
-    {
-      title: "Comment renouveler la carte d'handicap ?",
-      documentTitleFrench: "Renouvellement de la carte d'handicap",
-      documentTitleArabic: "تجديد بطاقة الإعاقة",
-      previewImage: `${process.env.PUBLIC_URL}/services/Renouvellement.png`,
-      pdfLinkFrench: `${process.env.PUBLIC_URL}/services/Renouvellement_de_la_carte_d'handicap.docx`,
-      pdfLinkArabic: `${process.env.PUBLIC_URL}/services/تجديد بطاقة الإعاقة.docx`
-    },
-    {
-      title: "Quelles sont les adresses des services de santé sexuelle et reproductive fournis par l'Office national de la famille ?",
-      documentTitleFrench: "Adresses des services de santé sexuelle et reproductive fournis par l'Office national de la famille",
-      documentTitleArabic: "هياكل الصحة الجنسية و الإنجابية حسب الجهات",
-      previewImage: `${process.env.PUBLIC_URL}/services/Adresses.png`,
-      pdfLinkFrench: `${process.env.PUBLIC_URL}/services/Adresses_des_services_de_santé_sexuelle_et_reproductive_fournis_par_l'Office_national_de_la_famille.docx`,
-      pdfLinkArabic: `${process.env.PUBLIC_URL}/services/هياكل الصحة الجنسية و الإنجابية حسب الجهات.docx`
-    },
-    {
-      title: "Quel est le répertoire des structures œuvrant dans le domaine du handicap en Tunisie ?",
-      documentTitleFrench: "Répertoire des structures œuvrant dans le domaine du handicap en Tunisie",
-      documentTitleArabic: "دليل الهياكل العاملة في مجال الإعاقة في تونس",
-      previewImage: `${process.env.PUBLIC_URL}/services/Repertoire.png`,
-      pdfLinkFrench: `${process.env.PUBLIC_URL}/services/Répertoire_des_structures_œuvrant_dans_le_domaine_du_handicap_en_Tunisie.docx`,
-      pdfLinkArabic: `${process.env.PUBLIC_URL}/services/دليل الهياكل العاملة في مجال الإعاقة في تونس.docx`
-    },
-    {
-      title: "Découvrez le guide des services de santé reproductive et sexuelle pour les personnes en situation de handicap.",
-      documentTitleFrench: "Guide des services de santé reproductive et sexuelle pour les personnes en situation de handicap",
-      documentTitleArabic: "دﻟﻴﻞ ﺗﻮﺟﻴﻬﻲ ﻟﺨﺪﻣﺎت اﻟﺼﺤﺔ اﻹﻧﺠﺎﺑﻴﺔ واﻟﺠﻨﺴﻴﺔ ﻟﻸﺷﺨﺎص ذوي وذوات اﻹﻋﺎﻗﺔ",
-      previewImage: `${process.env.PUBLIC_URL}/services/ssr.png`,
-      pdfLinkFrench: `${process.env.PUBLIC_URL}/services/Carte_des_Services_de_Santé_Reproductive_et_Sexuelle_Accessibles.docx`,
-      pdfLinkArabic: `${process.env.PUBLIC_URL}/services/Carto_SSR_accessible_ar.docx`
-    },
-  ];
+  
 
   useEffect(() => {
     const fetchApiCardData = async () => {
       try {
-        const response = await fetch(`/api/post-blogs?populate=*`);
+        const response = await fetch(`${BASE_URL}/api/post-blogs?populate=*`);
         const result = await response.json();
 
         // Filter by subcategory "Services"

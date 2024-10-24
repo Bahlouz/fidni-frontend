@@ -17,7 +17,7 @@ const SingleEvents = () => {
         const fetchEvent = async () => {
             try {
                 // Fetch event from API
-                const response = await fetch(`/api/post-blogs?filters[Title][$eq]=${eventTitle}&populate=*`);
+                const response = await fetch(`${BASE_URL}/api/post-blogs?filters[Title][$eq]=${eventTitle}&populate=*`);
                 const data = await response.json();
 
                 if (data.data.length > 0) {

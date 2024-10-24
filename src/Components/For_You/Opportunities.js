@@ -6,7 +6,7 @@ import backnavhead from "../../Assets/back navhead.jpg";
 const BASE_URL = 'https://admin.fidni.tn';
 
 
-const volunteerOpportunities = [
+export const volunteerOpportunities = [
     {
         id: 1,
         title: 'Bénévole pour des événements accessibles',

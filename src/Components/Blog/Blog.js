@@ -21,7 +21,7 @@ const Blog = () => {
   // Fetch existing posts from the API or fallback to local data
   const fetchPosts = async () => {
     try {
-      const response = await fetch(`/api/blogs?populate=*`);
+      const response = await fetch(`${BASE_URL}/api/blogs?populate=*`);
       const data = await response.json();
   
       // Filter posts by 'approved' status before setting state
@@ -88,7 +88,7 @@ const Blog = () => {
     });
   
     try {
-      const response = await fetch(`/api/blogs?populate=*`, {
+      const response = await fetch(`${BASE_URL}/api/blogs?populate=*`, {
         method: 'POST',
         body: formDataToSend, // Send FormData
       });
@@ -132,9 +132,9 @@ const Blog = () => {
             {posts.map((post) => (
               <Card key={post.attributes.titre} className="post-unique">
                 {post.attributes.file?.data?.[0]?.attributes?.formats?.large?.url ? (
-                  <Card.Img className="post-image-unique" variant="top" src={post.attributes.file.data[0].attributes.formats.large.url} />
+                  <Card.Img className="post-image-unique" variant="top" src={`${BASE_URL}${post.attributes.file.data[0].attributes.formats.large.url}`} />
                 ) : post.attributes.file?.data?.[0]?.attributes?.formats?.thumbnail?.url ? (
-                  <Card.Img className="post-image-unique" variant="top" src={post.attributes.file.data[0].attributes.formats.thumbnail.url} />
+                  <Card.Img className="post-image-unique" variant="top" src={`${BASE_URL}${post.attributes.file.data[0].attributes.formats.thumbnail.url}`}/>
                 ) : (
                   <div className="no-image-placeholder">No Image</div>
                 )}

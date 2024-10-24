@@ -173,7 +173,7 @@ const VideoPlayerList = () => {
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        const response = await fetch(`/api/post-blogs?populate=*`);
+        const response = await fetch(`${BASE_URL}/api/post-blogs?populate=*`);
         const data = await response.json();
 
         const fetchedVideos = data.data
