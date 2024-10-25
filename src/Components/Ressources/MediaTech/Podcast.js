@@ -125,16 +125,17 @@ const Podcast = () => {
                       return subcategory === 'Audio & Podcast' && description?.includes('<podcast>');
                   })
                   .map((post) => {
-                      const mediafiles = post.attributes.Mediafiles?.data || [];
-                      const audioFile = mediafiles.find(file => file.attributes.mime.startsWith('audio'));
-                      const imageFile = mediafiles.find(file => file.attributes.mime.startsWith('image'));
+                    const mediafiles = post.attributes.Mediafiles?.data || [];
+                    const audioFile = mediafiles.find(file => file.attributes.mime.startsWith('audio'));
+                    const imageFile = mediafiles.find(file => file.attributes.mime.startsWith('image'));
 
-                      const audioUrl = audioFile ? `${audioFile.attributes.url}` : '';
-                      const downloadUrl = audioUrl || '';  // Use audioUrl as the download URL
-
-                      console.log(`Audio URL: ${audioUrl}`); // Debugging log for audio URL
-                      console.log(`Download URL: ${downloadUrl}`); // Debugging log for download URL
-
+                    const imageUrl = imageFile 
+                    ? `${BASE_URL}${imageFile.attributes.formats.large.url}` : '';
+                    
+                    const audioUrl = audioFile ? `${BASE_URL}${audioFile.attributes.url}` : '';
+                    const downloadUrl = audioUrl ? `${BASE_URL}${audioFile.attributes.url}` : '';
+                    
+                     
                       return {
                           id: post.id,
                           title: post.attributes.Title,
@@ -142,9 +143,7 @@ const Podcast = () => {
                           description: post.attributes.content,
                           audioUrl,
                           downloadUrl,
-                          imageUrl: imageFile && imageFile.attributes.formats?.large
-                                      ? `${imageFile.attributes.formats.large.url}`
-                                      : backpodcast,
+                          imageUrl,
                       };
                   });
 
@@ -177,7 +176,7 @@ const Podcast = () => {
                   {episodes.map((episode) => (
                       <Col md={4} key={episode.id} className="mb-4">
                           <Card className="h-100">
-                              <Card.Img className="podcast-img-card" src={`${BASE_URL}${episode.imageUrl}`} alt={episode.title} />
+                              <Card.Img className="podcast-img-card" src={episode.imageUrl} alt={episode.title} />
                               <Card.Body>
                                   <Card.Title>{episode.title}</Card.Title>
                                   <Card.Subtitle className="mb-2 text-muted">{episode.date}</Card.Subtitle>
@@ -188,12 +187,12 @@ const Podcast = () => {
                                       {expandedDescriptionId === episode.id ? 'Afficher moins' : 'Afficher plus'}
                                   </Button>
                                   <audio controls className="audio-player-podcast-audio">
-                                      <source src={`${BASE_URL}${episode.audioUrl}`} type="audio/mpeg" />
+                                      <source src={`${episode.audioUrl}`} type="audio/mpeg" />
                                       Votre navigateur ne prend pas en charge l'élément audio.
                                   </audio>
                                 <Button variant="primary" 
-                                    href={`${BASE_URL}${episode.downloadUrl}`}  // Full URL of the file
-                                    download={`${BASE_URL}${episode.downloadUrl}`}  >Télécharger
+                                    href={`${episode.downloadUrl}`}  // Full URL of the file
+                                    download={`${episode.downloadUrl}`}  >Télécharger
                                 </Button>
                               </Card.Body>
                           </Card>

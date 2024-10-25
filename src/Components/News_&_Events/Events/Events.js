@@ -192,7 +192,7 @@ const Events = () => {
 
           // Extract image URL
           const imageUrl = Mediafiles?.data?.[0]?.attributes?.formats?.large?.url
-            ? `${Mediafiles.data[0].attributes.formats.large.url}`
+            ? `${BASE_URL}${Mediafiles.data[0].attributes.formats.large.url}`
             : '';
 
           return {

@@ -19,8 +19,6 @@ const monthMapping = {
     décembre: 'December'
 };
 
-
-
 const formatFrenchDate = (frenchDate) => {
     if (!frenchDate) return new Date(); // Return current date if date is not provided
 
@@ -41,6 +39,7 @@ const News = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const BASE_URL = 'https://admin.fidni.tn';
+    
     useEffect(() => {
         const fetchNews = async () => {
             try {
@@ -57,27 +56,27 @@ const News = () => {
                 }
 
                 // Filter based on subcategory "Actualités"
-                const actualites = data.data.filter(item => {
-                    // Ensure item and item.attributes are valid
-                    if (item && item.attributes && item.attributes.subcategory && item.attributes.subcategory.data && item.attributes.subcategory.data.attributes) {
-                        return item.attributes.subcategory.data.attributes.name === 'Actualités';
+                const actualites = data.data.filter(post => {
+                    // Ensure post and post.attributes are valid
+                    if (post && post.attributes && post.attributes.subcategory && post.attributes.subcategory.data && post.attributes.subcategory.data.attributes) {
+                        return post.attributes.subcategory.data.attributes.name === 'Actualités';
                     }
                     return false;
                 });
 
                 // Format the date and construct image URL
-                const formattedNews = actualites.map(item => {
-                    const { Title, Description, content, Mediafiles } = item.attributes || {};
+                const formattedNews = actualites.map(post => {
+                    const { Title, Description, content, Mediafiles } = post.attributes || {};
                     const date = Description?.[1]?.children?.[0]?.text || ''; // Ensure Description is not undefined and access safely
                     const formattedDate = formatFrenchDate(date);
 
                     // Construct image URL
-                    const imageUrl = Mediafiles?.data?.[0]?.attributes?.formats?.large?.url
-                        ? `${Mediafiles.data[0].attributes.formats.large.url}`
+                    const imageUrl = post.attributes.Mediafiles?.data?.[0]?.attributes?.formats?.large?.url
+                        ? `${BASE_URL}${post.attributes.Mediafiles.data[0].attributes.formats.large.url}`
                         : '';
 
                     return {
-                        id: item.id,
+                        id: post.id,
                         title: Title,
                         date: formattedDate,
                         content: content,
@@ -145,7 +144,13 @@ const News = () => {
                                             }) : 'Invalid Date'}
                                     </Card.Subtitle>
                                     <Card.Text className="news-content-desc" dangerouslySetInnerHTML={{ __html: latestNews.content }} />
-                                    <Button variant="primary" href={`/actualites-et-evenements/actualites/${latestNews.title}`}>Lire plus</Button>
+                                    <Button
+                                        variant="primary"
+                                        href={`/actualites-et-evenements/actualites/${encodeURIComponent(latestNews.title)}`}
+                                    >
+                                        Lire plus
+                                    </Button>
+
                                 </Card.Body>
                             </Card>
                         )}
@@ -167,13 +172,19 @@ const News = () => {
                                             }) : 'Invalid Date'}
                                     </Card.Subtitle>
                                     <Card.Text className="news-content-desc" dangerouslySetInnerHTML={{ __html: item.content }} />
-                                    <Button variant="primary" href={`/actualites-et-evenements/actualites/${item.title}`}>Lire plus</Button>
+                                    <Button
+                                    variant="primary"
+                                    href={`/actualites-et-evenements/actualites/${encodeURIComponent(item.title)}`}
+                                >
+                                    Lire plus
+                                </Button>
+
                                 </Card.Body>
                             </Card>
                         </Col>
                     ))}
                 </Row>
-            </Container>
+            </Container>    
         </Container>
     );
 };

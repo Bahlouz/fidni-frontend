@@ -5,14 +5,14 @@ import './SingleNews.css'; // Import the CSS for single news page
 import { newsItems as staticNewsItems } from './newsItems'; // Import static news items
 import backnavhead from "../../../Assets/back navhead.jpg";
 
-
-
 const SingleNews = () => {
     const { newsTitle } = useParams(); // Get title from URL params
+    const decodedNewsTitle = decodeURIComponent(newsTitle); // Decode the title for comparison
     const [newsItem, setNewsItem] = useState(null); // State to store the news item
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const BASE_URL = 'https://admin.fidni.tn';
+
     useEffect(() => {
         const fetchNews = async () => {
             try {
@@ -25,15 +25,16 @@ const SingleNews = () => {
 
                 // Search in the API data
                 const apiNewsItem = data.data.find(
-                    (item) => item.attributes.Title === newsTitle
+                    (item) => item.attributes.Title === decodedNewsTitle
                 );
 
                 if (apiNewsItem) {
                     const { Title, content, Mediafiles, Description } = apiNewsItem.attributes;
                     const date = Description?.[1]?.children?.[0]?.text; // Assume date is in Description field
                     const imageUrl = Mediafiles?.data?.[0]?.attributes?.formats?.large?.url
-                        ? `${Mediafiles.data[0].attributes.formats.large.url}`
+                        ? `${BASE_URL}${Mediafiles.data[0].attributes.formats.large.url}`
                         : '';
+
                     setNewsItem({
                         title: Title,
                         date: date,
@@ -42,7 +43,7 @@ const SingleNews = () => {
                     });
                 } else {
                     // If not found in API, search in static newsItems
-                    const staticNewsItem = staticNewsItems.find(item => item.title === newsTitle);
+                    const staticNewsItem = staticNewsItems.find(item => item.title === decodedNewsTitle);
                     if (staticNewsItem) {
                         setNewsItem(staticNewsItem);
                     } else {
@@ -57,7 +58,7 @@ const SingleNews = () => {
         };
 
         fetchNews();
-    }, [newsTitle]);
+    }, [decodedNewsTitle]);
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;

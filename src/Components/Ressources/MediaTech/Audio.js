@@ -29,7 +29,8 @@ const Audio = () => {
             const mediafiles = post.attributes.Mediafiles?.data || [];
             const audioFile = mediafiles.find(file => file.attributes.mime.startsWith('audio'));
             const imageFile = mediafiles.find(file => file.attributes.mime.startsWith('image'));
-
+            const imageUrl = imageFile 
+                    ? `${BASE_URL}${imageFile.attributes.formats.large.url}` : '';
             return {
               id: post.id,
               title: post.attributes.Title,
@@ -37,9 +38,7 @@ const Audio = () => {
               description: post.attributes.content,
               audioUrl: audioFile ? `${audioFile.attributes.url}` : '',
               downloadUrl: audioFile ? `${audioFile.attributes.url}` : '', // Ensure the URL is correct
-              imageUrl: imageFile && imageFile.attributes.formats?.large
-                        ? `${imageFile.attributes.formats.large.url}`
-                        : `${process.env.PUBLIC_URL}/audios/default.jpg`,
+              imageUrl,
             };
           });
 
@@ -69,7 +68,7 @@ const Audio = () => {
           {episodes.map((episode) => (
             <Col md={4} key={episode.id} className="mb-4">
               <Card className="h-100">
-                <Card.Img className="podcast-img-card" variant="top" src={`${BASE_URL}${episode.imageUrl}`} alt={episode.title} />
+                <Card.Img className="podcast-img-card" variant="top" src={`${episode.imageUrl}`} alt={episode.title} />
                 <Card.Body>
                   <Card.Title>{episode.title}</Card.Title>
                   <Card.Subtitle className="mb-2 text-muted">{episode.date}</Card.Subtitle>

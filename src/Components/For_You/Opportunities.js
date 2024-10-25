@@ -37,7 +37,7 @@ const Opportunities = () => {
 
     useEffect(() => {
         // Fetch data from the API
-        fetch(`/api/post-blogs?populate=*`)
+        fetch(`${BASE_URL}/api/post-blogs?populate=*`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -56,7 +56,7 @@ const Opportunities = () => {
                         organization: post.attributes.Description.map(block => block.children.map(child => child.text).join('')).join('\n'), // Description from the Description field// Organization from the content field
                         description: post.attributes.content || 'Unknown',
                         // Construct the full image URL
-                        imageUrl: post.attributes.Mediafiles?.data?.[0]?.attributes?.formats?.large?.url ? `${post.attributes.Mediafiles.data[0].attributes.formats.large.url}` : ''
+                        imageUrl: post.attributes.Mediafiles?.data?.[0]?.attributes?.formats?.large?.url ? `${BASE_URL}${post.attributes.Mediafiles.data[0].attributes.formats.large.url}` : ''
                     }));
 
                 // Combine fetched opportunities with local volunteer opportunities
