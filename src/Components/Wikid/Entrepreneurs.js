@@ -65,7 +65,7 @@ const Entrepreneurs = () => {
                         attributes: {
                             ...item.attributes,
                             mediaFiles: mediaFiles.map(file => file.attributes?.url || ''), // Extract URLs safely
-                            imageUrl: mediaFiles[0]?.attributes?.url ? `${mediaFiles[0].attributes.url}` : '' // Full URL for image
+                            imageUrl: mediaFiles[0]?.attributes?.url ? `${BASE_URL}${mediaFiles[0].attributes.url}` : '' // Full URL for image
                         }
                     };
                 });
@@ -143,7 +143,7 @@ const Entrepreneurs = () => {
                                     <Card.Img 
                                         className="latest-wikid" 
                                         variant="top" 
-                                        src={`${latestStory.attributes.mediaFiles[0]}`} 
+                                        src={`${BASE_URL}${latestStory.attributes.mediaFiles[0]}`} 
                                         alt={latestStory.attributes?.Title || latestStory.title}
                                         onError={() => console.error('Image not found:', latestStory.attributes?.mediaFiles[0])} // Error handling
                                     />
@@ -163,7 +163,12 @@ const Entrepreneurs = () => {
                                     <Card.Text className="card-text-truncatedd">
                                         {getFirstLine(latestStory.attributes?.content || latestStory.content)}
                                     </Card.Text>
-                                    <Button variant="primary" href={`/savoir-lab/wikiphedia/${encodeTitleForURL(latestStory.attributes?.Title || latestStory.title)}`}>Lire plus</Button>
+                                    <Button 
+    variant="primary" 
+    href={`/savoir-lab/wikiphedia/${encodeURIComponent(latestStory.attributes?.Title || latestStory.title)}`}
+>
+    Lire plus
+</Button>
                                 </Card.Body>
                             </Card>
                         )}
@@ -179,7 +184,7 @@ const Entrepreneurs = () => {
                                     <Card.Img 
                                         variant="top" 
                                         className="wikid-card-image" 
-                                        src={`${item.attributes.mediaFiles[0]}`} 
+                                        src={`${BASE_URL}${item.attributes.mediaFiles[0]}`} 
                                         alt={item.attributes?.Title || item.title}
                                         onError={() => console.error('Image not found:', item.attributes?.mediaFiles[0])} // Error handling
                                     />
@@ -199,7 +204,12 @@ const Entrepreneurs = () => {
                                     <Card.Text className="card-text-truncatedd">
                                         {getFirstLine(item.attributes?.content || item.content)}
                                     </Card.Text>
-                                    <Button variant="primary" href={`/savoir-lab/wikiphedia/${encodeTitleForURL(item.attributes?.Title || item.title)}`}>Lire plus</Button>
+                                    <Button 
+    variant="primary" 
+    href={`/savoir-lab/wikiphedia/${encodeURIComponent(item.attributes?.Title || item.title)}`}
+>
+    Lire plus
+</Button>
                                 </Card.Body>
                             </Card>
                         </Col>
