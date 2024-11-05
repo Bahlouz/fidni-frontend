@@ -1,0 +1,1019 @@
+{
+  "search":"Rechercher",
+  "searchplaceholder":"Rechercher ...",
+    "home": {
+      "title": "Fidni est un carrefour multipartite et accessible",
+      "intro": "Fidni est un carrefour multipartite et accessible qui regroupe les personnes handicapées et les acteurs engagés pour la promotion de leurs droits et services en Tunisie, pour un changement des mentalités sur le handicap."
+    },
+  
+  "nav": {
+    "goToMenu": "Aller au menu",
+    "goToFooter": "Aller au pied de page"
+  },
+  "accessibility": "Accessibilité",
+  "alerts": {
+    "zoomInfo": "Vous pouvez augmenter ou diminuer le zoom de la page en utilisant les raccourcis Ctrl + et Ctrl -"
+  },
+  "language": {
+    "french": "Français",
+    "arabic": "عربي"
+  },
+  "typewriter": [
+      "Parlons Accessibilité",
+      "Naviguez sans Barrières",
+      "Inclusif et Convivial",
+      "Chacun Mérite de Se Connecter",
+      "Sans Limites, Juste Naviguer"
+    ],
+    "home2": {
+        "keyFigures": "Chiffres Clés",
+        "healthServices": "Services de santé sexuelle et reproductive de l'Office national de la famille",
+        "accessibleServices": "Services de Santé Reproductive et Sexuelle Accessibles pour les Personnes en Situation de Handicap",
+        "structures": "Structures œuvrant dans le domaine du handicap en Tunisie"
+      },
+      "quiSommesNous": {
+        "title": "Qui sommes-nous ?",
+        "paragraph1": "L’association Ibsar, en partenariat avec le Bureau régional de l’UNESCO pour le Maghreb, lance FIDNI, une plateforme inclusive et centralisée. Laboratoire de savoir en ligne facilitant la collecte, la centralisation et la diffusion de données, d'analyses et de recherches stratégiques sur le handicap, FIDNI répond à l'impératif d'une meilleure accessibilité des personnes handicapées à l'information, à la lutte contre les normes culturelles qui perpétuent la discrimination, les préjugés et les stéréotypes, et à la prise de décisions politiques éclairées.",
+        "paragraph2": "Initiée dans le cadre des actions menées par l’UNESCO dans le projet conjoint « Pour un meilleur accès des personnes handicapées aux services et aux droits en Tunisie » favorisant une communication inclusive et des politiques fondées sur les droits de l'homme, en s'appuyant sur les articles 8 et 21 de la Convention relative aux droits des personnes handicapées (CDPH) ; FIDNI réunit toutes les parties engagées pour un meilleur accès aux droits et services des personnes handicapées en Tunisie."
+      },
+      "description": {
+      "vision": {
+        "title": "Notre Vision",
+        "content": "La plateforme FIDNI est une plateforme en ligne centralisée et accessible visant à faciliter la collecte, la centralisation et la diffusion d'informations pertinentes, de données, d'analyses et de recherches stratégiques sur le handicap, en réponse à l'impératif d'une meilleure accessibilité à l'information, et à la prise de décision politique éclairée."
+      },
+      "mission": {
+        "title": "Notre Mission",
+        "content": [
+          "Faciliter l'accès à l'information.",
+          "Promouvoir l'adoption de politiques inclusives fondées sur des recherches et ancrées dans les connaissances scientifiques.",
+          "Favoriser les échanges entre les personnes en situation de handicap en Tunisie, les chercheurs, les journalistes, les acteurs de la société civile et les décideurs."
+        ]
+      }
+    },
+    "quote": {
+        "title": "Chaque voix mérite d'être entendue",
+        "ericFalt": {
+          "title": "Mot d'Eric FALT:",
+          "role": "Directeur régional du bureau de l'UNESCO pour le Maghreb",
+          "text": "Portée par la conviction que chaque voix mérite d'être entendue, I'UNESCO, Organisation des Nations Unies pour l'éducation, la science et la culture, s'est engagée sur le chantier d'une communication plus des personnes en situation de handicap en Tunisie. Ce voyage vers l'inclusion a débuté avec la signature pionnière de la Tunisie en 2007 et sa ratification dès 2008 de la Convention relative aux droits des personnes handicapées, et l'inclusion historique dans la Constitution tunisienne de l'obligation de l'État de protéger les personnes handicapées contre toute discrimination et de prendre des mesures qui garantissent leur pleine inclusion dans la société. Malgré des progrès notables, les rapports récents du Comité des droits des personnes handicapées révèlent un écart entre les aspirations tunisiennes et la réalisation de la Convention, notamment en matière de dignité des personnes handicapées dans les médias. Cette plateforme est notre réponse à cet impératif, et illustre notre engagement à briser les barrières des préjugés, en commençant par la transformation des mentalités."
+        },
+        "mohammedMansouri": {
+          "title": "Mot de Mohammed Mansouri:",
+          "role": "Président et Fondateur de l’association IBSAR",
+          "text": "\"Fidni\" est une plateforme innovante dédiée à la production et à la diffusion d'informations sur le handicap, visant à garantir l'accès à l'information pour les personnes en situation de handicap, leurs familles, et les professionnels concernés. Cette plateforme répond à un besoin crucial en matière d'accessibilité à l'information pour les personnes handicapées, en offrant un accès centralisé et simplifié à des ressources sur des sujets essentiels comme l'emploi, l'éducation, la santé, et les droits légaux. \"Fidni\" se distingue par son approche inclusive et holistique, en proposant une variété de contenus regroupés en un seul endroit, facilitant ainsi la vie quotidienne et l'intégration sociale et professionnelle des personnes en situation de handicap. La plateforme s'adresse également aux journalistes et chercheurs, offrant une source fiable et accessible d'informations actuelles et pertinentes, avec un accent particulier sur l'accessibilité et la clarté des informations présentées. En somme, \"Fidni\" révolutionne l'accès à l'information pour les personnes en situation de handicap, leurs familles, et tous ceux qui œuvrent pour une société plus inclusive et équitable."
+        }
+      },
+      "footer": {
+        "description": "Pour une communauté informée et inclusive.",
+        "contact": "Contact@fidni.tn | +216 29 180 780",
+        "project": "Cette plateforme est élaborée dans le cadre du projet « Pour un meilleur accès des personnes handicapées aux services et aux droits en Tunisie »",
+        "startfooter":"Commencer",
+        "mediathequefooter":"Mediathèque",
+        "rapidlinksfooter":"Liens Rapides",
+        "menu": {
+          "about": "À propos de nous",
+          "accessibility": "Accessibilité",
+          "media": "Mediathèque",
+          "audio": "Audio & Podcast",
+          "video": "Vidéo",
+          "quickLinks": "Liens rapides",
+          "services": "Services",
+          "rights": "Droits",
+          "opportunities": "Opportunités",
+          "blog": "Blog",
+          "wiki": "WikiPHédia",
+          "news": "Actualités",
+          "events": "Événements"
+        },
+        "discussion": {
+          "title": "Discutons",
+          "description": "Avez-vous une question de support ?",
+          "contactUs": "Contactez-nous",
+          "disclaimer": "Disclaimer : Les idées et les opinions exprimées dans cette plateforme sont celles des auteurs ; elles ne reflètent pas nécessairement les points de vue de l’Association IBSAR ou de l’UNESCO et n’engagent en aucune façon ces organisations."
+        },
+        "copyright": "Tous droits réservés."
+      },
+      "navigation": {
+    "home": "Acceuil",
+    "services_and_rights": "Services et Droits",
+    "services": "Services",
+    "rights": "Droits",
+    "opportunities": "Opportunités",
+    "savoir_lab": "Savoir Lab",
+    "accessibility": "Accessibilité",
+    "inclusive_communication": "Communication inclusive",
+    "wikipedia": "WikiPhédia",
+    "advocacy_documents": "Documents de plaidoyer",
+    "news_and_events": "Actualités et Événements",
+    "news": "Actualités",
+    "events": "Événements",
+    "media_library": "Médiathèque",
+    "audio_and_podcast": "Audio & Podcast",
+    "video": "Vidéo",
+    "blog": "Blog"
+  },
+    "services": "SERVICES",
+    "services_description": "Vous allez trouver dans cette section des informations sur les services aux personnes handicapées en Tunisie.",
+    "cardTitles": {
+      "card1": "Comment obtenir une carte d'handicap ?",
+      "card2": "Comment renouveler la carte d'handicap ?",
+      "card3": "Quelles sont les adresses des services de santé sexuelle et reproductive fournis par l'Office national de la famille ?",
+      "card4": "Quel est le répertoire des structures œuvrant dans le domaine du handicap en Tunisie ?",
+      "card5": "Découvrez le guide des services de santé reproductive et sexuelle pour les personnes en situation de handicap."
+    },
+    "droits": {
+    "title1": "Convention relative aux Droits des Personnes Handicapées (CDPH)",
+    "description1": "La Convention relative aux droits des personnes handicapées (CDPH), adoptée le 13 décembre 2006 par l’Assemblée générale des Nations Unies à New York, a pour objet de « promouvoir, protéger et assurer la pleine et égale jouissance de tous les droits de l’homme et de toutes les libertés fondamentales par les personnes handicapées et de promouvoir le respect de leur dignité intrinsèque ».",
+    "title2": "Cadre réglementaire concernant le handicap en Tunisie",
+    "description2": "En ratifiant la Convention relative aux droits des personnes handicapées le 2 avril 2008, la Tunisie affirmait un engagement fort envers la protection et la promotion des droits des personnes en situation de handicap. Des avancées significatives ont ensuite été enregistrées avec l'intégration de ces principes dans la Constitution tunisienne, en 2014 et réaffirmée en 2022, consacrant ainsi la protection des personnes handicapées contre toute forme de discrimination, conformément à l'article 54 qui stipule que « l’État protège les personnes handicapées contre toute discrimination et prend toutes les mesures propres à leur garantir une entière intégration au sein de la société ».",
+    "header": "DROITS ET LEGISLATION",
+    "description": "Vous allez trouver dans cette section des informations sur les droits des personnes handicapées en Tunisie, à savoir la Convention relative aux Droits des Personnes Handicapées (CDPH) et le cadre légal en Tunisie."
+  },
+  "lm":{
+    "lmb":"En apprendre plus"},
+  "arrow":{
+    "arrow":"→"
+  },
+  "convention": {
+      "title": "Convention relative aux Droits des Personnes Handicapées (CDPH)",
+      "definitions": {
+        "header": "Définitions :",
+        "disabled_people": "Personnes handicapées ",
+        "disabled_people_description":"personnes qui présentent des incapacités physiques, mentales, intellectuelles ou sensorielles durables dont l'interaction avec diverses barrières peut faire obstacle à leur pleine et effective participation à la société sur la base de l'égalité avec les autres.",
+        "discrimination_description":"toute distinction, exclusion ou restriction fondée sur le handicap qui a pour objet ou pour effet de compromettre ou réduire à néant la reconnaissance, la jouissance ou l'exercice, sur la base de l'égalité avec les autres, de tous les droits de l'homme et de toutes les libertés fondamentales dans les domaines politique, économique, social, culturel, civil ou autres.",
+        "reasonable_accommodation_description":"modifications et ajustements nécessaires et appropriés n'imposant pas de charge disproportionnée ou indue, apportés, en fonction des besoins dans une situation donnée, pour assurer aux personnes handicapées la jouissance ou l'exercice, sur la base de l'égalité avec les autres, de tous les droits de l'homme et de toutes les libertés fondamentales.",
+        "discrimination": "Discrimination fondée sur le handicap ",
+        "reasonable_accommodation": "Aménagement raisonnable ",
+        "source": "Source : Convention relative aux Droits des Personnes Handicapées"
+      },
+      "introduction": "La Convention relative aux droits des personnes handicapées (CDPH), adoptée le 13 décembre 2006 par l'Assemblée générale des Nations Unies à New York, a pour objet de « promouvoir, protéger et assurer la pleine et égale jouissance de tous les droits de l’homme et de toutes les libertés fondamentales par les personnes handicapées et de promouvoir le respect de leur dignité intrinsèque ».",
+      "commitment": "La Convention est un engagement universel pour transformer les sociétés dans le sens de l’inclusion, afin de garantir que les personnes handicapées jouissent des mêmes opportunités, des mêmes possibilités de participation que les autres. Dans ce sens, elle prône la non-discrimination. Elle appelle à ce que les personnes handicapées ne soient plus considérées comme des objets de charité mais bien comme des sujets de droit.",
+      "linkage": "La CDPH fait le lien entre le handicap et les personnes détentrices de droits, et se focalise sur l’interaction des déficiences avec les obstacles de l’environnement qui entravent la participation pleine et entière dans la société.",
+      "significant_changes": {
+        "header": "Parmi les changements les plus significatifs, il faut retenir que cette Convention :",
+        "points": [
+          "Ne crée pas de nouveaux droits pour les personnes handicapées : elle exprime l’ensemble des droits humains en prenant en compte les besoins spécifiques et la situation des personnes handicapées, et énumère les étapes et actions nécessaires à leur réalisation pleine et entière.",
+          "Est juridiquement contraignante pour les États parties : les États doivent régulièrement faire un rapport des mesures entreprises pour l’appliquer.",
+          "Est un outil de développement et un instrument des droits humains.",
+          "Avisée le changement de paradigme sur la question du handicap en appliquant le modèle social du handicap à la totalité du texte de la Convention.",
+          "Est un instrument s’appliquant à tous les types d’incapacités et tous les secteurs.",
+          "Représente « un grand pas en avant pour la promotion de l’accès aux services destinés aux personnes handicapées, dans tous les contextes et à tout moment ». ",
+          "Stipule clairement le rôle des organisations représentatives des personnes handicapées comme élément moteur dans la promotion des droits des personnes handicapées, exigeant par conséquent leur participation systématique."
+        ]
+      },
+      "useful_link": {
+        "header": "Lien utile :",
+        "text": "Accéder à la Convention relative aux droits des personnes handicapées (CDPH) en français",
+        "url": "https://www.ohchr.org/fr/instruments-mechanisms/instruments/convention-rights-persons-disabilities"
+      },
+      "consult": {
+        "header": "Consulter :",
+        "notes": 
+          {
+            "ra": "CDPH, Article 1. Op, cit.",
+            "rb": "CDPH. Articles 3, 4.3, 29, 30, 32 et 33. Op, cit."
+          }
+        ,
+        "links": [
+          {
+            "text": "Droits",
+            "url": "/services-et-droits/droits"
+          },
+          {
+            "text": "Cadre réglementaire concernant le handicap en Tunisie",
+            "url": "/services-et-droits/cadre"
+          }
+        ]
+      }
+    },
+    "opportunities": { 
+      "opportunities_title": "Opportunités",
+      "opportunities_description": "Explorez les options de travail, de formation, de financement et de bénévolat pour les personnes handicapées en Tunisie. Encouragez l'intégration et le développement en saisissant toutes les occasions d'avancer dans votre carrière et votre vie personnelle.",
+      "accessible_event": "Bénévole pour des événements accessibles",
+      "oit": "Organisation Internationale du Travail (OIT) Tunisie",
+      "accessible_event_description": "L'OIT travaille sur divers projets pour améliorer les opportunités d'emploi pour les personnes handicapées en Tunisie. Ils se concentrent sur la création de marchés du travail inclusifs et proposent des programmes de formation pour améliorer les compétences et l'employabilité.",
+      "accessibility_initiatives": "Soutenir les initiatives d'accessibilité",
+      "atfp": "Agence Tunisienne de la Formation Professionnelle (ATFP)",
+      "accessibility_initiatives_description": "Cette agence propose des programmes de formation professionnelle spécialement adaptés aux personnes handicapées, les aidant à acquérir des compétences qui peuvent mener à un emploi durable.",
+      "technical_support": "Fournir un soutien technique pour les dispositifs d'assistance",
+      "handicap_international": "Handicap International",
+      "technical_support_description": "Cette ONG est active en Tunisie, fournissant divers services, y compris la réadaptation, les prothèses, et la défense des droits des personnes handicapées." 
+},
+"cadre": {
+    "background_image_title": "Cadre réglementaire concernant le handicap en Tunisie",
+    "paragraph_1": "La Tunisie a procédé à la signature de la Convention relative aux droits des personnes handicapées le 30 mars 2007 et l’a ratifié le 2 avril 2008.",
+    "paragraph_2": "Cette démarche affirmait déjà un engagement fort envers la protection et la promotion des droits des personnes en situation de handicap. Des avancées significatives ont ensuite été enregistrées avec l'intégration de ces principes dans la Constitution tunisienne, en 2014 et réaffirmée en 2022, consacrant ainsi la protection des personnes handicapées contre toute forme de discrimination, conformément à l'article 54 qui stipule que",
+    "paragraph_2_strong":" l’État protège les personnes handicapées contre toute discrimination et prend toutes les mesures propres à leur garantir une entière intégration au sein de la société",
+    "paragraph_3": "La Tunisie a aussi adopté d’autres mesures légales pour promouvoir et protéger les droits des personnes handicapées, dont la Loi n° 2005-83 du 15 août 2005, qui vise notamment à garantir :",
+    "list_item_1": "« l'égalité des chances entre les personnes handicapées et les autres personnes, ainsi que leur promotion et leur protection contre toutes formes de discrimination » (article 1er) ;",
+    "list_item_2": "« une carte de Handicap à tous ceux qui y ont droit » (article 9) ;",
+    "list_item_3": "« l’aménagement de l’environnement, à l’adaptation des moyens de communication et d’information, à la facilitation des déplacements des personnes handicapées et leur accès aux prestations » (article 10) ;",
+    "list_item_4": "« gratuité de soins, de l’hospitalisation dans les structures publiques de santé, des appareils de prothèses et de réadaptation » (article 15) ;",
+    "list_item_5": "« le droit à l’éducation, l’enseignement, la réadaptation et la formation dans le système ordinaire pour les enfants handicapés » (article 19) ;",
+    "list_item_6": "« droit d’exercer et de jouir des activités culturelles, sportives et de loisir » et œuvrer à « supprimer tous les obstacles qui entravent l’exercice de ces activités » (art. 36).",
+    "paragraph_4": "Cette loi marque l’adoption en Tunisie d’une approche centrée sur les droits humains et l’inclusion des personnes handicapées. La Tunisie serait ainsi passée d'une approche purement médicale du handicap à une approche à la fois médicale, psychologique et sociale prenant en considération les particularités personnelles et environnementales.",
+    "paragraph_5": "Cependant, malgré ces avancées juridiques, le rapport d’avril 2023 du Comité des droits des personnes handicapées du Haut-Commissariat aux droits de l'homme (HCDH), a mis en lumière un décalage entre les dispositions légales et leur application effective sur le terrain en Tunisie. Les membres du Comité ont exprimé leur préoccupation quant au supposé faible niveau de sensibilisation de la société tunisienne aux droits des personnes handicapées, ainsi qu'à l'usage présumé dans certains médias d'un langage dénigrant à leur égard. Ces constats mettent en lumière les défis liés à la perception sociale du handicap et soulignent .",
+    "paragraph_5_strong": "la nécessité d'une intervention holistique et multipartite pour renforcer la sensibilisation et promouvoir une approche basée sur les droits humains",
+    "table_title": "A retenir : Cadre réglementaire concernant le handicap en Tunisie",
+    "constitution_2022_title": "L’article 54 de la Constitution (2022) : « L’État protège les personnes handicapées de toute discrimination et prend toutes les mesures qui lui garantissent une pleine intégration dans la société ».",
+    "constitution_2022_content": "L’article 48 de la Constitution (2014) stipule que l’État protège les personnes handicapées contre toute discrimination fondée sur le handicap, de bénéficier de toutes les mesures propres à lui garantir une entière intégration au sein de la société ; incombe à l’État de prendre toutes les mesures nécessaires à cet effet.",
+    "constitution_2014_content": "La loi n° 2005-83 énonce que toute entreprise publique ou privée de plus de 100 employés doit réserver 1% au moins de son personnel pour les postes des employés handicapés. Celles qui emploient plus de 100 personnes doivent réserver 2 % des postes à des personnes handicapées.",
+    "law_2005_83_content": "Loi organique n° 2016-61 du 3 août 2016, relative à la prévention et la lutte contre la traite des personnes.",
+    "law_2016_61_content": "Loi d'orientation N° 83-2005 du 15 août 2005 relative à la protection des personnes handicapées ;",
+    "decree_1996_content": "Décret n°96-849 du 1 mai 1996, relatif à la création du Conseil national des personnes handicapées Décret n°90-2601 du 10 décembre 1990, modifié par le décret n°96-1419 du 12 août 1996, portant organisation de l’institut de promotion des personnes handicapées.",
+    "decree_2005_3029_content": "Décret n°2005-3029 du 21 novembre 2005, portant création d’un conseil supérieur de la protection des personnes handicapées et fixant sa composition, ses attributions et les modalités de son fonctionnement.",
+    "cadre.decree_2005_3086_content": "Décret n°2005-3086 du 29 novembre 2005, relatif à la création des commissions régionales des personnes handicapées, à la fixation des critères de handicap et aux conditions d’attribution de la carte de handicap.",
+    "carte_handicap": "CARTE HANDICAP :",
+    "carte_handicap_link": "https://www.social.gov.tn/fr/attribution-de-carte-de-handicap"
+  },
+  "accessibilityPage": {
+    "title": "Accessibilité",
+    "description": "Vous allez trouver dans cette section des informations sur l’accessibilité des personnes en situation de handicap aux droits et services, mais également aux médias et à l’information.",
+    "cardData": [
+      {
+        "title": "Accessibilité aux médias et à l’information",
+        "description": "L’accessibilité des médias pour les personnes handicapées est centrale, non seulement pour leur droit à l’information, mais aussi pour leur capacité à participer pleinement dans la société. De ce fait, les acteurs médiatiques ont un rôle a joué dans le cadre du processus d’accessibilité. En effet, ils se doivent de respecter des normes inclusives et respectueuses des personnes en situation de handicap. Pour ce faire, ils peuvent adopter une série de mesures tels qu’une nouvelle manière de structurer un communiqué de presse pour qu’il soit plus impactant et en faveur de l’inclusion des personnes handicapées ou encore à travers l’organisation d’une conférence de presse pour sensibiliser et mobiliser autour des enjeux des personnes en situation de handicap. Des défis persistent dans la création de contenus médiatiques accessibles. Nous proposons des solutions concrètes pour surmonter ces obstacles garantissant que personne ne soit laissé pour compte.",
+        "link": "/savoir-lab/Accessibilité aux médias et à l’information"
+      },
+      {
+        "title": "Appui des acteurs médiatiques au processus d'accessibilité",
+        "description": "Le lien entre handicap et accessibilité est indissociable. Comprendre les défis quotidiens des personnes en situation de handicap est essentiel pour saisir le rôle crucial de l’accessibilité. Celle-ci influence de nombreux aspects de la vie quotidienne, incluant l’éducation, la santé, le travail, le transport et la culture. Rendre le monde accessible est une nécessité pour promouvoir l’inclusion des personnes handicapées, un objectif qui bénéficie à l’ensemble de la société, quels que soient les capacités individuelles. L’appui des acteurs médiatiques à ce processus est indispensable, notamment à travers la réalisation de reportage sur des aspects cruciaux de la vie des personnes handicapées, comme l’accès aux espaces publics ou urbains ou à travers une méthodologie journalistique rigoureuse.",
+        "link": "/savoir-lab/Appui des acteurs médiatiques au processus d accessibilité"
+      }
+    ]
+  },
+ "AccessMedia":{
+  "accessibility_title": "Accessibilité aux médias et à l’information",
+  "section_one_title": "i. Créer un contenu accessible",
+  "section_one_paragraph1": "L’accessibilité « permet à une personne en situation de handicap de bénéficier des informations, des interactions et des services dont dispose une personne sans handicap de manière compréhensible, pertinente et exploitable. En résumé, il s’agit d’une pratique inclusive visant à supprimer toutes les barrières à l’apprentissage pour le plus grand nombre de personnes ».",
+  "section_one_paragraph2" :"Bien qu’on puisse penser « que l’accessibilité s’oriente principalement vers l’aide aux personnes en situation de handicap physique, comme la perte de l’audition ou de la vue (...), l’accessibilité bénéficie également aux personnes atteintes de troubles temporaires, parmi lesquels la perte d’audition ou de vision en raison d’une pathologie (…) ou d’une chirurgie ».",
+  "section_one_paragraph3":"Malgré cela, l’accessibilité est souvent mise de côté en raison de l’idée reçue selon laquelle cette démarche serait coûteuse et compliquée à mettre en œuvre",
+  "best_practices_title": "Nous préconisons ci-après quelques pratiques concernant l’accessibilité des images et des écrits :",
+  "best_practices": {
+    "best_pr1":"Utiliser plusieurs moyens de communication chaque fois que vous le pouvez. Ne vous contentez pas que de la couleur pour signaler des éléments importants.",
+    "best_pr2":"Rendre les images accessibles pour que les informations voulues parviennent bien aux personnes aveugles, aux personnes malvoyantes, aux personnes daltoniennes ou aux personnes ayant une déficience cognitive. Accompagnez par exemple les images, les graphiques, et les publications sur les réseaux sociaux, de descriptions et/ou de textes de remplacement.",
+    "best_pr3":"Rendre le texte accessible moyennant de petits changements pour que les personnes ayant des difficultés d’apprentissage aient plus facilement accès. Également utilisez des mots simples et des liens hypertextes et organiser les informations de manière logique.",
+    "best_pr4":"Assurer des transcriptions et des interprétations en langue des signes lorsque vous communiquez des informations et ne se basant pas uniquement sur les paroles ou expressions orales."
+  },
+  "section_two_title": "ii. Accessibilité dans le secteur audiovisuel",
+  "section_two_paragraphs":{
+    "section_two_pr1":"La Haute Autorité Indépendante de la Communication Audiovisuelle (HAICA) occupe une place fondamentale en tant qu'organisme de régulation des médias audiovisuels en Tunisie. Par conséquent, elle peut jouer un rôle crucial dans la promotion de l'accessibilité des personnes en situation de handicap aux médias, tout en contribuant à renforcer les mécanismes d'autorégulation.",
+    "section_two_pr2":"Malgré les clauses dans les cahiers des charges exigeant la prise en compte de l'aspect des droits humains, des groupes vulnérables et des personnes handicapées, il existe encore d'importantes lacunes. Il est donc essentiel d'établir des directives spécifiques concernant l'accessibilité aux médias, de les présenter comme des lignes directrices claires sur la manière de traiter ces questions et de poser les bases de leur prise en compte.",
+    "section_two_pr3":"À travers cette étude et les recommandations qui y sont formulées, en particulier dans ce document, nous exhortons la HAICA à élaborer une stratégie visant à promouvoir l'intégration des personnes en situation de handicap dans les médias. Elle devrait également fournir des conseils et des moyens pour l'autorégulation, tout en assurant le suivi de la mise en œuvre.",
+    "section_two_pr4":"L'accessibilité des personnes en situation de handicap aux médias nécessite une compréhension de tous les types de handicaps, notamment les handicaps visuels, auditifs, moteurs et mentaux. Il est donc important de tenir compte de cette diversité pour garantir une réelle intégration.",
+    "section_two_pr5":"Voici quelques recommandations clés pour assurer une accessibilité efficace :"
+  },
+  "recommendations": [
+      {
+        "title": "Sous-titrage",
+        "description": "Fournir des sous-titres pour les personnes malentendantes dans le contenu vidéo, qui rendent le dialogue et les effets sonores accessibles par le texte."
+      },
+      {
+        "title": "Transcription",
+        "description": "Accompagner les médias audios de transcriptions écrites pour permettre aux personnes malentendantes de les suivre."
+      },
+      {
+        "title": "Braille et Audio",
+        "description": "Fournir des documents en braille et des versions audio pour les personnes aveugles ou malvoyantes."
+      },
+      {
+        "title": "Adaptation des Supports",
+        "description": "Prévoir des supports multimodaux, notamment en utilisant divers supports de communication (visuels, auditifs, tactiles)."
+      },
+      {
+        "title": "Format inclusif",
+        "description": "Concevoir les sites web et applications des médias pour être compatibles avec les technologies d'assistance, telles que les lecteurs d'écran, pour les personnes malvoyantes."
+      },
+      {
+        "title": "Langage explicite",
+        "description": "Utiliser un langage clair et simple dans les médias pour faciliter la compréhension des personnes atteintes de troubles cognitifs."
+      },
+      {
+        "title": "Accessibilité aux médias imprimés",
+        "description": "Rendre disponible les publications imprimées dans des formats accessibles tels que le braille ou de gros caractères pour les personnes malvoyantes."
+      },
+      {
+        "title": "Formation continue du personnel",
+        "description": "Sensibiliser les professionnels des médias aux besoins des personnes handicapées et les former à créer un contenu accessible."
+      },
+      {
+        "title": "Implication des parties prenantes",
+        "description": "Impliquer activement les personnes en situation de handicap dans la conception et la planification des médias pour prendre en compte leurs besoins."
+      },
+      {
+        "title": "Audiodescription",
+        "description": "Utiliser la technique de l'audiodescription pour guider les personnes non voyantes ou malvoyantes en décrivant les éléments visuels pour améliorer leur expérience de visionnage de films."
+      },
+      {
+        "title": "Accessibilité Web",
+        "description": "Veiller à une conformité avec les directives Web Content Accessibility Guidelines (WCAG), une navigation facile à utiliser et la fourniture de descriptions pour les images."
+      },
+      {
+        "title": "Langue des signes",
+        "description": "Prendre en compte les règles des langues des signes et fournir des interprètes au besoin, en veillant à ce que la langue des signes ne soit pas universelle, mais spécifique à chaque région. S’assurer également que les interprètes comprennent les éléments non verbaux qui peuvent être essentiels pour la compréhension du programme."
+      }
+  ],
+  "final_note": "Il est important de noter que lorsqu'une personne apparaît à l'écran en langue des signes, elle doit porter des vêtements contrastés par rapport à l'arrière-plan et être bien visible pour permettre une bonne visibilité des mouvements.",
+  "references": {
+    "reference_one": "« Création de contenu d’apprentissage accessible et inclusif », Udemy ? Teaching center, 2024. [En ligne] Création de contenu d’apprentissage accessible et inclusif (udemy.com) (Page consultée le 11 mai 2024)",
+    "reference_two": "Idem.",
+    "reference_three": "Idem.",
+    "reference_four": "Nations Unies, « Lignes directrices pour l’inclusion du handicap dans la langue écrite et orale », Nations Unies et en concertation avec l’International Disability Alliance, Mars 2022, pp 24-28 pages. [En ligne]disability-inclusive_language_guidelines_fr.pdf (un.org) (Page consultée le 03 mai 2024)"
+  }
+},
+"AppuiActeurs":{
+  "fr": {
+    "appuiActeursTitle": "Appui des acteurs médiatiques au processus d'accessibilité",
+    "importanceAccessibilite": "Comprendre l'importance de l'accessibilité pour promouvoir l'inclusivité",
+    "lienHandicapAccessibilite": "Le lien entre handicap et accessibilité est indiscociable. Comprendre les défis quotidiens des personnes en situation de handicap est essentiel pour saisir le rôle crucial de l'accessibilité. Celle-ci influence de nombreux aspects de la vie quotidienne, incluant l'éducation, la santé, le travail, le transport, et la culture. Rendre le monde accessible est une nécessité pour promouvoir l'inclusivité. Son objectif est d'éliminer tout ce qui entrave la pleine inclusion de la société, quel que soit les capacités individuelles.",
+    "nuancesAccessibiliteInclusivite": "Nuances entre accessibilité et inclusivité réside dans leurs objectifs et leurs portées",
+    "accesstitle":"Accessibilité",
+    "inclutitle":"Inclusivité",
+    "objtitle":"Objectif :",
+    "focustitle":"Focus :",
+    "exptitle":"Exemples :",
+    "accessibiliteObjectif": "L'accessibilité vise à garantir que tous les individus, indépendamment de leurs capacités physiques ou mentales, puissent accéder aux bâtiments, aux services, aux transports, aux technologies numériques, et à toutes les autres formes d'infrastructure et de services disponibles dans la société.",
+    "inclusiviteObjectif": "L'inclusivité vise à créer des environnements, des politiques et des pratiques qui accueillent et respectent la diversité de tous les individus, en favorisant leur participation active, leur contribution et leur sentiment d'appartenance dans tous les aspects de la société.",
+    "accessibiliteFocus": "Elle se concentre sur la suppression des barrières physiques, sensorielles, cognitives, et autres, qui peuvent empêcher ou limiter l'accès des personnes handicapées à des infrastructures et services.",
+    "inclusiviteFocus": "Elle va au-delà de l'accès physique en cherchant à éliminer les barrières sociales, culturelles et comportementales qui peuvent marginaliser ou exclure certaines populations, y compris les personnes handicapées.",
+    "accessibiliteExemples": "Rampes d'accès pour fauteuils roulants, ascenseurs adaptés, systèmes de guidage pour non-voyants, sous-titres pour sourds dans les médias, sites web accessibles, etc.",
+    "inclusiviteExemples": "Initiatives visant à sensibiliser sur les besoins des différentes communautés, politiques d'emploi inclusif, programmes éducatifs accessibles à tous les enfants, espaces publics conçus pour favoriser l'interaction sociale de tous les membres de la communauté, etc.",
+    "garantieAcces": "L'accessibilité garantit que tous les individus puissent accéder sans difficulté aux bâtiments, aux services et aux infrastructures. Elle ne concerne pas uniquement les personnes handicapées, mais aussi d'autres groupes tels que les femmes enceintes, les personnes âgées, et les parents avec des enfants en poussette. Toute personne confrontée à des obstacles temporaires ou permanents doit pouvoir accéder pleinement à tous les lieux et services.",
+    "accestitle1":"Accessibilité",
+    "accestitle2":"Conception Universelle",
+    "accestitle3":"Design Inclusif",
+    "adaptationAccessibilite": "Adaptation de l'existant pour répondre aux besoins spécifiques des personnes handicapées à travers des solutions ou équipements spécifiques, comme les guidages podotactiles dans les gares.",
+    "conceptionUniverselle": "Aussi appelée design pour tous, elle vise à créer des solutions qui répondent aux besoins de tous, de ces environnements mêmes stressants pour les personnes handicapées ou ayant un handicap cognitif.",
+    "designInclusif": "Conception prenant en compte les besoins diversifiés de plusieurs groupes, adaptant la solution en fonction des spécificités de chaque utilisateur.",
+    "objectifCommun": "Ces approches se croisent pour un objectif commun: assurer aux personnes en situation de handicap l'accès équitable aux mêmes droits et services que tous les citoyens.",
+    "accederLexiqueFrancais": "Accéder au lexique en français",
+    "accederLexiqueArabe": "Accéder au lexique en arabe"
+  },
+  "fiche8": {
+    "title": "Réaliser un reportage sur l'accessibilité des espaces publics urbains",
+    "sections": {
+      "accessibility": {
+        "title": "1. L'Accessibilité des Espaces Publics",
+        "text": "L'accessibilité des espaces publics vise à permettre à toutes les personnes, y compris celles en situation de handicap, de circuler librement et de bénéficier pleinement des services et équipements urbains disponibles. Ce droit fondamental garantit l'égalité d'accès à l'espace urbain et aux services publics pour tous les citoyens."
+      },
+      "journalistic_importance": {
+        "title": "2. Importance du Travail Journalistique sur l'Accessibilité",
+        "text": "Le travail journalistique sur l'accessibilité urbaine consiste à réaliser des reportages de terrain, accompagnés de photos et de vidéos, pour évaluer concrètement l'accessibilité d'un quartier, d'une administration ou d'un établissement public... Ces reportages mettent en lumière les défis rencontrés par les personnes en situation de handicap et permettent de sensibiliser le public et les décideurs sur l'importance d'améliorer l'accessibilité urbaine."
+      },
+      "key_elements": {
+        "title": "3. Quelques éléments Clés pour comprendre l'Accessibilité Urbaine",
+        "subsections": {
+          "a_parking": {
+            "title": "a. Stationnement",
+            "list": "Stationnement Extérieur: Les places accessibles doivent être proches des entrées principales et être clairement signalées par une signalisation horizontale et verticale appropriée et calires."
+          },
+          "b_sidewalks": {
+            "title": "b. Chaussée et Parcours Piétons",
+            "list": [
+              "Trottoirs: Les trottoirs doivent être dégagés de tout encombrement, avec des dévers limités à 2% pour assurer une circulation aisée. Les ressaut doivent être évités ou aménagés avec une inclinaison douce.",
+              "Abaissement du Trottoir (Bateau): Un abaissement du trottoir avec une bande d'éveil et de vigilance est nécessaire pour faciliter l'accès aux traversées piétonnes.",
+              "Surélévation de la Chaussée (Plateau): Les plateaux surélevés doivent être équipés de pentes latérales douces et d'ilots refuges pour sécuriser les traversées.",
+              "Ilots Refuges: Permettent une traversée en deux temps avec des bandes d'éveil et de vigilance pour assurer la sécurité des piétons."
+            ]
+          },
+          "c_street_furniture": {
+            "title": "c. Mobilier Urbain",
+            "list": [
+              "Bancs et Chaises: Les bancs doivent être espacés régulièrement et respecter des dimensions confortables pour tous les usagers.",
+              "Signalétique : La signalisation doit être claire, visible et compréhensible par tous, y compris les personnes atteintes de déficiences visuelles ou mentales."
+            ]
+          }
+        }
+      },
+      "methodology": {
+        "title": "4. Méthodologie du Travail Journalistique",
+        "text": "Pour réaliser un reportage sur l'accessibilité urbaine, les journalistes peuvent suivre cette méthodologie simplifiée:",
+        "list": [
+          "Choix du Lieu et Préparation: Sélectionner un quartier, une administration ou un établissement public à observer/évaluer. Préparer une visite en contactant les responsables pour obtenir les autorisations nécessaires.",
+          "Évaluation sur le Terrain: Accompagner une personne en situation de handicap (de préférence représentative du groupe visé) pour tester l'accessibilité réelle. Documenter avec des photos et des vidéos les défis rencontrés.",
+          "Interviews et Témoignages: Recueillir les témoignages des personnes handicapées sur leurs expériences quotidiennes en matière d'accessibilité. Interroger également les responsables municipaux ou administratifs sur les efforts entrepris pour améliorer l'accessibilité.",
+          "Analyse et Rapportage: Analyser les observations recueillies sur le terrain. Identifier les points forts et les déficiences en matière d'accessibilité. Formuler des recommandations/revendications concrètes pour améliorer la situation."
+        ]
+      },
+      "reporting_goals": {
+        "title": "5. Objectifs du Reportage",
+        "list": [
+          "Sensibiliser le public aux défis quotidiens rencontrés par les personnes handicapées.",
+          "Encourager les autorités locales à prendre des mesures concrètes pour rendre les espaces publics plus accessibles.",
+          "Promouvoir l'inclusion et l'égalité des droits dans les politiques urbaines (Journalisme de solution)."
+        ]
+      }
+    }
+  },
+  "lexique": {
+    "title": "Lexique",
+    "preview": {
+      "imageAlt": "Lexique Preview",
+      "download": {
+        "link": "Télécharger",
+        "file": "Fiche 8 word.pdf",
+        "imageAlt": "Télécharger"
+      }
+    },
+    "links": {
+      "french": "Accéder au lexique en français",
+      "arabic": "Accéder au lexique en arabe",
+      "arabicFile": "Fiche 8 Réaliser un reportage sur l’accessibilité des Espaces Publics Urbains_ VAR.pdf"
+    }
+  },
+  "fiche91": {
+    "title": "Grille Pratique pour les Journalistes pour le monitoring de l'Accessibilité des Services Numériques Publics",
+    "sections": [
+      {
+        "title": "1. Qu'est-ce que l'accessibilité Numérique ?",
+        "paragraph": "L'accessibilité numérique consiste à rendre les services en ligne accessibles à tous, y compris les personnes en situation de handicap. Elle vise à garantir que le contenu web soit perceptible, utilisable, compréhensible et robuste pour tous les utilisateurs, indépendamment de leurs capacités physiques ou mentales."
+      },
+      {
+        "title": "2. Contexte",
+        "paragraph": "Dans le cadre du travail de terrain journalistique, les journalistes peuvent utiliser cette fiche pratique pour observer, comparer et évaluer l'accessibilité des services numériques publics. Cela permet de porter un regard critique et constructif sur les actions des administrations publiques et de sensibiliser les parties prenantes à l'importance de l'accessibilité numérique."
+      },
+      {
+        "title": "3. Objectifs de la fiche",
+        "list": [
+          "Évaluer l'accessibilité des services numériques publics selon les normes WCAG(65).",
+          "Détecter les failles et les points à améliorer en matière d'accessibilité numérique.",
+          "Fournir des recommandations (journalisme de solution) pour améliorer l'accès des personnes en situation de handicap aux services numériques publics."
+        ]
+      }
+    ],
+    "observationSheet": {
+      "title": "Fiche pratique d'observation sur l'accessibilité des services numériques publics",
+      "generalInfo": {
+        "title": "Informations Générales",
+        "list": [
+          "Nom du site/application: ",
+          "URL: ",
+          "Secteur public: ",
+          "Date de l'observation: "
+        ]
+      },
+      "accessibilityEvaluation": {
+        "title": "Évaluation des Critères d'Accessibilité",
+        "tableHeaders": [
+          "N°",
+          "Recommandation de WebAIM(66)",
+          "Existant.e",
+          "Non Existant.e",
+          "Moyenne d'accessibilité Note (0-10)"
+        ],
+        "criteria": [
+          {
+            "number": 1,
+            "recommendation": "Le contenu important du site est-il accessible sans avoir besoin d'utiliser des scripts?",
+            "checkboxes": [
+              {"exists": false},
+              {"notExists": false}
+            ],
+            "score": 0
+          },
+          {
+            "number": 2,
+            "recommendation": "Les liens sur le site ont-ils un sens hors contexte, en évitant les expressions génériques comme «Cliquez ici»?",
+            "checkboxes": [
+              {"exists": false},
+              {"notExists": false}
+            ],
+            "score": 0
+          },
+          {
+            "number": 3,
+            "recommendation": "Y a-t-il des descriptions alternatives (alt text) pour toutes les images et graphiques?",
+            "checkboxes": [
+              {"exists": false},
+              {"notExists": false}
+            ],
+            "score": 0
+          },
+          {
+            "number": 4,
+            "recommendation": "Des sous-titres sont-ils fournis pour toutes les vidéos et des transcriptions pour les fichiers audios?",
+            "checkboxes": [
+              {"exists": false},
+              {"notExists": false}
+            ],
+            "score": 0
+          },
+          {
+            "number": 5,
+            "recommendation": "Le texte du site utilise-t-il des contrastes de couleurs suffisamment élevés?",
+            "checkboxes": [
+              {"exists": false},
+              {"notExists": false}
+            ],
+            "score": 0
+          },
+          {
+            "number": 6,
+            "recommendation": "Toutes les pages web peuvent-elles être naviguées avec un clavier, sans utiliser la souris?",
+            "checkboxes": [
+              {"exists": false},
+              {"notExists": false}
+            ],
+            "score": 0
+          },
+          {
+            "number": 7,
+            "recommendation": "Les formulaires sont-ils clairement étiquetés et peuvent-ils être utilisés avec un lecteur d'écran ?",
+            "checkboxes": [
+              {"exists": false},
+              {"notExists": false}
+            ],
+            "score": 0
+          },
+          {
+            "number": 8,
+            "recommendation": "Le site évite-t-il d'utiliser uniquement des couleurs pour transmettre de l'information?",
+            "checkboxes": [
+              {"exists": false},
+              {"notExists": false}
+            ],
+            "score": 0
+          },
+          {
+            "number": 9,
+            "recommendation": "Le site fournit-il un moyen de sauter directement au contenu principal de la page ?",
+            "checkboxes": [
+              {"exists": false},
+              {"notExists": false}
+            ],
+            "score": 0
+          },
+          {
+            "number": 10,
+            "recommendation": "Les documents téléchargeables (comme les PDF) sont-ils accessibles, avec des balises et une structure correcte des titres et sections?",
+            "checkboxes": [
+              {"exists": false},
+              {"notExists": false}
+            ],
+            "score": 0
+          },
+          {
+            "number": 11,
+            "recommendation": "Les lecteurs d'écran peuvent-ils lire correctement les tableaux de données grâce à l'utilisation des en-têtes de ligne et de colonne?",
+            "checkboxes": [
+              {"exists": false},
+              {"notExists": false}
+            ],
+            "score": 0
+          },
+          {
+            "number": 12,
+            "recommendation": "Le site offre-t-il des alternatives pour les contenus dynamiques, comme les animations et les carrousels, pour les utilisateurs qui ne peuvent pas les voir ou les utiliser ?",
+            "checkboxes": [
+              {"exists": false},
+              {"notExists": false}
+            ],
+            "score": 0
+          },
+          {
+            "number": 13,
+            "recommendation": "Le site est-il compatible avec les technologies d'assistance, comme les lecteurs d'écran et les navigateurs spécialisés?",
+            "checkboxes": [
+              {"exists": false},
+              {"notExists": false}
+            ],
+            "score": 0
+          },
+          {
+            "number": 14,
+            "recommendation": "Le site évite-t-il les fenêtres contextuelles (pop-ups) qui peuvent être difficiles à fermer pour certains utilisateurs?",
+            "checkboxes": [
+              {"exists": false},
+              {"notExists": false}
+            ],
+            "score": 0
+          },
+          {
+            "number": 15,
+            "recommendation": "Les éléments de navigation sont-ils cohérents sur toutes les pages du site?",
+            "checkboxes": [
+              {"exists": false},
+              {"notExists": false}
+            ],
+            "score": 0
+          }
+        ]
+      }
+    }
+  },
+  "fiche92": {
+    "totalAccessibilityScore": "Note totale des moyennes d'accessibilité",
+    "averageCriteriaRespect": "Calcul de la Moyenne de Respect des Critères",
+    "table": {
+      "headers": {
+        "c":"Calcul de la moyenne",
+        "n":"Note"
+      },
+      "rows": 
+        {
+          "criteriaRespect": "Respect des critères",
+          "note": "Note Totale des moyennes d'accessibilité divisée par le nombre des critères qui sont 15 dans ce cas"
+        }
+    },
+    "accessibilityAverageText": "La moyenne d'accessibilité pour ce site est donc ... ce qui indique un bon niveau général d'accessibilité. Cependant, des recommandations spécifiques peuvent être faites pour les critères ayant des notes inférieures à 10.",
+    "instructions": "Instructions",
+    "instructionDetails": [
+      "1. Critères: Les recommandations sont fractionnées ligne par ligne avec une numérotation pour faciliter le suivi et le monitoring.",
+      "2. Existant/Non Existant: Cochez la case correspondante pour chaque critère, selon qu'il est respecté ou non.",
+      "3. Moyen d'accessibilité: Utilisez une échelle de 0 à 10 pour évaluer chaque critère d'accessibilité. Une note de 0 signifie que le critère n'est pas du tout respecté, tandis qu'une note de 10 signifie qu'il est pleinement respecté.",
+      "4. Calcul de la moyenne: À la fin du tableau, calculez la moyenne du respect des critères pour évaluer l'accessibilité globale.",
+      "5. Cette fiche pratique permet aux journalistes d'évaluer systématiquement l'accessibilité des services numériques publics et de contribuer, à travers leurs articles et reportages, à l'amélioration de ces services pour tous les utilisateurs."
+    ],
+    "lexique": {
+      "preview": {
+        "imageAlt": "Aperçu du lexique",
+        "download": {
+          "link": "Télécharger",
+          "file": "Fiche 9 word.pdf",
+          "imageAlt": "Télécharger"
+        }
+      },
+      "frenchLink": {
+        "text": "Accéder au lexique en français",
+        "href": "pdfs/Fiche 9 word.pdf"
+      },
+      "arabicLink": {
+        "text": "Accéder au lexique en arabe",
+        "href": "pdfs/Fiche 9 grille Pratique pour les Journalistes pour le monitoring de l'Accessibilité des Services Numériques Publics_VAR.pdf"
+      }
+    }
+  }
+},
+"communication": {
+  "title": "Communication inclusive",
+  "description": "Vous allez trouver dans cette section des informations sur la communication inclusive. Une enquête de terrain menée en 2023 sous la direction du Professeur Sadok Hammmami de l’Institut de Presse et des Sciences de l’information (IPSI), a mis en lumière des tendances alarmantes sur la représentation du handicap dans les médias. Un constat partagé tant par les personnes handicapées que par les journalistes interrogés.",
+  "tools": "Afin de lutter contre ces pratiques, l’UNESCO a développé plusieurs outils :",
+  "links": {
+    "guide": "Le guide de bonnes pratiques éditoriales et éthiques",
+    "lexique": "Le lexique de communication inclusive des personnes handicapées",
+    "charte": "La charte nationale pour des médias inclusifs et accessibles aux personnes handicapées en Tunisie",
+    "recommendations": "Les recommandations pour les médias et les acteurs médiatiques"
+  }
+},
+"previewcomm":{
+  "articles": [
+    {
+      "imageUrl": "/previewcomm/backcommunication.png",
+      "title": "Le guide de bonnes pratiques éditoriales et éthiques",
+      "buttonText": "Lire plus",
+      "link": "/savoir-lab/communication-inclusive/guide"
+    },
+    {
+      "imageUrl": "/previewcomm/backcommunication1.png",
+      "title": "Le lexique de communication inclusive des personnes handicapées",
+      "buttonText": "Lire plus",
+      "link": "/savoir-lab/communication-inclusive/lexique"
+    },
+    {
+      "imageUrl": "/previewcomm/backcharte.jpg",
+      "title": "La charte nationale pour des médias inclusifs et accessibles aux personnes handicapées en Tunisie",
+      "buttonText": "Lire plus",
+      "link": "/savoir-lab/communication-inclusive/charte-nationale"
+    },
+    {
+      "imageUrl": "/previewcomm/rec3.png",
+      "title": "Les recommandations pour les médias et les acteurs médiatiques",
+      "buttonText": "Lire plus",
+      "link": "/savoir-lab/communication-inclusive/recommandations"
+    }
+  ]
+},
+
+  "guide": {
+    "title": "Le guide de bonnes pratiques éditoriales et éthiques",
+    "link": "/pdfs/Guide Unesco.pdf",
+    "linkText": "Accéder au guide en français",
+    "contexttitle":"Contexte :",
+    "content": {
+      "sectionTitle": "Vers une communication inclusive :",
+      "sectionSubtitle": "Changer de regard sur le handicap et promouvoir les droits des personnes handicapées en Tunisie.",
+      "context": [
+        "Dans le cadre du développement de ce guide, l’approche adoptée par l’UNESCO vise à limiter la reproduction de normes culturelles qui perpétuent et nourrissent les discriminations, les préjugés et les stéréotypes vis-à-vis des personnes en situation de handicap.",
+        "Cette vision inclusive et participative nécessite la mise en place de projets innovants en matière de communication inclusive.",
+        "À l’heure où les médias jouent un rôle central dans le façonnement de nos perceptions d’autrui, une représentation précise et respectueuse des personnes handicapées n’est pas seulement souhaitable, mais essentielle.",
+        "C’est pour cela qu’une approche éditoriale bien conçue est la clé pour une représentation respectueuse et équilibrée des personnes handicapées.",
+        "Le guide accompagnera la transformation du paysage médiatique."
+      ]
+    }
+  },
+"lexique": {
+    "title": "Le lexique de communication inclusive des personnes handicapées",
+    "linkLexique": "/pdfs/Fiche lexique word.pdf",
+    "linkGuidelines": "/pdfs/undis_communication_guidelines.pdf",
+    "arabicLink": "/pdfs/Terminologie appropriée et expressions à éviter VAR.pdf",
+    "context": [
+        "Les mots ont du pouvoir : ils peuvent à la fois libérer et opprimer. Bien choisir ses mots est important, notamment pour la représentation des personnes handicapées. Un langage qui respecte et valorise chaque individu sans renforcer les stéréotypes ou les préjugés doit être privilégié.",
+        "En choisissant soigneusement les mots et les terminologies, les médias ont le pouvoir de transformer la perception publique du handicap. Un langage inclusif et respectueux renforce l’intégration sociale des personnes handicapées et promeut une culture médiatique qui est véritablement représentative de la diversité de la société.",
+        "En utilisant un vocabulaire inadapté, les contenus produits participent à la stigmatisation des personnes en situation de handicap. Cela se traduit par un vocabulaire qui tend à considérer les personnes handicapées comme des individus en dehors de la société, mettant en avant leur handicap pour susciter de la compassion et les assignant à un statut d’infériorité sociale. Ils nourrissent les stéréotypes, considérant que les personnes handicapées formeraient un seul et unique groupe homogène, sans mettre en avant le fait qu’ils ont des capacités variables pouvant contribuer au bien-être de la société. Par conséquent, ce traitement médiatique peut amener à ne plus considérer les personnes en situation de handicap comme des citoyens possédant des droits.",
+        "Un tableau de terminologie (non exhaustif) à éviter et/ou à favoriser est téléchargeable sur cette page.",
+        "Pour approfondir ce sujet, vous pouvez également consulter les « Lignes directrices pour l’inclusion du handicap dans les communications » des Nations Unies. Ce document produit pour les membres du personnel des Nations Unies, fournit des précisions sur les moyens pratiques à mettre en place dans le développement d’un contenu inclusif et accessible pour tous."
+    ],
+    "guidelinesTitle": "Lignes directrices pour l’inclusion du handicap dans les communications."
+  },
+  "charte":{
+    "charteTitle": "La charte nationale pour des médias inclusifs et accessibles aux personnes handicapées en Tunisie",
+    "cardData": {
+      "title1": "Découvrez la Charte pour l'Inclusion et l'Accessibilité des Personnes Handicapées dans les Médias Tunisiens",
+      "description1": "Adoptée par la « Coalition nationale pour des médias inclusifs et accessibles aux personnes handicapées », la charte vise à promouvoir l'inclusion et l'accessibilité des personnes handicapées dans les médias tunisiens. Les principaux acteurs de cette initiative comprennent des institutions de recherche et de formation, des organisations professionnelles, des organismes de régulation et d'autorégulation des médias, des associations de défense des droits des personnes handicapées, des organisations internationales et de nombreux médias tunisiens, ainsi que des personnalités médiatiques et des membres de l'Assemblée des représentants du peuple. Avec pour objectifs clés la création d'un comité de suivi du traitement médiatique des questions liées au handicap, l'organisation de campagnes de plaidoyer régulières et l'institution d'un prix professionnel annuel, le 'Prix de l'accessibilité et de l'inclusion', pour honorer les initiatives médiatiques exemplaires."
+    },
+    "defaultTitle": "Titre non disponible",
+    "learnMore": "En apprendre plus"
+  },
+  "coalition":{
+    "coalitionTitle": "La charte nationale pour des médias inclusifs et accessibles aux personnes handicapées en Tunisie",
+    "coalitionDescription1": "Adoptée par la « Coalition nationale pour des médias inclusifs et accessibles aux personnes handicapées », la charte vise à promouvoir l'inclusion et l'accessibilité des personnes handicapées dans les médias tunisiens.",
+    "coalitionDescription2": "Les principaux acteurs de cette initiative comprennent des institutions de recherche et de formation, des organisations professionnelles, des organismes de régulation et d'autorégulation des médias, des associations de défense des droits des personnes handicapées, des organisations internationales et de nombreux médias tunisiens, ainsi que des personnalités médiatiques et des membres de l'Assemblée des représentants du peuple. Avec pour objectifs clés la création d'un comité de suivi du traitement médiatique des questions liées au handicap, l'organisation de campagnes de plaidoyer régulières et l'institution d'un prix professionnel annuel, le \"Prix de l'accessibilité et de l'inclusion\", pour honorer les initiatives médiatiques exemplaires.",
+    "coalitionDescription3": "Réunie lors de la conférence « Vers une communication inclusive : Changer de regard sur le handicap et promouvoir les droits des personnes handicapées en Tunisie » le 19 juillet 2024 à Tunis, cette coalition s’appuie sur l’engagement historique de la Tunisie dans le développement de la charte adoptée. En effet, la Tunisie a été l'un des premiers pays à ratifier la Convention relative aux droits des personnes handicapées (CDPH) en 2008 et a inscrit la protection contre les discriminations dans sa Constitution de 2014 et 2022. De plus, la Loi-cadre 83-2005 renforce les droits des personnes handicapées en garantissant l'égalité des chances et en protégeant contre toutes formes de discrimination.",
+    "coalitionDescription4": "En adoptant cette charte, la coalition vise à transformer les perceptions publiques et à sensibiliser sur les enjeux de l'inclusion en utilisant le pouvoir des médias pour influencer les perceptions et servir de plateforme pour les voix des personnes handicapées, en garantissant une représentation équitable des personnes handicapées et en facilitant leur accès aux droits et services essentiels.",
+    "usefulLink": "Lien utile :",
+    "accessCharterArabic": "Accéder à la Charte en arabe"
+  },
+  "recom":{
+    "recommandationTitle": "Les recommandations pour les médias et les acteurs médiatiques",
+    "recommandationDescription": "À mesure que la Tunisie progresse vers une société plus inclusive, l'importance de la communication inclusive des personnes handicapées dans les médias devient primordiale.",
+    "recommandationDescription1": "Afin de transformer cette aspiration en réalité, des mesures concrètes doivent être prises à plusieurs niveaux de la société, afin d’instaurer une culture médiatique qui non seulement respecte mais aussi valorise la diversité et les contributions des personnes handicapées.",
+    "cardDataTitle1": "Accéder aux Recommandations Stratégiques pour l'Inclusion Médiatique des Personnes Handicapées",
+    "cardDataDescription1": "Cette section présente une première feuille de route de recommandations stratégiques développée dans le cadre de la dynamique de développement du Guide « … », qui s’adressent aux acteurs nationaux, aux institutions éducatives, aux organes de régulation, et impliquent la création de partenariats innovants et de programmes de formation adaptés. L'objectif est double : améliorer la représentation des personnes handicapées dans les médias et assurer leur participation active et équitable dans tous les aspects de la vie médiatique.",
+    "cardButtonText": "En apprendre plus"
+  },
+  "recomcomp":{
+    "title": "Accéder aux Recommandations Stratégiques pour l'Inclusion Médiatique des Personnes Handicapées",
+    "recommendation_a": "a) Recommandations au niveau de la régulation des médias",
+    "recommendation_ai": "i. Régulation nationale",
+    "recommendation_ai_text": [
+      "La Haute Autorité Indépendante de la Communication Audiovisuelle (HAICA) est appelée à produire des rapports annuels sur le respect par les institutions médiatiques des dispositions énoncées dans les cahiers des charges relatifs aux personnes handicapées.",
+      "Appel à concevoir un guide pour l’accès des personnes handicapées aux programmes télévisés."
+    ],
+    "recommendation_aii": "ii. Auto-régulation",
+    "recommendation_aii_text": [
+      "Appel à concevoir un guide pour l'accès des personnes handicapées aux programmes télévisés.",
+      "Appeler le Conseil de presse à inclure des principes liés au respect des droits humains et à la dignité des personnes handicapées.",
+      "Inciter les institutions médiatiques publiques et privées qui disposent de chartes éthiques à inclure des principes particuliers dans les chartes qui ont été établies."
+    ],
+    "recommendation_b": "b) Recommandations au niveau de la formation",
+    "recommendation_bi": "i. Formation académique",
+    "recommendation_bi_text": [
+      "Inclure le contenu du guide dans les matières qui enseignent l’éthique journalistique aux niveaux de la licence et du Master.",
+      "Sensibiliser les enseignants de l’Institut de Presse et des Sciences de l'Information (IPSI) à inclure les questions liées au handicap et aux personnes handicapées dans les activités pédagogiques destinées aux étudiants."
+    ],
+    "recommendation_bii": "ii. Formation professionnelle",
+    "recommendation_bii_text": [
+      "Développer des programmes en coopération avec le Centre africain de formation des journalistes pour le journalisme professionnel dans les médias, basés sur les principes du Guide des bonnes pratiques journalistiques.",
+      "Ces programmes pilotes s’adressent à toutes les catégories professionnelles: journalistes, hommes et femmes, producteurs de programmes, animateurs, présentateurs, commentateurs, analystes.",
+      "Développer des programmes de formation en coopération avec le SNJT et avec les institutions journalistiques dans le cadre de formations « in situ » afin d’orienter la formation vers les agents professionnels et des producteurs de contenu."
+    ],
+    "recommendation_c": "c) Recommandations au niveau national",
+    "recommendation_c_text": [
+      "Créer, à l'initiative conjointe de l'UNESCO, des associations représentatives des personnes handicapées, de la Haute Autorité Indépendante de la Communication Audiovisuelle (HAICA) ou du Conseil de presse."
+    ],
+    "mission_list": [
+      "Mettre en place un comité de suivi de l'évolution du traitement médiatique des problématiques liées aux personnes handicapées.",
+      "Organiser des rencontres régulières (tous les 6 mois) pour élaborer des propositions adressées à tous les départements impliqués dans les médias.",
+      "Créer un prix professionnel pour récompenser les bonnes initiatives journalistiques et médiatiques institutionnelles et professionnelles."
+    ]
+  },
+
+    "document_pl": {
+      "title": "Documents de plaidoyer",
+      "description": "Vous allez trouver dans cette section des informations concernant les documents de plaidoyer...",
+      "pdf_list": 
+        {
+          "title1": "Étude sur les droits politiques et culturels des personnes handicapées en Tunisie",
+          "description1": "Cette étude examine la participation des personnes handicapées à la vie politique et culturelle en Tunisie, en soulignant les obstacles importants qu'elles rencontrent. Malgré les avancées législatives, telles que les articles 29 et 30 de la Convention relative aux droits des personnes handicapées (CDPH), ces individus continuent de faire face à des lois restrictives, des obstacles institutionnels et des pratiques discriminatoires qui les excluent largement de ces sphères. L'objectif principal de l'étude est de définir clairement les droits politiques et culturels des personnes handicapées en Tunisie et d’identifier les défis rencontrés au sein du cadre législatif actuel, en mettant en évidence les écarts par rapport aux normes internationales. L'étude se concentre sur trois sites en Tunisie (Tunis, Bizerte, Médenine), choisis pour leur diversité géographique et économique. Elle examine les obstacles à la participation politique et culturelle, notamment les défis législatifs et les pratiques discriminatoires. Les objectifs incluent également la recherche de pratiques prometteuses et la proposition de mesures concrètes pour améliorer l'accès et la participation des personnes handicapées. En conclusion, l'étude vise à combler le fossé entre les normes juridiques et la réalité pratique en Tunisie, en mettant en lumière les défis auxquels sont confrontées les personnes handicapées et en formulant des recommandations pour renforcer leur inclusion et leur participation effective dans la vie politique et culturelle.",
+          "link1": "${process.env.PUBLIC_URL}/pdfs/Etude Sur Les Droits Politiques Et Culturels Des Personnes Handicapées En Tunisie.pdf",
+          "imageUrl1": "${process.env.PUBLIC_URL}/pdfs/etude2.png",
+      
+          "title2": "Guide de formation sur l’éducation complète à la sexualité pour des personnes en situation de handicap",
+          "description2": "Le guide \"Éclairant les Chemins\" vise à offrir une éducation sexuelle complète et inclusive aux personnes en situation de handicap visuel. Il fournit des informations accessibles sur la santé sexuelle et reproductive, en mettant l'accent sur l'autonomie, le respect et l'inclusion. Ce guide répond aux besoins spécifiques de cette population, comble les lacunes d'information et corrige les malentendus passés concernant l'éducation sexuelle, en promouvant l'égalité d'accès, la prévention des risques et le respect des droits.",
+          "link2": "${process.env.PUBLIC_URL}/pdfs/Guide de formation sur l’Education Complète a la sexualité pour des personnes en situation de hand.pdf",
+          "imageUrl2": "${process.env.PUBLIC_URL}/pdfs/guide.png",
+      
+          "title3": "Étude sur l’accessibilité aux structures de prise en charge des violences basées sur le genre pour les femmes en situation de handicap victimes de violence",
+          "description3": "L'amélioration de l'inclusion des personnes en situation de handicap, notamment des femmes victimes de violence, passe par une analyse approfondie de l'accessibilité des services qui leur sont dédiés. Cette étude vise à établir un diagnostic initial de l'accessibilité en identifiant les divers types de barrières rencontrées par toutes les catégories de déficience, tout en hiérarchisant les enjeux prioritaires à améliorer en fonction des types de structures, comme les centres d'écoute, d'orientation et d'hébergement. L'évaluation examine également l'adéquation des services d'accompagnement aux besoins spécifiques des femmes en situation de handicap. Elle repose sur deux volets principaux : un questionnaire destiné aux directeurs des structures concernées et des entretiens semi-dirigés avec les professionnels en charge de l'accueil, de l'orientation et de l'accompagnement. Cette analyse a permis d'identifier les écarts et dysfonctionnements existants au sein des services dédiés à ces femmes, révélant des points d'amélioration essentiels pour assurer une prise en charge plus inclusive. Sur la base de ces constats, l'étude formule des recommandations concrètes pour améliorer l'accessibilité physique, organisationnelle et la sensibilisation au sein de ces structures. Ces recommandations sont adaptées aux spécificités locales, tenant compte des ressources disponibles et des bonnes pratiques internationales, avec pour objectif final de garantir un accès équitable et adapté aux services de soutien et de protection pour les femmes victimes de violence en situation de handicap.",
+          "link3": "${process.env.PUBLIC_URL}/pdfs/ETUDE SUR L’ACCESSIBILITE AUX STRUCTURES DE PRISE EN CHARGE DES VIOLENCES BASEES SUR LE GENRE POUR.pdf",
+          "imageUr3": "${process.env.PUBLIC_URL}/pdfs/etude1.png"
+      },   
+    "voirpdf":"Voir PDF"
+    },
+    "wiki":{
+      "wikiphedia": "Wikiphedia",
+      "description": "Vous allez trouver dans cette section des informations sur WikiPHédia. Cette initiative a pour objectif de sensibiliser au manque d’informations concernant les personnes handicapées qui ont grandement contribué à leurs communautés, et mettre en lumière l’importance de la médiatisation des personnes en situation de handicap.",
+      "detailed_profiles": "Découvrez des profils détaillés d'artistes, d'athlètes paralympiques, et d'entrepreneurs de scientifiques et d'autres profils de personnes en situation de handicap. Explorez leurs réalisations, parcours et contributions dans divers domaines pour vous inspirer et vous informer.",
+      "actorSocialAndPolitical": "Les acteurs sociaux et politiques",
+      "artists": "Les artistes",
+      "researchers": "Les chercheurs",
+      "entrepreneurs": "Les entrepreneurs",
+      "athletes": "Les sportifs"
+  },
+  "wikipreview":{
+    "readMore": "Lire plus",
+    "lastArticles": "Derniers articles",
+    "actorScPl": "Acteurs sociaux et politiques",
+    "artists": "Artistes",
+    "researchers": "Chercheurs",
+    "entrepreneurs": "Entrepreneurs",
+    "athletes": "Sportifs",
+    "title": "Titre",
+    "date": "Date"
+},
+"ActeurSc":{
+  "Loading...": "Chargement...",
+  "Error:": "Erreur:",
+  "Les acteurs sociaux et politiques": "Les acteurs sociaux et politiques",
+  "Découvrez des profils détaillés d'acteurs sociaux et politiques engagés, explorez leurs réalisations, parcours et contributions dans le domaine de l'activisme et des politiques publiques. Inspirez-vous de leurs efforts pour faire progresser la société.": "Découvrez des profils détaillés d'acteurs sociaux et politiques engagés, explorez leurs réalisations, parcours et contributions dans le domaine de l'activisme et des politiques publiques. Inspirez-vous de leurs efforts pour faire progresser la société.",
+  "Histoires des acteurs sociaux et politiques": "Histoires des acteurs sociaux et politiques",
+  "Lire plus": "Lire plus"
+},
+"artistes": {
+    "title": "Les artistes",
+    "description": "Découvrez des profils détaillés d'artistes talentueux, explorez leurs œuvres, parcours créatifs et contributions au monde de l'art. Laissez-vous inspirer par leurs réalisations et leurs approches uniques.",
+    "latest_story": "Histoires des artistes",
+    "read_more": "Lire plus"
+  },
+  "chercheurs": {
+    "pageTitle": "Les chercheurs",
+    "description": "Découvrez des profils détaillés de chercheurs innovants, explorez leurs travaux, découvertes et contributions dans le domaine de la science et de la recherche. Informez-vous sur leurs contributions significatives à la connaissance et à l'innovation.",
+    "latest_story": "Histoires des chercheurs",
+    "readMore": "Lire plus"
+  },
+  "entrepreneurs": {
+    "title": "Les entrepreneurs",
+    "description": "Découvrez des profils détaillés d'entrepreneurs innovants, explorez leurs projets, réalisations et contributions dans le monde des affaires. Informez-vous sur leurs contributions significatives à l'économie et à l'innovation.",
+    "readMore": "Lire plus",
+    "historyTitle": "Histoires des entrepreneurs"
+  },
+  "sportifs": {
+        "title": "Les sportifs",
+        "description": "Découvrez des profils détaillés de sportifs engagés, explorez leurs réalisations, parcours et contributions dans le monde du sport. Inspirez-vous de leurs efforts pour exceller dans leur domaine.",
+        "readMore": "Lire plus",
+        "historyTitle": "Histoires des sportifs",
+        "loading": "Chargement...",
+        "error": "Erreur : "
+      },
+      "contact":{
+        "contactUs": {
+          "title": "Contactez Nous",
+          "description": "Remplissez le formulaire ci-dessous et notre équipe vous répondra dans les plus brefs délais.",
+          "name": "Nom & Prénom",
+          "namePlaceholder": "Entrez votre nom et prénom",
+          "organization": "L'organisation/individu",
+          "organizationPlaceholder": "Entrez le nom de l'organisation ou de l'individu",
+          "email": "Adresse Email",
+          "emailPlaceholder": "Entrez votre email",
+          "subject": "Sujet",
+          "subjectPlaceholder": "Entrez le sujet",
+          "message": "Message",
+          "messagePlaceholder": "Écrivez votre message ici...",
+          "send": "Envoyer",
+          "successMessage": "Votre message a été envoyé avec succès!",
+          "errorMessage": "Erreur lors de l'envoi du message."
+        }
+      },
+      "accessw":{
+        
+          "accessibility": {
+            "w3cMeasures": "Les mesures d'accessibilité du W3C (World Wide Web Consortium) sont conçues pour rendre le contenu web accessible à tous, y compris aux personnes handicapées. Ces mesures comprennent l'amélioration de la perceptibilité, de l'utilisabilité, de la compréhensibilité et de la robustesse du contenu web.",
+            "shortcuts": {
+              "windows": {
+                "title": "Raccourcis pour Windows",
+                "features": [
+                  { "name": "Augmenter la taille de la police", "shortcut": "Ctrl + +" },
+                  { "name": "Diminuer la taille de la police", "shortcut": "Ctrl + -" },
+                  { "name": "Activer le mode contraste élevé", "shortcut": "Alt + Maj + Impr écran" },
+                  { "name": "Lancer le Narrateur", "shortcut": "Win + Ctrl + Entrée" }
+                ]
+              },
+              "macOS": {
+                "title": "Raccourcis pour macOS",
+                "features": [
+                  { "name": "Zoom avant", "shortcut": "Cmd + Opt + =" },
+                  { "name": "Zoom arrière", "shortcut": "Cmd + Opt + -" },
+                  { "name": "Activer VoiceOver", "shortcut": "Cmd + F5" },
+                  { "name": "Inverser les couleurs", "shortcut": "Cmd + Opt + Ctrl + 8" }
+                ]
+              },
+              "linux": {
+                "title": "Raccourcis pour Linux",
+                "features": [
+                  { "name": "Augmenter la taille de la police", "shortcut": "Ctrl + +" },
+                  { "name": "Diminuer la taille de la police", "shortcut": "Ctrl + -" },
+                  { "name": "Activer Orca (lecteur d'écran)", "shortcut": "Alt + Super + S" }
+                ]
+              }
+            },
+            "assistanceApps": "Applications d'assistance",
+            "nvda": "NVDA - NonVisual Desktop Access",
+            "jaws": "JAWS - Job Access With Speech",
+            "voiceOver": "VoiceOver - Lecteur d'écran pour macOS et iOS",
+            "talkBack": "TalkBack - Lecteur d'écran pour Android"
+          }       
+      },
+      "news":{
+        "newstitle":"Actualités",
+        "newsdesc":"Explorez les dernières mises à jour sur l'intégration et l'accessibilité des personnes handicapées en Tunisie. Tenez-vous informé des récentes politiques, actions du gouvernement, événements à venir, initiatives locales, et histoires motivantes. Découvrez des outils pratiques et des conseils pour accéder aux différents soutiens disponibles.",
+        "topnews":"A La Une",
+        "button":"Lire plus",
+        "getback":"Retour aux nouvelles"
+      },
+      "events":{
+        "eventstitle":"Nos Événements",
+        "eventsdescription":"Explorez les activités et les rassemblements axés sur l'inclusion et l'accessibilité pour les personnes handicapées en Tunisie. Consultez les conférences, ateliers, séminaires et événements communautaires à venir. Engagez-vous dans des conversations pertinentes, rencontrez des spécialistes et participez à des projets locaux."
+      },
+      "podcast": {
+        "title": "Derniers Épisodes de Podcast",
+        "showMore": "Afficher plus",
+        "showLess": "Afficher moins",
+        "download": "Télécharger",
+        "error": "Erreur lors de la récupération des données du podcast."
+      },
+      "videos": {
+        "title": "Vidéos Informatives",
+        "description": "Découvrez nos vidéos sélectionnées pour vous.",
+        "showMore": "Afficher plus",
+        "showLess": "Afficher moins"
+      },
+      "blog": {
+    "title": "Blog",
+    "addPost": "Ajouter un post",
+    "allPosts": "Tous les posts",
+    "noImage": "Pas d'image",
+    "postLink": "Titre du post",
+    "noContent": "Aucun contenu disponible",
+    "modal": {
+      "header": "Ajouter un post",
+      "name": "Nom et Prénom",
+      "domain": "Votre domaine d'expertise",
+      "age": "Âge",
+      "email": "Email",
+      "postTitle": "Titre de post",
+      "content": "Écrire le post",
+      "uploadFile": "Télécharger un fichier",
+      "submit": "Soumettre le post"
+    }
+  },
+  "audio":{
+    "title": "Derniers Épisodes d'audios",
+    "showMore": "Afficher plus",
+    "showLess": "Afficher moins",
+    "audioNotSupported": "Votre navigateur ne prend pas en charge l'élément audio.",
+    "download": "Télécharger"
+  },
+  "accessibility1": {
+    "button": "bouton d'accessibilité",
+    "menuHeader": "Paramètres d'accessibilité",
+    "closeMenu": "Fermer La fenêtre d'accessibilité",
+    "fontControl": "Contrôle des polices",
+    "increaseFont": "Agrandir la taille de la police",
+    "lineHeight": {
+      "normal": "Espacement normal",
+      "medium": "Espacement moyen",
+      "large": "Espacement large"
+    },
+    "letterSpacing": "Espacement des lettres",
+    "fontWeight": {
+      "bold": "Gras",
+      "normal": "Normal"
+    },
+    "readingAssistance": "Assistance à la lecture",
+    "screenReader": {
+      "activate": "Activer Lecteur d'écran",
+      "deactivate": "Désactiver Lecteur d'écran"
+    },
+    "readingGuide": "Activer Masque de lecture",
+    "highlightHeadings": {
+      "activate": "Désactiver la surbrillance des titres",
+      "deactivate": "Activer le surlignage des titres "
+    },
+    "bigCursor": "Curseur Agrandi",
+    "colorControl": "Contrôle des couleurs",
+    "contrast": {
+      "default": "Contraste par défaut",
+      "high": "Contraste élevé"
+    }
+  }
+      
+          
+
+  
+  
+  
+  
+  
+  
+  
+
+
+ 
+  
+   
+      
+  
+  
+  
+  }
+    

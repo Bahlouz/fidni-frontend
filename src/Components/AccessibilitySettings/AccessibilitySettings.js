@@ -1,12 +1,13 @@
 import React , {useEffect,useState,useCallback, useRef}from 'react';
-
+import { useTranslation } from 'react-i18next';
 const AccessibilityIcon = () => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [isGuideActive, setGuideActive] = useState(false);
   const overlayRef = useRef(null);
   const guideRef = useRef(null);
-
-
+  const { t,i18n } = useTranslation();
+  const textDirection = i18n.language === 'ar' ? 'rtl' : 'ltr';
+  const isArabic = i18n.language === 'ar';
   useEffect(() => {
     onPageLoad();
   }, []);
@@ -320,84 +321,118 @@ const AccessibilityIcon = () => {
 
 
     
-  const [readingMode, setReadingMode] = useState(false);
-  const [currentUtterance, setCurrentUtterance] = useState(null);
+const [readingMode, setReadingMode] = useState(false);
+const [currentUtterance, setCurrentUtterance] = useState(null);
+const [voices, setVoices] = useState([]);
 
-  const toggleReadingMode = () => {
-    setReadingMode(prevMode => {
-      const newMode = !prevMode;
-      document.body.classList.toggle('active-reader', newMode);
+// Load available voices
+const loadVoices = () => {
+  const availableVoices = window.speechSynthesis.getVoices();
+  setVoices(availableVoices);
+  console.log(availableVoices); // Log all available voices
 
-      if (newMode) {
-        document.querySelectorAll('*').forEach(el => {
-          el.style.cursor = 'url("./readercursor.svg"), default';
-        });
-        updateOutlineColor();
-      } else {
-        document.querySelectorAll('*').forEach(el => {
-          el.style.cursor = 'default';
-        });
-        if (currentUtterance) {
-          window.speechSynthesis.cancel(); 
-          setCurrentUtterance(null);
-        }
+  // Check for Arabic voices
+  const arabicVoices = availableVoices.filter(voice => voice.lang.startsWith('ar'));
+  console.log('Available Arabic Voices:', arabicVoices);
+};
+
+useEffect(() => {
+  loadVoices();
+  window.speechSynthesis.onvoiceschanged = loadVoices;
+}, []);
+
+const toggleReadingMode = () => {
+  setReadingMode(prevMode => {
+    const newMode = !prevMode;
+    document.body.classList.toggle('active-reader', newMode);
+
+    if (newMode) {
+      document.querySelectorAll('*').forEach(el => {
+        el.style.cursor = 'url("./readercursor.svg"), default';
+      });
+      updateOutlineColor();
+    } else {
+      document.querySelectorAll('*').forEach(el => {
+        el.style.cursor = 'default';
+      });
+      if (currentUtterance) {
+        window.speechSynthesis.cancel(); 
+        setCurrentUtterance(null);
       }
+    }
 
-      return newMode;
-    });
-  };
+    return newMode;
+  });
+};
 
-  // Update outline color for text elements
-  const updateOutlineColor = () => {
-    document.querySelectorAll('.active-reader *').forEach(el => {
-      const computedStyle = window.getComputedStyle(el);
-      const textColor = computedStyle.color;
-      el.style.setProperty('--outline-color', textColor);
-    });
-  };
+// Update outline color for text elements
+const updateOutlineColor = () => {
+  document.querySelectorAll('.active-reader *').forEach(el => {
+    const computedStyle = window.getComputedStyle(el);
+    const textColor = computedStyle.color;
+    el.style.setProperty('--outline-color', textColor);
+  });
+};
 
-  // Handle clicks to read content aloud
-  useEffect(() => {
-    const handleClick = (event) => {
-      if (readingMode) {
-        if (currentUtterance) {
-          window.speechSynthesis.cancel(); // Stop any ongoing speech
-          setCurrentUtterance(null);
-        }
-        const content = event.target.textContent.trim();
-        if (content) {
-          const newUtterance = new SpeechSynthesisUtterance(content);
-          newUtterance.lang = 'fr-FR';
-          newUtterance.onend = () => setCurrentUtterance(null);
-          window.speechSynthesis.speak(newUtterance);
-          setCurrentUtterance(newUtterance);
-        }
-      }
-    };
-
-    document.addEventListener('click', handleClick);
-
-    return () => {
-      document.removeEventListener('click', handleClick);
-    };
-    
-  }, [readingMode, currentUtterance]);
-
-  // Handle page refresh or navigation
-  useEffect(() => {
-    const handleBeforeUnload = () => {
-      if (readingMode) {
+// Handle clicks to read content aloud
+useEffect(() => {
+  const handleClick = (event) => {
+    if (readingMode) {
+      if (currentUtterance) {
         window.speechSynthesis.cancel(); // Stop any ongoing speech
         setCurrentUtterance(null);
       }
-    };
+      
+      const content = event.target.textContent.trim();
+      if (content) {
+        const newUtterance = new SpeechSynthesisUtterance(content);
+        const currentLang = i18n.language;
 
-    window.addEventListener('beforeunload', handleBeforeUnload);
+        // Set language and voice based on the current language
+        if (currentLang === 'ar') {
+          newUtterance.lang = 'ar-SA'; // Set to Arabic
+          const arabicVoice = voices.find(voice => voice.lang === 'ar-SA' || voice.lang.startsWith('ar'));
+          newUtterance.voice = arabicVoice || voices.find(voice => voice.lang === 'fr-FR'); // Fallback to French if no Arabic voice
+        } else if (currentLang === 'fr') {
+          newUtterance.lang = 'fr-FR'; // Set to French
+          const voice = voices.find(voice => voice.lang === 'fr-FR');
+          newUtterance.voice = voice;
+        } else {
+          newUtterance.lang = 'en-US'; // Default to English
+          const voice = voices.find(voice => voice.lang === 'en-US');
+          newUtterance.voice = voice;
+        }
 
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-    };
-  }, [readingMode]);
+        newUtterance.onend = () => setCurrentUtterance(null);
+        window.speechSynthesis.speak(newUtterance);
+        setCurrentUtterance(newUtterance);
+      }
+    }
+  };
+
+  document.addEventListener('click', handleClick);
+
+  return () => {
+    document.removeEventListener('click', handleClick);
+  };
+  
+}, [readingMode, currentUtterance, i18n.language, voices]);
+
+// Handle page refresh or navigation
+useEffect(() => {
+  const handleBeforeUnload = () => {
+    if (readingMode) {
+      window.speechSynthesis.cancel(); // Stop any ongoing speech
+      setCurrentUtterance(null);
+    }
+  };
+
+  window.addEventListener('beforeunload', handleBeforeUnload);
+
+  return () => {
+    window.removeEventListener('beforeunload', handleBeforeUnload);
+  };
+}, [readingMode]);
 
   // Ensure reading mode is off when component mounts
   useEffect(() => {
@@ -493,151 +528,142 @@ const AccessibilityIcon = () => {
         }
     };
 }, [handleKeyPress, isGuideActive, updateGuidePosition]); 
-        return (
-<div>
-      <div 
-        className="accessibility-container" 
-        tabIndex="0" 
-        role="button" 
-        aria-label="bouton d'accessibilité"
-        onClick={toggleMenu}
+return (
+  <div>
+    <div 
+    
+    className={`accessibility-container ${isArabic ? 'left' : ''}`} 
+      tabIndex="0" 
+      role="button" 
+      aria-label={t('accessibility1.button')}
+      onClick={toggleMenu}
+    ></div>
 
-      ></div>
-   
-      {menuVisible && (
-        <div className="asw-menu" id="aswMenu">
-          <div className="asw-menu-header">
-            <div className="asw-translate">Paramètres d'accessibilité</div>
-            <div>
-
-              <div 
-                role="button" 
-                className="asw-menu-close" 
-                aria-label="Fermer La fenêtre d'accessibilité" 
-                onClick={toggleMenu}
-              >
-                <span className="material-icons">close</span>
-              </div>
+    {menuVisible && (
+      <div className="asw-menu" id="aswMenu">
+        <div className="asw-menu-header">
+          <div className="asw-translate">{t('accessibility1.menuHeader')}</div>
+          <div>
+            <div 
+              role="button" 
+              className="asw-menu-close" 
+              aria-label={t('accessibility1.closeMenu')} 
+              onClick={toggleMenu}
+            >
+              <span className="material-icons">close</span>
             </div>
           </div>
-          <div className="asw-menu-content">
-            <div className="asw-card">
-              <p className="asw-title-card">Contrôle des polices</p>
-              <div className="asw-items content">
+        </div>
+        <div className="asw-menu-content">
+          <div className="asw-card">
+            <p className="asw-title-card">{t('accessibility1.fontControl')}</p>
+            <div className="asw-items content">
               <button
-              className="asw-btn"
-              type="button"
-              onClick={handleButtonFontSize}
-              aria-label="Agrandir la taille de la police"
-            >
-              <span className="material-icons">format_size</span>
-              <span className="asw-translate">Agrandir la taille de la police</span>
+                className="asw-btn"
+                type="button"
+                onClick={handleButtonFontSize}
+                aria-label={t('accessibility1.increaseFont')}
+              >
+                <span className="material-icons">format_size</span>
+                <span className="asw-translate">{t('accessibility1.increaseFont')}</span>
               </button>
               <button
-      className="asw-btn"
-      type="button"
-      onClick={toggleLineHeight}
-      aria-label="Espacement des lignes"
-    >
-      <span className="material-icons">format_line_spacing</span>
-      <span className="asw-translate">
-        {lineHeightLevel === 1 ? 'Espacement normal' : lineHeightLevel === 2 ? 'Espacement moyen' : 'Espacement large'}
-      </span>
-    </button>
-                <button
+                className="asw-btn"
+                type="button"
+                onClick={toggleLineHeight}
+                aria-label="Espacement des lignes"
+              >
+                <span className="material-icons">format_line_spacing</span>
+                <span className="asw-translate">
+                  {lineHeightLevel === 1 ? t('accessibility1.lineHeight.normal') : 
+                   lineHeightLevel === 2 ? t('accessibility1.lineHeight.medium') : 
+                   t('accessibility1.lineHeight.large')}
+                </span>
+              </button>
+              <button
                 className="asw-btn"
                 type="button"
                 onClick={handleButtonClick}
-                aria-label="Espacement des lettres"
+                aria-label={t('accessibility1.letterSpacing')}
               >
                 <span className="material-icons">text_rotation_none</span>
-                <span className="asw-translate">Espacement des lettres</span>
-                </button>
-                
-      <button
-      className="asw-btn"
-      type="button"
-      onClick={toggleFontWeight}
-      aria-label="Épaisseur de la police"
-    >
-      <span className="material-icons">format_bold</span>
-      <span className="asw-translate">
-        {isBold ? 'Gras' : 'Normal'}
-      </span>
-    </button>
-              </div>
+                <span className="asw-translate">{t('accessibility1.letterSpacing')}</span>
+              </button>
+              <button
+                className="asw-btn"
+                type="button"
+                onClick={toggleFontWeight}
+                aria-label={t('accessibility1.fontWeight.bold')}
+              >
+                <span className="material-icons">format_bold</span>
+                <span className="asw-translate">
+                  {isBold ? t('accessibility1.fontWeight.bold') : t('accessibility1.fontWeight.normal')}
+                </span>
+              </button>
             </div>
-            <div className="asw-card">
-              <p className="asw-title-card">Assistance à la lecture</p>
-              <div className="asw-items content">
+          </div>
+          <div className="asw-card">
+            <p className="asw-title-card">{t('accessibility1.readingAssistance')}</p>
+            <div className="asw-items content">
               <button 
                 className="asw-btn" 
                 type="button" 
                 onClick={toggleReadingMode} 
-                aria-label={readingMode ? "Désactiver Lecteur d'écran" : "Activer Lecteur d'écran"}
+                aria-label={readingMode ? t('accessibility1.screenReader.deactivate') : t('accessibility1.screenReader.activate')}
               >
                 <span className="material-icons" aria-label="">
                   {readingMode ? 'volume_off' : 'volume_up'}
                 </span>
                 <span className="asw-translate">
-                  {readingMode ? 'Désactiver Lecteur d\'écran' : 'Activer Lecteur d\'écran'}
+                  {readingMode ? t('accessibility1.screenReader.deactivate') : t('accessibility1.screenReader.activate')}
                 </span>
               </button>
-                <button 
-                  className="asw-btn" 
-                  type="button" 
-                  onClick={() => toggleReadingGuide(true)} 
-                  aria-label="Activate Reading Guide"
-                >
-                  <span className="reading-guide-icon material-icons" aria-hidden="true">visibility</span>
-                  <span className="reading-guide-text">Activer Masque de lecture</span>
-                </button>
-                <button
-                  className="asw-btn"
-                  type="button"
-                  onClick={toggleHighlightHeadings}
-                  aria-label={isHighlightHeadings ? "Désactiver la surbrillance des titres" : "Activer la surbrillance des titres"}
-                >
-                  <span className="material-icons">local_parking</span>
-                  <span className="asw-translate">
-                    {isHighlightHeadings ? "Activer le surlignage des titres" : " Désactiver le surlignage des titres"}
-                  </span>
-                </button>
-                
-                <button
+              <button 
+                className="asw-btn" 
+                type="button" 
+                onClick={() => toggleReadingGuide(true)} 
+                aria-label={t('accessibility1.readingGuide')}
+              >
+                <span className="reading-guide-icon material-icons" aria-hidden="true">visibility</span>
+                <span className="reading-guide-text">{t('accessibility1.readingGuide')}</span>
+              </button>
+              <button
                 className="asw-btn"
                 type="button"
-                onClick={toggleBigCursor}
-                aria-label="Curseur Agrandi"
+                onClick={toggleHighlightHeadings}
+                aria-label={isHighlightHeadings ? t('accessibility1.highlightHeadings.deactivate') : t('accessibility1.highlightHeadings.activate')}
               >
-                <span className="material-icons">ads_click</span>
-                <span className="asw-translate">Curseur Agrandi</span>
-                </button>
-              </div>
+                <span className="material-icons" aria-hidden="true">
+                  {isHighlightHeadings ? 'highlight_off' : 'highlight'}
+                </span>
+                <span className="asw-translate">
+                  {isHighlightHeadings ? t('accessibility1.highlightHeadings.deactivate') : t('accessibility1.highlightHeadings.activate')}
+                </span>
+              </button>
             </div>
-            <div className="asw-card">
-              <p className="asw-title-card">Contrôle des couleurs</p>
-              <div className="asw-items content">
-                <button
-      className="asw-btn"
-      type="button"
-      onClick={toggleContrast}
-      aria-label={contrastLevel === 1 ? "Contraste par défaut" : "Contraste élevé"}
-    >
-      <span className="material-icons">
-        {contrastLevel === 1 ? 'high_quality' : 'contrast'}
-      </span>
-      <span className="asw-translate">
-        {contrastLevel === 1 ? 'Contraste élevé' : 'Contraste par défaut'}
-      </span>
-    </button>
-              </div>
+          </div>
+          <div className="asw-card">
+            <p className="asw-title-card">{t('accessibility1.colorControl')}</p>
+            <div className="asw-items content">
+              <button className="asw-btn" type="button" onClick={toggleBigCursor} aria-label={t('accessibility1.bigCursor')}>
+                <span className="material-icons" aria-hidden="true">cursor</span>
+                <span className="asw-translate">{t('accessibility1.bigCursor')}</span>
+              </button>
+              <button className="asw-btn" type="button" onClick={toggleContrast} aria-label={t('accessibility1.contrast.default')}>
+                <span className="material-icons" aria-hidden="true">
+                  {contrastLevel === 1 ? 'contrast' : 'contrast'}
+                </span>
+                <span className="asw-translate">
+                  {contrastLevel === 1 ? t('accessibility1.contrast.default') : t('accessibility1.contrast.high')}
+                </span>
+              </button>
             </div>
           </div>
         </div>
-      )}
-    </div>
-        );       
-}
+      </div>
+    )}
+  </div>
+);
+};
 
 export default AccessibilityIcon;

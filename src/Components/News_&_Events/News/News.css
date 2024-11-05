@@ -10,7 +10,11 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
-
+.top-news{
+    width: auto;
+    height:42em;
+    object-fit: cover;
+}
 
 .news-content.collapsed {
     -webkit-line-clamp: 3; /* Limit to 3 lines when collapsed */

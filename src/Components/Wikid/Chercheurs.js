@@ -1,10 +1,12 @@
 
 import { Chercheursitems } from './Chercheursitems'; // Import Chercheursitems data
+import { Chercheursitemsar } from './Chercheursitemsar'; // Import Chercheursitems data
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import "./Wikid.css";
 import "./Chercheurs.css";
+import { useTranslation } from 'react-i18next';
 
 // Function to extract the first line of HTML content
 const getFirstLine = (htmlContent) => {
@@ -36,6 +38,7 @@ const encodeTitleForURL = (title) => {
 
 const Chercheurs = () => {
     const location = useLocation();
+    const { t, i18n } = useTranslation();
     const currentPath = location.pathname.split('/').pop(); // Extract current page from URL
 
     const [apiItems, setApiItems] = useState([]);
@@ -82,8 +85,8 @@ const Chercheurs = () => {
         fetchData();
     }, []);
     
-    // Combine static and API data
-    const combinedItems = [...Chercheursitems, ...apiItems];
+    const staticItems = i18n.language === 'ar' ? Chercheursitemsar : Chercheursitems;
+    const combinedItems = [...staticItems, ...apiItems];
 
     // Sort combined items by publishedAt date to find the latest story
     const sortedItems = combinedItems.sort((a, b) => 
@@ -95,11 +98,11 @@ const Chercheurs = () => {
 
     // Updated links based on your provided categories
     const wikidlinks = [
-        { title: 'Les acteurs sociaux et politiques', link: '/savoir-lab/wikiphedia/acteurs-sociaux-politiques', page: 'acteurs-sociaux-politiques' },
-        { title: 'Les artistes', link: '/savoir-lab/wikiphedia/artistes', page: 'artistes' },
-        { title: 'Les chercheurs', link: '/savoir-lab/wikiphedia/chercheurs', page: 'chercheurs' },
-        { title: 'Les entrepreneurs', link: '/savoir-lab/wikiphedia/entrepreneurs', page: 'entrepreneurs' },
-        { title: 'Les sportifs', link: '/savoir-lab/wikiphedia/sportifs', page: 'sportifs' }
+        { title: t('wiki.actorSocialAndPolitical'), link: '/savoir-lab/wikiphedia/acteurs-sociaux-politiques', page: 'acteurs-sociaux-politiques' },
+        { title: t('wiki.artists'), link: '/savoir-lab/wikiphedia/artistes', page: 'artistes' },
+        { title: t('wiki.researchers'), link: '/savoir-lab/wikiphedia/chercheurs', page: 'chercheurs' },
+        { title: t('wiki.entrepreneurs'), link: '/savoir-lab/wikiphedia/entrepreneurs', page: 'entrepreneurs' },
+        { title: t('wiki.athletes'), link: '/savoir-lab/wikiphedia/sportifs', page: 'sportifs' }
     ];
 
     if (loading) return <p>Loading...</p>;
@@ -109,9 +112,9 @@ const Chercheurs = () => {
         <>
             <div className="background-image-chercheurs">
                 <div className="overlay-text-chercheurs">
-                    <h1 className="chercheurs-titre">Les chercheurs</h1>
+                    <h1 className="chercheurs-titre">{t('chercheurs.pageTitle')}</h1>
                     <p className="p-5 chercheurs-description">
-                        Découvrez des profils détaillés de chercheurs innovants, explorez leurs travaux, découvertes et contributions dans le domaine de la science et de la recherche. Informez-vous sur leurs contributions significatives à la connaissance et à l'innovation.
+                        {t('chercheurs.description')}
                     </p>
                 </div>
 
@@ -131,25 +134,22 @@ const Chercheurs = () => {
             <Container className="mt-4">
                 <Row>
                     <Col>
-                        <h1 className="Chercheurs-title">Histoires des chercheurs</h1>
+                        <h1 className="Chercheurs-title">{t('chercheurs.latest_story')}</h1>
                     </Col>
                 </Row>
                 <Row>
                     <Col>
-                        {/* Display the latest story */}
                         {latestStory.id && (
                             <Card className="mb-4 custom-card">
-                                {/* Handle image rendering for dynamic images */}
                                 {latestStory.attributes?.mediaFiles?.[0] && (
                                     <Card.Img 
                                         className="latest-wikid" 
                                         variant="top" 
-                                        src={`${BASE_URL}${latestStory.attributes.mediaFiles[0]}`} 
+                                        src={latestStory.attributes.mediaFiles[0]} 
                                         alt={latestStory.attributes?.Title || latestStory.title}
-                                        onError={() => console.error('Image not found:', latestStory.attributes?.mediaFiles[0])} // Error handling
+                                        onError={() => console.error('Image not found:', latestStory.attributes?.mediaFiles[0])}
                                     />
                                 )}
-                                {/* Handle image rendering for static data */}
                                 {!latestStory.attributes?.mediaFiles?.[0] && latestStory.imageUrl && (
                                     <Card.Img 
                                         className="latest-wikid" 
@@ -160,37 +160,36 @@ const Chercheurs = () => {
                                 )}
                                 <Card.Body>
                                     <Card.Title>{latestStory.attributes?.Title || latestStory.title}</Card.Title>
-                                    <Card.Subtitle className="mb-2 text-muted">{formatDate(latestStory.attributes?.publishedAt || latestStory.date)}</Card.Subtitle>
+                                    <Card.Subtitle className="mb-2 text-muted">
+                                        {formatDate(latestStory.attributes?.publishedAt || latestStory.date)}
+                                    </Card.Subtitle>
                                     <Card.Text className="card-text-truncatedd">
                                         {getFirstLine(latestStory.attributes?.content || latestStory.content)}
                                     </Card.Text>
                                     <Button 
-    variant="primary" 
-    href={`/savoir-lab/wikiphedia/${encodeURIComponent(latestStory.attributes?.Title || latestStory.title)}`}
->
-    Lire plus
-</Button>
+                                        variant="primary" 
+                                        href={`/savoir-lab/wikiphedia/${encodeURIComponent(latestStory.attributes?.Title || latestStory.title)}`}
+                                    >
+                                        {t('chercheurs.readMore')}
+                                    </Button>
                                 </Card.Body>
                             </Card>
                         )}
                     </Col>
                 </Row>
                 <Row>
-                    {/* Display remaining stories */}
                     {sortedItems.slice(1).map(item => (
                         <Col key={item.id} md={4} className="mb-4">
                             <Card className="custom-card h-100">
-                                {/* Handle image rendering for dynamic images */}
                                 {item.attributes?.mediaFiles?.[0] && (
                                     <Card.Img 
                                         variant="top" 
                                         className="wikid-card-image" 
-                                        src={`${BASE_URL}${item.attributes.mediaFiles[0]}`} 
+                                        src={item.attributes.mediaFiles[0]} 
                                         alt={item.attributes?.Title || item.title}
-                                        onError={() => console.error('Image not found:', item.attributes?.mediaFiles[0])} // Error handling
+                                        onError={() => console.error('Image not found:', item.attributes?.mediaFiles[0])}
                                     />
                                 )}
-                                {/* Handle image rendering for static data */}
                                 {!item.attributes?.mediaFiles?.[0] && item.imageUrl && (
                                     <Card.Img 
                                         variant="top" 
@@ -201,16 +200,18 @@ const Chercheurs = () => {
                                 )}
                                 <Card.Body>
                                     <Card.Title>{item.attributes?.Title || item.title}</Card.Title>
-                                    <Card.Subtitle className="mb-2 text-muted">{formatDate(item.attributes?.publishedAt || item.date)}</Card.Subtitle>
+                                    <Card.Subtitle className="mb-2 text-muted">
+                                        {formatDate(item.attributes?.publishedAt || item.date)}
+                                    </Card.Subtitle>
                                     <Card.Text className="card-text-truncatedd">
                                         {getFirstLine(item.attributes?.content || item.content)}
                                     </Card.Text>
                                     <Button 
-    variant="primary" 
-    href={`/savoir-lab/wikiphedia/${encodeURIComponent(item.attributes?.Title || item.title)}`}
->
-    Lire plus
-</Button>
+                                        variant="primary" 
+                                        href={`/savoir-lab/wikiphedia/${encodeURIComponent(item.attributes?.Title || item.title)}`}
+                                    >
+                                        {t('chercheurs.readMore')}
+                                    </Button>
                                 </Card.Body>
                             </Card>
                         </Col>

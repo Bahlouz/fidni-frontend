@@ -1,20 +1,41 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { ActeurScPlitems } from './ActeurScPlitems';
-import { Artistesitems } from './Artistesitems';
-import { Chercheursitems } from './Chercheursitems';
-import { Entrepreneursitems } from './Entrepreneursitems';
-import { Sportifsitems } from './Sportifsitems';
+import { useTranslation } from 'react-i18next';
 import './WikidiPreview.css';
 
+// Import data based on the selected language
+const importData = (lang) => {
+  if (lang === 'fr') {
+    return {
+      ActeurScPlitems: require('./ActeurScPlitems').ActeurScPlitems,
+      Artistesitems: require('./Artistesitems').Artistesitems,
+      Chercheursitems: require('./Chercheursitems').Chercheursitems,
+      Entrepreneursitems: require('./Entrepreneursitems').Entrepreneursitems,
+      Sportifsitems: require('./Sportifsitems').Sportifsitems,
+    };
+  } else if (lang === 'ar') {
+    return {
+      ActeurScPlitems: require('./ActeurScPlitemsar').ActeurScPlitemsar,
+      Artistesitems: require('./Artistesitemsar').Artistesitemsar,
+      Chercheursitems: require('./Chercheursitemsar').Chercheursitemsar,
+      Entrepreneursitems: require('./Entrepreneursitemsar').Entrepreneursitemsar,
+      Sportifsitems: require('./Sportifsitemsar').Sportifsitemsar,
+    };
+  }
+};
+
 const WikidiPreview = () => {
+  const { t, i18n } = useTranslation(); // Initialize translation function
+  const lang = i18n.language; // Get the current language
+  const items = importData(lang); // Import data based on language
+
   const categories = [
-    { name: 'ActeurScPl', items: ActeurScPlitems },
-    { name: 'Artistes', items: Artistesitems },
-    { name: 'Chercheurs', items: Chercheursitems },
-    { name: 'Entrepreneurs', items: Entrepreneursitems },
-    { name: 'Sportifs', items: Sportifsitems },
+    { name: 'ActeurScPl', items: items.ActeurScPlitems },
+    { name: 'Artistes', items: items.Artistesitems },
+    { name: 'Chercheurs', items: items.Chercheursitems },
+    { name: 'Entrepreneurs', items: items.Entrepreneursitems },
+    { name: 'Sportifs', items: items.Sportifsitems },
   ];
 
   const getLastArticleFromCategory = (category) => {
@@ -36,8 +57,6 @@ const WikidiPreview = () => {
   const handleArticleChange = (index) => {
     setImageTransitionClass(""); // Remove the class to reset the zoom
     setCurrentIndex(index); // Change the article
-
-    // Reapply the transition class after a brief delay to trigger the zoom effect from the start
     setTimeout(() => {
       setImageTransitionClass("transition-scale");
     }, 10);
@@ -45,7 +64,6 @@ const WikidiPreview = () => {
 
   useEffect(() => {
     startInterval(); // Start the interval when the component mounts
-
     return () => clearInterval(intervalRef.current); // Clear the interval when the component unmounts
   }, [latestArticles.length]);
 
@@ -59,7 +77,6 @@ const WikidiPreview = () => {
 
   // Function to format description content
   const formatDescription = (content) => {
-    // Replace <b> tags with <strong> tags for better semantics and replace <br /> with line breaks
     return content
       .replace(/<b>/g, '<strong>')
       .replace(/<\/b>/g, '</strong>')
@@ -92,7 +109,6 @@ const WikidiPreview = () => {
         </div>
         <Card.Body className="card-body-wikiphedia">
           <Card.Title>{currentArticle.title}</Card.Title>
-          {/* Format the content before displaying it and truncate to a single line */}
           <Card.Text 
             className="single-line-content" 
             dangerouslySetInnerHTML={{ __html: formatDescription(currentArticle.content) }} 
@@ -101,7 +117,7 @@ const WikidiPreview = () => {
             <small className="text-muted">{currentArticle.date}</small>
           </Card.Text>
           <Link to={`/savoir-lab/wikiphedia/${currentArticle.title}`}>
-            <Button variant="primary">Lire plus</Button>
+            <Button variant="primary">{t('wikipreview.readMore')}</Button> {/* Use translation key */}
           </Link>
         </Card.Body>
       </Card>

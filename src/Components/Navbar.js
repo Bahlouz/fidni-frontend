@@ -17,38 +17,108 @@ import { Entrepreneursitems } from './Wikid/Entrepreneursitems';
 import { Sportifsitems } from './Wikid/Sportifsitems';
 import {cardData as droitsdata } from './For_You/Droits';
 import {cardData as servicesdata} from './For_You/Services';
-import { staticEvents } from "./News_&_Events/Events/Events";
+import { eventsitems } from "./News_&_Events/Events/eventsitems";
 import { newsItems } from "./News_&_Events/News/newsItems";
 import {volunteerOpportunities} from "./For_You/Opportunities";
 import {cardData as chartedata} from "./SavoirLab/Communication/Charte/Charte";
 import {cardData as recommandtaionsdata} from "./SavoirLab/Communication/Recommandation/Recommandation";
 import {pdfList} from "./SavoirLab/DocumentsPl/DocumentPl";
+import { useTranslation } from 'react-i18next';
+
 // Define your manual links here
-const manualLinks = {
-  "Acceuil": "/",
-  "Services et Droits": {
-    "Services": "/services-et-droits/services",
-    "Droits": "/services-et-droits/droits",
-    "Opportunités": "/services-et-droits/opportunites"
-  },
-  "Savoir Lab": {
-    "Accessibilité": "/savoir-lab/accessibilite",
-    "Communication inclusive": "/savoir-lab/communication-inclusive",
-    "WikiPhédia": "/savoir-lab/wikiphedia",
-    "Documents de plaidoyer": "/savoir-lab/documents-de-plaidoyer"
-  },
-  "Actualités et Événements": {
-    "Actualités": "/actualites-et-evenements/actualites",
-    "Événements": "/actualites-et-evenements/evenements"
-  },
-  "Médiathèque": {
-    "Audio & Podcast": "/mediatheque/audio-podcast",
-    "Vidéo": "/mediatheque/video"
-  },
-  "Blog": "/blog"
-};
+
+
+  // Define your manual links here, utilizing the translation keys
+  
 
 function NavBar() {
+  const { t,i18n } = useTranslation();
+  const textDirection = i18n.language === 'ar' ? 'rtl' : 'ltr';
+  const arabicNavItems = [
+    {
+      title: 'الرئيسية',
+      to: '/'
+    },
+    {
+      title: 'الخدمات والحقوق',
+      subcategories: [
+        { title: 'الخدمات', to: '/services-et-droits/services' },
+        { title: 'الحقوق', to: '/services-et-droits/droits' },
+        { title: 'فرص التطوع', to: '/services-et-droits/opportunites' }
+      ]
+    },
+    {
+      title: 'مختبر المعرفة',
+      subcategories: [
+        { title: 'الوصول', to: '/savoir-lab/accessibilite' },
+        { title: 'الاتصال الشامل', to: '/savoir-lab/communication-inclusive' },
+        { title: 'ويكيبيديا', to: '/savoir-lab/wikiphedia' },
+        { title: 'وثائق المناصرة', to: '/savoir-lab/documents-de-plaidoyer' }
+      ]
+    },
+    {
+      title: 'الأخبار والفعاليات',
+      subcategories: [
+        { title: 'الأخبار', to: '/actualites-et-evenements/actualites' },
+        { title: 'الفعاليات', to: '/actualites-et-evenements/evenements' }
+      ]
+    },
+    {
+      title: 'المكتبة الإعلامية',
+      subcategories: [
+        { title: 'الصوتيات والبودكاست', to: '/mediatheque/audio-podcast' },
+        { title: 'الفيديو', to: '/mediatheque/video' }
+      ]
+    },
+    {
+      title: 'المدونة',
+      to: '/blog'
+    }
+  ];
+  
+  const manualLinks = [
+    {
+      title: t('navigation.home'),
+      to: "/"
+    },
+    {
+      title: t('navigation.services_and_rights'),
+      subcategories: [
+        { title: 'Services', to: "/services-et-droits/services" },
+        { title: t('navigation.rights'), to: "/services-et-droits/droits" },
+        { title: t('navigation.opportunities'), to: "/services-et-droits/opportunites" }
+      ]
+    },
+    {
+      title: t('navigation.savoir_lab'),
+      subcategories: [
+        { title: t('navigation.accessibility'), to: "/savoir-lab/accessibilite" },
+        { title: t('navigation.inclusive_communication'), to: "/savoir-lab/communication-inclusive" },
+        { title: t('navigation.wikipedia'), to: "/savoir-lab/wikiphedia" },
+        { title: t('navigation.advocacy_documents'), to: "/savoir-lab/documents-de-plaidoyer" }
+      ]
+    },
+    {
+      title: t('navigation.news_and_events'),
+      subcategories: [
+        { title: t('navigation.news'), to: "/actualites-et-evenements/actualites" },
+        { title: t('navigation.events'), to: "/actualites-et-evenements/evenements" }
+      ]
+    },
+    {
+      title: t('navigation.media_library'),
+      subcategories: [
+        { title: t('navigation.audio_and_podcast'), to: "/mediatheque/audio-podcast" },
+        { title: t('navigation.video'), to: "/mediatheque/video" }
+      ]
+    },
+    {
+      title: t('navigation.blog'),
+      to: "/blog"
+    }
+  ];
+  
+  
   const [expand, updateExpanded] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -61,16 +131,17 @@ function NavBar() {
   const BASE_URL = 'https://admin.fidni.tn';
 
   const getSubcategoryLink = (subcategoryName) => {
-    for (const [category, links] of Object.entries(manualLinks)) {
-      if (typeof links === 'object') {
-        const subLink = links[subcategoryName];
+    for (const link of manualLinks) {
+      if (link.subcategories) {
+        const subLink = link.subcategories.find(sub => sub.title === subcategoryName);
         if (subLink) {
-          return subLink; // Return the corresponding path for the subcategory
+          return subLink.to; // Return the corresponding path for the subcategory
         }
       }
     }
     return null; // Return null if not found
   };
+  
   
   const formatTitleForURL = (title) => {
     return encodeURIComponent(title); // Encode the title for URL (spaces become %20, etc.)
@@ -114,7 +185,7 @@ function NavBar() {
         ...Sportifsitems,
         ...droitsdata,
         ...servicesdata,
-        ...staticEvents,
+        ...eventsitems,
         ...newsItems,
         ...volunteerOpportunities,
         ...chartedata,
@@ -136,7 +207,6 @@ function NavBar() {
       setSuggestions(combinedSuggestions);
       setSearchOpen(true);
     } catch (error) {
-      console.error('Error fetching suggestions:', error);
       setSuggestions([]);
     }
   };
@@ -145,7 +215,6 @@ function NavBar() {
 
   const handleSearchSubmit = (event) => {
     event.preventDefault();
-    console.log("Search submitted:", searchQuery);
     setSearchOpen(false);
     setSuggestions([]);
   };
@@ -172,7 +241,7 @@ function NavBar() {
     setSuggestions([]);
     setSearchOpen(false);
   };
-
+  
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
@@ -195,139 +264,148 @@ function NavBar() {
 
   // Function to get manual link for a category or subcategory
   const getManualLink = (name) => {
-    for (const [category, link] of Object.entries(manualLinks)) {
-      if (typeof link === 'string' && category === name) {
-        return link;
+    for (const link of manualLinks) {
+      // Check if the category title matches the name
+      if (link.title === name) {
+        return link.to; // Return the 'to' property if a top-level match is found
       }
-      if (typeof link === 'object') {
-        const subLink = link[name];
+      // Check if there are subcategories and search within them
+      if (link.subcategories) {
+        const subLink = link.subcategories.find(sub => sub.title === name);
         if (subLink) {
-          return subLink;
+          return subLink.to; // Return the 'to' property of the matched subcategory
         }
       }
     }
-    return null;
+    return null; // Return null if no match is found
   };
+  
 
   // Map fetched categories and subcategories to manual links
-  const mappedCategories = Object.keys(manualLinks).map((categoryTitle) => {
-    const categoryLink = manualLinks[categoryTitle];
+  const mappedCategories = manualLinks.map((categoryLink) => {
+    const categoryTitle = categoryLink.title; // Access the category title
     const categoryFromFetchedData = categories.find(category => category.name === categoryTitle);
-
+  
     if (!categoryFromFetchedData) {
       return null; // Skip categories that are not found in the fetched data
     }
-
-    if (typeof categoryLink === 'string') {
-      // This is a main category with no subcategories
-      return {
-        title: categoryTitle,
-        to: categoryLink, // Direct link for top-level categories
-        items: []
-      };
-    }
-
-    return {
+  
+    // Initialize the mapped category
+    const mappedCategory = {
       title: categoryTitle,
-      items: Object.keys(categoryLink).map(subcat => ({
-        to: categoryLink[subcat], // Use the manual link here
-        label: subcat,
-      }))
+      to: categoryLink.to || null, // Direct link for top-level categories, or null if it doesn't exist
+      subcategories: []
     };
-  }).filter(category => category !== null); // Remove any null values from the array
+  
+    if (categoryLink.subcategories) {
+      // If there are subcategories, map them
+      mappedCategory.subcategories = categoryLink.subcategories.map(subcat => ({
+        to: subcat.to, // Use the manual link here
+        title: subcat.title, // Use the title for the label
+      }));
+    }
+  
+    return mappedCategory;
+  }).filter(category => category !== null); // Filter out null categories
+   // Remove any null values from the array
 
   // Add subcategories with no corresponding category as top-level categories
   const additionalCategories = subcategoriesNoCategory
     .map(subcategory => ({
       title: subcategory.name,
-      items: [], // Assuming these subcategories don't have subcategories
+      subcateogories: [], // Assuming these subcategories don't have subcategories
       to: getManualLink(subcategory.name) // Add manual link for these subcategories
     }))
     .filter(cat => cat.to !== null); // Ensure they have a manual link
 
   const finalCategories = [...mappedCategories, ...additionalCategories];
-
+  const navItems = i18n.language === 'fr' ? finalCategories : arabicNavItems;
   return (
     <div className="navigation">
-      <Header />
-      <Navbar 
-        expanded={expand}
-        fixed="top"
-        expand="lg"
-        id="navbar"
-        className={`${isScrolled ? 'scrolled' : 'visible'}`}
-        aria-label="Navigation principale"
+    <Header />
+    <Navbar 
+      expanded={expand}
+      fixed="top"
+      expand="lg"
+      id="navbar"
+      className={`${isScrolled ? 'scrolled' : 'visible'}`}
+      aria-label="Navigation principale"
+    >
+      <Container fluid>
+        <Navbar.Brand as={Link} to="/" className="d-flex m-0 p-1">
+          <img src={logo} className="img-fluid logo" alt="Fidni logo" />
+        </Navbar.Brand>
+        <Navbar.Toggle
+          aria-controls="responsive-navbar-nav"
+          onClick={() => {
+            updateExpanded(expand ? false : "expanded");
+          }}
+          aria-label="Basculer la navigation"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </Navbar.Toggle>
+        <Navbar.Collapse id="responsive-navbar-nav">
+        <Nav className="ms-auto" defaultActiveKey="#home" >
+  {navItems && navItems.length > 0 && navItems.map((menu, index) => (
+    menu.subcategories && menu.subcategories.length > 0 ? (
+      <NavDropdown
+        key={index}
+        title={menu.title}
+        id={`nav-dropdown-${index}`}
+        className="navbar-item"
       >
-        <Container fluid>
-          <Navbar.Brand as={Link} to="/" className="d-flex m-0 p-1">
-            <img src={logo} className="img-fluid logo" alt="Fidni logo" />
-          </Navbar.Brand>
-          <Navbar.Toggle
-            aria-controls="responsive-navbar-nav"
-            onClick={() => {
-              updateExpanded(expand ? false : "expanded");
-            }}
-            aria-label="Basculer la navigation"
+        {menu.subcategories.map((item, idx) => (
+          <NavDropdown.Item
+          style={{ direction: textDirection, textAlign: textDirection === 'rtl' ? 'right' : 'left' }}
+            as={Link}
+            to={item.to}
+            key={idx}
+            className="dropdown-item"
           >
-            <span></span>
-            <span></span>
-            <span></span>
-          </Navbar.Toggle>
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="ms-auto" defaultActiveKey="#home">
-              {finalCategories && finalCategories.length > 0 && finalCategories.map((menu, index) => (
-                menu.items.length > 0 ? (
-                  <NavDropdown
-                    key={index}
-                    title={menu.title}
-                    id={`nav-dropdown-${index}`}
-                    className="navbar-item"
-                  >
-                    {menu.items.map((item, idx) => (
-                      <NavDropdown.Item
-                        as={Link}
-                        to={item.to}
-                        key={idx}
-                        className="dropdown-item"
-                      >
-                        {item.label}
-                      </NavDropdown.Item>
-                    ))}
-                  </NavDropdown>
-                ) : (
-                  <Nav.Link
-                    as={Link}
-                    to={menu.to}
-                    key={index}
-                    className="navbar-item"
-                  >
-                    {menu.title}
-                  </Nav.Link>
-                )
-              ))}
-              <Nav.Item>
-                <Nav.Link onClick={handleSearchToggle}>
-                  <AiOutlineSearch />
-                </Nav.Link>
-              </Nav.Item>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+            {item.title} {/* Ensure to use item.title */}
+          </NavDropdown.Item>
+        ))}
+      </NavDropdown>
+    ) : (
+      <Nav.Link
+        as={Link}
+        to={menu.to}
+        key={index}
+        className="navbar-item"
+      >
+        {menu.title} {/* Ensure to use menu.title */}
+      </Nav.Link>
+    )
+  ))}
+
+
+
+
+            <Nav.Item>
+              <Nav.Link onClick={handleSearchToggle}>
+                <AiOutlineSearch />
+              </Nav.Link>
+            </Nav.Item>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
 
       {searchOpen && (
         <div className={`search-container ${searchOpen ? 'open' : ''}`}>
           <Form onSubmit={handleSearchSubmit} className="d-flex">
             <FormControl
               type="search"
-              placeholder="Search"
+              placeholder={t('searchplaceholder')}
               className="me-2 search-input"
               aria-label="Search"
               value={searchQuery}
               onChange={handleSearchInputChange}
               ref={searchInputRef} // Attach ref here
             />
-            <Button variant="outline-success" type="submit">Search</Button>
+            <Button variant="outline-success" type="submit">{t('search')}</Button>
           </Form>
           {suggestions.length > 0 && (
             <ul className="search-suggestions">

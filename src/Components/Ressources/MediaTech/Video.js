@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import './video.css'; // Import the custom CSS
+import './video.css';
 import backvideo from "../../../Assets/backvideo.jpg";
 import { Col, Row, Button } from 'react-bootstrap';
-import localVideos from './videolist'; // Import the local video list
+import localVideos from './videolist';
+import localVideosar from './videolistar';
+import { useTranslation } from 'react-i18next';
 
 
 
 const VideoPlayer = ({ url, title, description, isExpanded, onToggle }) => {
+  const { t,i18n } = useTranslation();
   const renderVideo = () => {
     if (url.includes('youtube.com') || url.includes('youtu.be')) {
       // YouTube video embedding
@@ -148,11 +151,8 @@ const VideoPlayer = ({ url, title, description, isExpanded, onToggle }) => {
       </p>
 
       {description.length > 100 && (
-        <Button
-          variant="link"
-          onClick={onToggle}
-        >
-          {isExpanded ? 'Afficher moins' : 'Afficher plus'}
+        <Button variant="link" onClick={onToggle}>
+          {isExpanded ? i18n.t('videos.showLess') : i18n.t('videos.showMore')}
         </Button>
       )}
     </div>
@@ -160,14 +160,13 @@ const VideoPlayer = ({ url, title, description, isExpanded, onToggle }) => {
 };
 
 const VideoPlayerList = () => {
+  const { t,i18n } = useTranslation();
   const [videos, setVideos] = useState([]);
   const [expanded, setExpanded] = useState({});
   const BASE_URL = 'https://admin.fidni.tn';
+
   const toggleDescription = (index) => {
-    setExpanded(prev => ({
-      ...prev,
-      [index]: !prev[index]
-    }));
+    setExpanded(prev => ({ ...prev, [index]: !prev[index] }));
   };
 
   useEffect(() => {
@@ -181,16 +180,15 @@ const VideoPlayerList = () => {
             const subcategory = post.attributes?.subcategory?.data?.attributes?.name;
             return subcategory === 'Vidéo';
           })
-          .map((post) => {
-            return {
-              url: post.attributes.content,
-              title: post.attributes.Title,
-              description: post.attributes.Description?.[0]?.children?.[0]?.text || '',
-            };
-          });
+          .map((post) => ({
+            url: post.attributes.content,
+            title: post.attributes.Title,
+            description: post.attributes.Description?.[0]?.children?.[0]?.text || '',
+          }));
 
-        // Merge local and fetched data
-        const combinedVideos = [...localVideos, ...fetchedVideos];
+        // Select local videos based on the current language
+        const localData = i18n.language === 'fr' ? localVideos : localVideosar;
+        const combinedVideos = [...localData, ...fetchedVideos];
         setVideos(combinedVideos);
       } catch (error) {
         console.error("Error fetching video data:", error);
@@ -198,16 +196,22 @@ const VideoPlayerList = () => {
     };
 
     fetchVideos();
-  }, []);
+  }, [i18n.language]); // Fetch videos when language changes
+
+  const changeLanguage = (lang) => {
+    i18n.changeLanguage(lang);
+    window.location.reload(); // Refresh page on language change
+  };
 
   return (
     <div>
       <div className="audio-image">
         <img src={backvideo} alt="Background" />
-      </div> 
+      </div>
       <div className="page-header">
-        <h1 className='video-page-title'>Vidéos Informatives</h1>
-        <p className='video-page-description'>Découvrez nos vidéos sélectionnées pour vous.</p>
+        <h1 className='video-page-title'>{t('videos.title')}</h1>
+        <p className='video-page-description'>{t('videos.description')}</p>
+        
       </div>
       <Row className="videos-list">
         {videos.map((video, index) => (

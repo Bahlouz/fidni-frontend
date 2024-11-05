@@ -3,10 +3,13 @@ import { useParams } from 'react-router-dom';
 import { Container, Card, Button } from 'react-bootstrap';
 import './SingleNews.css'; // Import the CSS for single news page
 import { newsItems as staticNewsItems } from './newsItems'; // Import static news items
+import { newsItemsar as staticNewsItemsar } from './newsItemsar';
 import backnavhead from "../../../Assets/back navhead.jpg";
+import { useTranslation } from 'react-i18next';
 
 const SingleNews = () => {
     const { newsTitle } = useParams(); // Get title from URL params
+    const {t, i18n } = useTranslation(); // Access the i18n instance
     const decodedNewsTitle = decodeURIComponent(newsTitle); // Decode the title for comparison
     const [newsItem, setNewsItem] = useState(null); // State to store the news item
     const [loading, setLoading] = useState(true);
@@ -43,7 +46,8 @@ const SingleNews = () => {
                     });
                 } else {
                     // If not found in API, search in static newsItems
-                    const staticNewsItem = staticNewsItems.find(item => item.title === decodedNewsTitle);
+                    const staticData = i18n.language === 'fr' ? staticNewsItems : staticNewsItemsar;
+                    const staticNewsItem = staticData.find(item => item.title === decodedNewsTitle);
                     if (staticNewsItem) {
                         setNewsItem(staticNewsItem);
                     } else {
@@ -77,7 +81,7 @@ const SingleNews = () => {
                         <Card.Title className="single-news-title">{newsItem.title}</Card.Title>
                         <Card.Subtitle className="mb-2 text-muted">{newsItem.date}</Card.Subtitle>
                         <Card.Text className="single-news-content" dangerouslySetInnerHTML={{ __html: newsItem.content }} />
-                        <Button variant="primary" href="/actualites-et-evenements/actualites">Retour aux nouvelles</Button>
+                        <Button variant="primary" href="/actualites-et-evenements/actualites">{t('news.getback')}</Button>
                     </Card.Body>
                 </Card>
             </Container>

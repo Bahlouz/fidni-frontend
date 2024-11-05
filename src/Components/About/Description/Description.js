@@ -1,24 +1,29 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { FaEye, FaBullseye } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next'; // Import the hook
 import './Description.css';
 
 const DescriptionOfConcept = () => {
+    const { t, i18n } = useTranslation(); // Initialize translation
+    const textDirection = i18n.language === 'ar' ? 'rtl' : 'ltr';
+    // Determine alignment and direction based on current language
+    const textAlignment = i18n.language === 'ar' ? 'text-right ' : 'text-left';
+    const direction = i18n.language === 'ar' ? 'rtl !important' : 'ltr';
+
     return (
-        <Container fluid className="p-0 description-container">
+        <Container fluid className="p-0 description-container" style={{ direction }}>
             <Row className="flex-grow-1 d-flex align-items-stretch">
                 <Col md={5} lg={4} className="flex-grow-1 d-flex align-items-stretch">
                     <section className="concept-section">
                         <div className="icon-container">
                             <FaEye className="concept-icon" aria-hidden="true" />
                         </div>
-                        <h2 tabIndex="3" className="description-title">Notre Vision</h2>
-                        <p tabIndex="4" className="description-p">
-                            La plateforme FIDNI est une plateforme en ligne centralisée et
-                            accessible visant à faciliter la collecte, la centralisation et la diffusion d'informations
-                            pertinentes, de données, d'analyses et de recherches stratégiques sur le handicap,
-                            en réponse à l'impératif d'une meilleure accessibilité à l'information, et à la prise de
-                            décision politique éclairée.
+                        <h2 tabIndex="3" className={`description-title ${textAlignment}`} >
+                            {t("description.vision.title")}
+                        </h2>
+                        <p tabIndex="4" className={`description-p ${textAlignment}`}style={{ direction: textDirection, textAlign: textDirection === 'rtl' ? 'right' : 'left' }}>
+                            {t("description.vision.content")}
                         </p>
                     </section>
                 </Col>
@@ -27,17 +32,14 @@ const DescriptionOfConcept = () => {
                         <div className="icon-container">
                             <FaBullseye className="concept-icon" aria-hidden="true" />
                         </div>
-                        <h2 tabIndex="5" className="description-title">Notre Mission</h2>
-                        <p tabIndex="6" className="description-p">
-                            <ul>
-                                <li>Faciliter l'accès à l'information.</li>
-                                <li>Promouvoir l'adoption de politiques inclusives fondées sur des recherches et
-                                    ancrées dans les connaissances scientifiques.</li>
-                                <li>Favoriser les échanges entre les personnes en situation de handicap en
-                                    Tunisie, les chercheurs, les journalistes, les acteurs de la société civile et les
-                                    décideurs.</li>
-                            </ul>
-                        </p>
+                        <h2 tabIndex="5" className={`description-title ${textAlignment}`}>
+                            {t("description.mission.title")}
+                        </h2>
+                        <ul className={`description-p ${textAlignment}`} style={{ direction: textDirection, textAlign: textDirection === 'rtl' ? 'right' : 'left' }}>
+                            {t("description.mission.content", { returnObjects: true }).map((item, index) => (
+                                <li key={index}>{item}</li>
+                            ))}
+                        </ul>
                     </section>
                 </Col>
             </Row>
@@ -46,4 +48,3 @@ const DescriptionOfConcept = () => {
 };
 
 export default DescriptionOfConcept;
-    

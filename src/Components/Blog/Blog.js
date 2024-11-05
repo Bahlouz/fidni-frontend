@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 import './Blog.css';
 import { Button, Modal, Form, Card } from 'react-bootstrap';
 import blogPosts from './blogPosts'; // Local data for demo
-
+import { useTranslation } from 'react-i18next';
 const Blog = () => {
   const [posts, setPosts] = useState([]);
+  const { t ,i18n} = useTranslation(); 
+  const textDirection = i18n.language === 'ar' ? 'rtl' : 'ltr';
   const BASE_URL = 'https://admin.fidni.tn';
   const [show, setShow] = useState(false);
   const [formData, setFormData] = useState({
@@ -118,16 +120,16 @@ const Blog = () => {
   return (
     <>
       <div className="background-image-blog">
-        <div className="overlay-text-blog-singlepage">
-          <h1 className="p-5 blog-titre-singlepage">Blog</h1>
-          <Button variant="primary" onClick={handleShow} className="my-4">
-            Ajouter un post
+        <div className="overlay-text-blog-singlepage" style={{ direction: textDirection, textAlign: textDirection === 'rtl' ? 'right' : 'left' }}>
+          <h1 className="p-5 blog-titre-singlepage" style={{ direction: textDirection, textAlign: textDirection === 'rtl' ? 'right' : 'left' }}>{t('blog.title')}</h1>
+          <Button  variant="primary" onClick={handleShow} className="my-4">
+            {t('blog.addPost')}
           </Button>
         </div>
       </div>
       <div className="background-image-blog-two">
         <div className="blog-container-unique">
-          <h2 className="all-posts-title-unique">All Posts</h2>
+          <h2 className="all-posts-title-unique">{t('blog.allPosts')}</h2>
           <div className="all-posts-grid-unique">
             {posts.map((post) => (
               <Card key={post.attributes.titre} className="post-unique">
@@ -136,11 +138,11 @@ const Blog = () => {
                 ) : post.attributes.file?.data?.[0]?.attributes?.formats?.thumbnail?.url ? (
                   <Card.Img className="post-image-unique" variant="top" src={`${BASE_URL}${post.attributes.file.data[0].attributes.formats.thumbnail.url}`}/>
                 ) : (
-                  <div className="no-image-placeholder">No Image</div>
+                  <div className="no-image-placeholder">{t('blog.noImage')}</div>
                 )}
                 <Card.Body className="post-content-unique">
                   <Link to={`/blog/${post.attributes.titre}`} className="post-link">
-                    <Card.Title className="post-title-unique">{post.attributes.titre || "Untitled Post"}</Card.Title>
+                    <Card.Title className="post-title-unique">{post.attributes.titre || t('blog.postLink')}</Card.Title>
                   </Link>
                   <Card.Text>
                     {post.attributes.content && post.attributes.content.length > 0 ? (
@@ -150,16 +152,9 @@ const Blog = () => {
                         </p>
                       ))
                     ) : (
-                      <p>No content available</p>
+                      <p>{t('blog.noContent')}</p>
                     )}
                   </Card.Text>
-                  <Card.Footer>
-                    <small className="text-muted">
-                      {post.attributes.createdAt
-                        ? new Date(post.attributes.createdAt).toLocaleDateString()
-                        : "Unknown Date"}
-                    </small>
-                  </Card.Footer>
                 </Card.Body>
               </Card>
             ))}
@@ -167,92 +162,43 @@ const Blog = () => {
         </div>
       </div>
 
-      {/* Modal for Adding a Post */}
-      <Modal show={show} onHide={handleClose} centered>
+      {/* Modal for Adding Posts */}
+      <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Ajouter un post</Modal.Title>
+          <Modal.Title>{t('blog.modal.header')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
-            <Form.Group controlId="formName" className="mb-3">
-              <Form.Control
-                type="text"
-                name="nometprenom"
-                placeholder="Nom et Prénom"
-                value={formData.nometprenom}
-                onChange={handleChange}
-                required
-              />
+            <Form.Group controlId="formName">
+              <Form.Label>{t('blog.modal.name')}</Form.Label>
+              <Form.Control type="text" name="nometprenom" value={formData.nometprenom} onChange={handleChange} />
             </Form.Group>
-
-            <Form.Group controlId="formDomain" className="mb-3">
-              <Form.Control
-                type="text"
-                name="domainexpertise"
-                placeholder="Votre domaine d'expertise"
-                value={formData.domainexpertise}
-                onChange={handleChange}
-                required
-              />
+            <Form.Group controlId="formDomain">
+              <Form.Label>{t('blog.modal.domain')}</Form.Label>
+              <Form.Control type="text" name="domainexpertise" value={formData.domainexpertise} onChange={handleChange} />
             </Form.Group>
-
-            <Form.Group controlId="formAge" className="mb-3">
-              <Form.Control
-                type="number"
-                name="age"
-                placeholder="Âge"
-                value={formData.age}
-                onChange={handleChange}
-                required
-              />
+            <Form.Group controlId="formAge">
+              <Form.Label>{t('blog.modal.age')}</Form.Label>
+              <Form.Control type="number" name="age" value={formData.age} onChange={handleChange} />
             </Form.Group>
-
-            <Form.Group controlId="formEmail" className="mb-3">
-              <Form.Control
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
+            <Form.Group controlId="formEmail">
+              <Form.Label>{t('blog.modal.email')}</Form.Label>
+              <Form.Control type="email" name="email" value={formData.email} onChange={handleChange} />
             </Form.Group>
-
-            <Form.Group controlId="formTitle" className="mb-3">
-              <Form.Control
-                type="text"
-                name="titre"
-                placeholder="Titre de post"
-                value={formData.titre}
-                onChange={handleChange}
-                required
-              />
+            <Form.Group controlId="formPostTitle">
+              <Form.Label>{t('blog.modal.postTitle')}</Form.Label>
+              <Form.Control type="text" name="titre" value={formData.titre} onChange={handleChange} />
             </Form.Group>
-
-            <Form.Group controlId="formContent" className="mb-3">
-              <Form.Control
-                as="textarea"
-                name="content"
-                placeholder="Écrire le post"
-                rows={5}
-                value={formData.content}
-                onChange={handleChange}
-                required
-              />
+            <Form.Group controlId="formContent">
+              <Form.Label>{t('blog.modal.content')}</Form.Label>
+              <Form.Control as="textarea" rows={3} name="content" value={formData.content} onChange={handleChange} />
             </Form.Group>
-
-            <Form.Group controlId="formFile" className="mb-3">
-              <Form.Label>Télécharger un fichier</Form.Label>
-              <Form.Control
-                type="file"
-                name="files"
-                multiple // Allow multiple file uploads
-                onChange={handleChange}
-              />
+            <Form.Group controlId="formFile">
+              <Form.Label>{t('blog.modal.uploadFile')}</Form.Label>
+              <Form.Control type="file" name="files" multiple onChange={handleChange} />
             </Form.Group>
-
             <Button variant="primary" type="submit">
-              Soumettre le post
+              {t('blog.modal.submit')}
             </Button>
           </Form>
         </Modal.Body>

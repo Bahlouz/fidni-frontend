@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Container, Form, Button, Row, Col, Alert } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import backnavhead from "../Assets/back navhead.jpg";
 
 const ContactUs = () => {
+  const { t } = useTranslation(); // Hook to access translation
   const [alert, setAlert] = useState({ show: false, message: '', variant: '' });
   const BASE_URL = 'https://admin.fidni.tn';
 
@@ -39,21 +41,17 @@ const ContactUs = () => {
         body: JSON.stringify(requestBody),
       });
   
-      // Handle the response
       if (response.ok) {
-        setAlert({ show: true, message: 'Votre message a été envoyé avec succès!', variant: 'success' });
+        setAlert({ show: true, message: t('contact.contactUs.successMessage'), variant: 'success' });
       } else {
         const errorData = await response.json();
-        setAlert({ show: true, message: errorData.message || 'Erreur lors de l\'envoi du message.', variant: 'danger' });
+        setAlert({ show: true, message: errorData.message || t('contact.contactUs.errorMessage'), variant: 'danger' });
       }
     } catch (error) {
       console.error('Erreur:', error);
-      setAlert({ show: true, message: 'Erreur lors de l\'envoi du message.', variant: 'danger' });
+      setAlert({ show: true, message: t('contact.contactUs.errorMessage'), variant: 'danger' });
     }
   };
-  
-    
-
 
   return (
     <>
@@ -68,9 +66,9 @@ const ContactUs = () => {
         )}
         <Row className="justify-content-center text-center mb-5">
           <Col md={8}>
-            <h1 className="display-4">Contactez Nous</h1>
+            <h1 className="display-4">{t('contact.contactUs.title')}</h1>
             <p className="lead">
-              Remplissez le formulaire ci-dessous et notre équipe vous répondra dans les plus brefs délais.
+              {t('contact.contactUs.description')}
             </p>
           </Col>
         </Row>
@@ -78,31 +76,31 @@ const ContactUs = () => {
           <Col md={6}>
             <Form onSubmit={handleSubmit}>
               <Form.Group controlId="formName" className="mb-4">
-                <Form.Label>Nom & Prénom</Form.Label>
-                <Form.Control type="text" name="formName" placeholder="Entrez votre nom et prénom" />
+                <Form.Label>{t('contact.contactUs.name')}</Form.Label>
+                <Form.Control type="text" name="formName" placeholder={t('contact.contactUs.namePlaceholder')} />
               </Form.Group>
               <Form.Group controlId="formOrganization" className="mb-4">
-                <Form.Label>L'organisation/individu</Form.Label>
-                <Form.Control type="text" name="formOrganization" placeholder="Entrez le nom de l'organisation ou de l'individu" />
+                <Form.Label>{t('contact.contactUs.organization')}</Form.Label>
+                <Form.Control type="text" name="formOrganization" placeholder={t('contact.contactUs.organizationPlaceholder')} />
               </Form.Group>
 
               <Form.Group controlId="formEmail" className="mb-4">
-                <Form.Label>Adresse Email</Form.Label>
-                <Form.Control type="email" name="formEmail" placeholder="Entrez votre email" />
+                <Form.Label>{t('contact.contactUs.email')}</Form.Label>
+                <Form.Control type="email" name="formEmail" placeholder={t('contact.contactUs.emailPlaceholder')} />
               </Form.Group>
 
               <Form.Group controlId="formSubject" className="mb-4">
-                <Form.Label>Sujet</Form.Label>
-                <Form.Control type="text" name="formSubject" placeholder="Entrez le sujet" />
+                <Form.Label>{t('contact.contactUs.subject')}</Form.Label>
+                <Form.Control type="text" name="formSubject" placeholder={t('contact.contactUs.subjectPlaceholder')} />
               </Form.Group>
 
               <Form.Group controlId="formMessage" className="mb-4">
-                <Form.Label>Message</Form.Label>
-                <Form.Control as="textarea" name="formMessage" rows={5} placeholder="Écrivez votre message ici..." />
+                <Form.Label>{t('contact.contactUs.message')}</Form.Label>
+                <Form.Control as="textarea" name="formMessage" rows={5} placeholder={t('contact.contactUs.messagePlaceholder')} />
               </Form.Group>
 
               <Button variant="primary" type="submit" size="lg" className="w-100">
-                Envoyer
+                {t('contact.contactUs.send')}
               </Button>
             </Form>
           </Col>

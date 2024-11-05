@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
-import { ActeurScPlitems } from './ActeurScPlitems'; // Import static data
+import { useTranslation } from 'react-i18next'; // Import useTranslation for language support
+import { ActeurScPlitems } from './ActeurScPlitems'; 
+import { ActeurScPlitemsar } from './ActeurScPlitemsar'; 
 import "./Wikid.css";
 import "./ActeurScPl.css";
 
 // Function to extract the first line of HTML content
 const getFirstLine = (htmlContent) => {
-    const tempDiv = document.createElement('div');
+    const tempDiv = document.createElement('ActeurSc.div');
     tempDiv.innerHTML = htmlContent;
-    const firstLine = tempDiv.textContent.split('\n')[0];
+    const firstLine = tempDiv.textContent.split('ActeurSc.\n')[0];
     return firstLine;
 };
 
@@ -31,8 +33,8 @@ const encodeTitleForURL = (title) => {
     return encodeURIComponent(title.toLowerCase().replace(/\s+/g, '-'));
 };
 
-
 const ActeurScPl = () => {
+    const { t, i18n } = useTranslation(); // Use i18n for language handling
     const location = useLocation();
     const currentPath = location.pathname.split('/').pop(); // Extract current page from URL
 
@@ -40,6 +42,7 @@ const ActeurScPl = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const BASE_URL = 'https://admin.fidni.tn';
+    
     // Fetch data from API
     useEffect(() => {
         const fetchData = async () => {
@@ -50,21 +53,19 @@ const ActeurScPl = () => {
                 }
                 const data = await response.json();
     
-                // Filter items based on subcategory 'WikiPhédia' and the presence of <acteurscpl> tag in description
                 const filteredItems = data.data.filter(item => 
                     item.attributes?.subcategory?.data?.attributes?.name === 'WikiPhédia' &&
                     containsActeursCplTag(item.attributes?.Description || [])
                 );
     
-                // Map to include media files if available
                 const itemsWithImages = filteredItems.map(item => {
                     const mediaFiles = item.attributes?.Mediafiles?.data || [];
                     return {
                         ...item,
                         attributes: {
                             ...item.attributes,
-                            mediaFiles: mediaFiles.map(file => file.attributes?.url || ''), // Extract URLs safely
-                            imageUrl: mediaFiles[0]?.attributes?.url ? `${BASE_URL}${mediaFiles[0].attributes.url}` : '' // Full URL for image
+                            mediaFiles: mediaFiles.map(file => file.attributes?.url || ''),
+                            imageUrl: mediaFiles[0]?.attributes?.url ? `${BASE_URL}${mediaFiles[0].attributes.url}` : ''
                         }
                     };
                 });
@@ -79,37 +80,38 @@ const ActeurScPl = () => {
     
         fetchData();
     }, []);
-    
+
+    // Determine static items based on the current language
+    const staticItems = i18n.language === 'fr' ? ActeurScPlitems : ActeurScPlitemsar;
+
     // Combine static and API data
-    const combinedItems = [...ActeurScPlitems, ...apiItems];
+    const combinedItems = [...staticItems, ...apiItems];
 
     // Sort combined items by publishedAt date to find the latest story
     const sortedItems = combinedItems.sort((a, b) => 
         new Date(b.attributes?.publishedAt || b.attributes?.publishedAt) - new Date(a.attributes?.publishedAt || a.attributes?.publishedAt)
     );
 
-    // Latest story based on sorted items
     const latestStory = sortedItems[0] || {};
 
-    // Updated links based on your provided categories
     const wikidlinks = [
-        { title: 'Les acteurs sociaux et politiques', link: '/savoir-lab/wikiphedia/acteurs-sociaux-politiques', page: 'acteurs-sociaux-politiques' },
-        { title: 'Les artistes', link: '/savoir-lab/wikiphedia/artistes', page: 'artistes' },
-        { title: 'Les chercheurs', link: '/savoir-lab/wikiphedia/chercheurs', page: 'chercheurs' },
-        { title: 'Les entrepreneurs', link: '/savoir-lab/wikiphedia/entrepreneurs', page: 'entrepreneurs' },
-        { title: 'Les sportifs', link: '/savoir-lab/wikiphedia/sportifs', page: 'sportifs' }
+        { title: t('wiki.actorSocialAndPolitical'), link: '/savoir-lab/wikiphedia/acteurs-sociaux-politiques', page: 'acteurs-sociaux-politiques' },
+        { title: t('wiki.artists'), link: '/savoir-lab/wikiphedia/artistes', page: 'artistes' },
+        { title: t('wiki.researchers'), link: '/savoir-lab/wikiphedia/chercheurs', page: 'chercheurs' },
+        { title: t('wiki.entrepreneurs'), link: '/savoir-lab/wikiphedia/entrepreneurs', page: 'entrepreneurs' },
+        { title: t('wiki.athletes'), link: '/savoir-lab/wikiphedia/sportifs', page: 'sportifs' }
     ];
 
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error: {error.message}</p>;
+    if (loading) return <p>{t('ActeurSc.Loading...')}</p>;
+    if (error) return <p>{t('ActeurSc.Error:')} {error.message}</p>;
 
     return (
         <>
             <div className="background-image-acteursc">
                 <div className="overlay-text-acteursc">
-                    <h1 className="acteursc-titre">Les acteurs sociaux et politiques</h1>
+                    <h1 className="acteursc-titre">{t('ActeurSc.Les acteurs sociaux et politiques')}</h1>
                     <p className="p-5 acteursc-description">
-                        Découvrez des profils détaillés d'acteurs sociaux et politiques engagés, explorez leurs réalisations, parcours et contributions dans le domaine de l'activisme et des politiques publiques. Inspirez-vous de leurs efforts pour faire progresser la société.
+                        {t('ActeurSc.Découvrez des profils détaillés d\'acteurs sociaux et politiques engagés, explorez leurs réalisations, parcours et contributions dans le domaine de l\'activisme et des politiques publiques. Inspirez-vous de leurs efforts pour faire progresser la société.')}
                     </p>
                 </div>
 
@@ -129,7 +131,7 @@ const ActeurScPl = () => {
             <Container className="mt-4">
                 <Row>
                     <Col>
-                        <h1 className="ActeurScPl-title">Histoires des acteurs sociaux et politiques</h1>
+                        <h1 className="ActeurScPl-title">{t('ActeurSc.Histoires des acteurs sociaux et politiques')}</h1>
                     </Col>
                 </Row>
                 <Row>
@@ -144,7 +146,7 @@ const ActeurScPl = () => {
                                         variant="top" 
                                         src={`${BASE_URL}${latestStory.attributes.mediaFiles[0]}`} 
                                         alt={latestStory.attributes?.Title || latestStory.title}
-                                        onError={() => console.error('Image not found:', latestStory.attributes?.mediaFiles[0])} // Error handling
+                                        onError={() => console.error('Image not found:', latestStory.attributes?.mediaFiles[0])}
                                     />
                                 )}
                                 {/* Handle image rendering for static data */}
@@ -163,11 +165,11 @@ const ActeurScPl = () => {
                                         {getFirstLine(latestStory.attributes?.content || latestStory.content)}
                                     </Card.Text>
                                     <Button 
-    variant="primary" 
-    href={`/savoir-lab/wikiphedia/${encodeURIComponent(latestStory.attributes?.Title || latestStory.title)}`}
->
-    Lire plus
-</Button>
+                                        variant="primary" 
+                                        href={`/savoir-lab/wikiphedia/${encodeURIComponent(latestStory.attributes?.Title || latestStory.title)}`}
+                                    >
+                                        {t('ActeurSc.Lire plus')}
+                                    </Button>
                                 </Card.Body>
                             </Card>
                         )}
@@ -185,7 +187,7 @@ const ActeurScPl = () => {
                                         className="wikid-card-image" 
                                         src={`${BASE_URL}${item.attributes.mediaFiles[0]}`} 
                                         alt={item.attributes?.Title || item.title}
-                                        onError={() => console.error('Image not found:', item.attributes?.mediaFiles[0])} // Error handling
+                                        onError={() => console.error('Image not found:', item.attributes?.mediaFiles[0])}
                                     />
                                 )}
                                 {/* Handle image rendering for static data */}
@@ -204,11 +206,11 @@ const ActeurScPl = () => {
                                         {getFirstLine(item.attributes?.content || item.content)}
                                     </Card.Text>
                                     <Button 
-    variant="primary" 
-    href={`/savoir-lab/wikiphedia/${encodeURIComponent(item.attributes?.Title || item.title)}`}
->
-    Lire plus
-</Button>
+                                        variant="primary" 
+                                        href={`/savoir-lab/wikiphedia/${encodeURIComponent(item.attributes?.Title || item.title)}`}
+                                    >
+                                        {t('ActeurSc.Lire plus')}
+                                    </Button>
                                 </Card.Body>
                             </Card>
                         </Col>

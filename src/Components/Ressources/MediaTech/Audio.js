@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import './audio.css';
-
+import { useTranslation } from 'react-i18next';
 
 
 const staticAudioEpisodes = [
-
   // Add more static episodes here
 ];
 
 const Audio = () => {
+  const { t } = useTranslation(); // Use translation hook
   const [episodes, setEpisodes] = useState([]);
   const [expandedDescriptionId, setExpandedDescriptionId] = useState(null);
   const BASE_URL = 'https://admin.fidni.tn';
+
   useEffect(() => {
     const fetchAudioEpisodes = async () => {
       try {
@@ -57,45 +58,43 @@ const Audio = () => {
   };
 
   return (
-    <>
-      <Container className="mt-4">
-        <Row>
-          <Col>
-            <h1 className="podcasts-title">Derniers Épisodes d'audios</h1>
-          </Col>
-        </Row>
-        <Row>
-          {episodes.map((episode) => (
-            <Col md={4} key={episode.id} className="mb-4">
-              <Card className="h-100">
-                <Card.Img className="podcast-img-card" variant="top" src={`${episode.imageUrl}`} alt={episode.title} />
-                <Card.Body>
-                  <Card.Title>{episode.title}</Card.Title>
-                  <Card.Subtitle className="mb-2 text-muted">{episode.date}</Card.Subtitle>
-                  <Card.Text>
-                    {expandedDescriptionId === episode.id ? episode.description : `${episode.description.substring(0, 200)}...`}
-                  </Card.Text>
-                  <Button variant="link" onClick={() => toggleDescription(episode.id)}>
-                    {expandedDescriptionId === episode.id ? 'Afficher moins' : 'Afficher plus'}
-                  </Button>
-                  <audio controls className="audio-player-podcast-audio">
-                    <source src={`${BASE_URL}${episode.audioUrl}`} type="audio/mpeg" />
-                    Votre navigateur ne prend pas en charge l'élément audio.
-                  </audio>
-                  <Button 
+    <Container className="mt-4">
+      <Row>
+        <Col>
+          <h1 className="podcasts-title">{t('audio.title')}</h1>
+        </Col>
+      </Row>
+      <Row>
+        {episodes.map((episode) => (
+          <Col md={4} key={episode.id} className="mb-4">
+            <Card className="h-100">
+              <Card.Img className="podcast-img-card" variant="top" src={`${episode.imageUrl}`} alt={episode.title} />
+              <Card.Body>
+                <Card.Title>{episode.title}</Card.Title>
+                <Card.Subtitle className="mb-2 text-muted">{episode.date}</Card.Subtitle>
+                <Card.Text>
+                  {expandedDescriptionId === episode.id ? episode.description : `${episode.description.substring(0, 200)}...`}
+                </Card.Text>
+                <Button variant="link" onClick={() => toggleDescription(episode.id)}>
+                  {expandedDescriptionId === episode.id ? t('audio.showLess') : t('audio.showMore')}
+                </Button>
+                <audio controls className="audio-player-podcast-audio">
+                  <source src={`${BASE_URL}${episode.audioUrl}`} type="audio/mpeg" />
+                  {t('audio.audioNotSupported')}
+                </audio>
+                <Button 
                   variant="primary" 
                   href={`${BASE_URL}${episode.downloadUrl}`}  // Full URL of the file
                   download={`${BASE_URL}${episode.downloadUrl}`}  // Ensure download attribute has a filename
                 >
-                  Télécharger
+                  {t('audio.download')}
                 </Button>
-                </Card.Body>
-              </Card>
-            </Col>
-          ))}
-        </Row>
-      </Container>
-    </>
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
+      </Row>
+    </Container>
   );
 };
 

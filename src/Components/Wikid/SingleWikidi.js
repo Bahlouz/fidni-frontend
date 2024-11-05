@@ -8,7 +8,12 @@ import { Entrepreneursitems } from './Entrepreneursitems';
 import { Sportifsitems } from './Sportifsitems';
 import backnavhead from "../../Assets/back navhead.jpg";
 import Preloader from '../Preloader';
-
+import ActeurScPl from './ActeurScPl';
+import { ActeurScPlitemsar } from './ActeurScPlitemsar';
+import { Artistesitemsar } from './Artistesitemsar';
+import { Chercheursitemsar } from './Chercheursitemsar';
+import { Entrepreneursitemsar } from './Entrepreneursitemsar';
+import { Sportifsitemsar } from './Sportifsitemsar';
 // Define the categories of static items
 const categories = {
   ActeurScPl: ActeurScPlitems,
@@ -16,6 +21,11 @@ const categories = {
   Chercheurs: Chercheursitems,
   Entrepreneurs: Entrepreneursitems,
   Sportifs: Sportifsitems,
+  ActeurScPlar:ActeurScPlitemsar,
+  Artistesar: Artistesitemsar,
+  Chercheursar: Chercheursitemsar,
+  Entrepreneursar: Entrepreneursitemsar,
+  Sportifsar: Sportifsitemsar,
 };
 
 // Map tags to categories

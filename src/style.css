@@ -79,23 +79,41 @@ a:hover{
 
 .accessibility-container {
   position: fixed;
-  right: 0;
+  right: 0; /* Default to right */
   top: 28%;
   transform: translateY(-50%);
   display: flex;
   align-items: center;
   justify-content: center; /* Center the content */
   transition: all 0.5s ease;
-  background: linear-gradient(to right, #850000, #a90000); /* Gray gradient background */
+  background: linear-gradient(to right, #850000, #900000); /* Gray gradient background */
   cursor: pointer;
   padding: 10px;
   border-radius: 50px 0 0 50px;
   width: 80px;
   height: 80px; /* Match the size of the icon */
   z-index: 9998; /* Ensure it stays above other components */
-  filter: none !important;
+  filter:none !important;
 }
 
+.accessibility-container.left {
+  right: auto; /* Reset the right property */
+  left: 0; /* Position on the left */
+  border-radius: 0px 50px 50px 0px;
+  
+}
+.accessibility-container.left::before {
+  content: '';
+  display: block;
+  width: 3.75em;
+  height: 3.75em;
+  background: url('./accessibility_icon.svg') no-repeat center;
+  background-size: contain;
+  position: absolute;
+  right:15px; /* Adjust to fit the container */
+  z-index: 1; /* Ensure it is on top of the gray background */
+  filter: invert(100%);
+}
 .accessibility-container::before {
   content: '';
   display: block;

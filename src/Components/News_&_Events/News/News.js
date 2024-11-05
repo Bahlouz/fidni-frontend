@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import './News.css';
 import { newsItems as staticNewsItems } from './newsItems';
+import { newsItemsar as staticNewsItemsar } from './newsItemsar';
+import { useTranslation } from 'react-i18next';
+import Preloader from '../../Preloader';
 
-// Mapping of French month names to English
+// Mapping of month names to English
 const monthMapping = {
     janvier: 'January',
     février: 'February',
@@ -16,24 +19,43 @@ const monthMapping = {
     septembre: 'September',
     octobre: 'October',
     novembre: 'November',
-    décembre: 'December'
+    décembre: 'December',
+    جانفي: 'January',   // January in Arabic
+    فيفري: 'February',   // February in Arabic
+    مارس: 'March',       // March in Arabic
+    أفريل: 'April',      // April in Arabic
+    ماي: 'May',          // May in Arabic
+    جوان: 'June',       // June in Arabic
+    جويلية: 'July',     // July in Arabic
+    أوت: 'August',       // August in Arabic
+    سبتمبر: 'September', // September in Arabic
+    أكتوبر: 'October',   // October in Arabic
+    نوفمبر: 'November',  // November in Arabic
+    ديسمبر: 'December'   // December in Arabic
 };
 
-const formatFrenchDate = (frenchDate) => {
-    if (!frenchDate) return new Date(); // Return current date if date is not provided
+const formatDate = (dateString) => {
+    if (typeof dateString !== 'string' || !dateString) {
+        return null; // Return null if input is not a valid string
+    }
 
-    const [day, month, year] = frenchDate.split(' ');
-    if (!day || !month || !year) return new Date(); // Return current date if any part of the date is missing
+    const [day, month, year] = dateString.split(' ');
+    if (!day || !month || !year) {
+        return null; // Return null if any part is missing
+    }
 
     const englishMonth = monthMapping[month.toLowerCase()];
     if (englishMonth) {
         const date = new Date(`${day} ${englishMonth} ${year}`);
-        return isNaN(date.getTime()) ? new Date() : date; // Ensure date is valid
+        return isNaN(date.getTime()) ? null : date; // Ensure date is valid
     }
-    return new Date(); // Return current date if month is not valid
+
+    return null; // Return null if month is not valid
 };
 
 const News = () => {
+    const {t, i18n } = useTranslation(); // Access the i18n instance
+    const textDirection = i18n.language === 'ar' ? 'rtl' : 'ltr';
     const [newsItems, setNewsItems] = useState([]);
     const [latestNews, setLatestNews] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -48,7 +70,6 @@ const News = () => {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 const data = await response.json();
-                console.log('Fetched data:', data); // Log the fetched data
 
                 // Check if data and data.data are valid
                 if (!data || !data.data) {
@@ -57,7 +78,6 @@ const News = () => {
 
                 // Filter based on subcategory "Actualités"
                 const actualites = data.data.filter(post => {
-                    // Ensure post and post.attributes are valid
                     if (post && post.attributes && post.attributes.subcategory && post.attributes.subcategory.data && post.attributes.subcategory.data.attributes) {
                         return post.attributes.subcategory.data.attributes.name === 'Actualités';
                     }
@@ -67,9 +87,10 @@ const News = () => {
                 // Format the date and construct image URL
                 const formattedNews = actualites.map(post => {
                     const { Title, Description, content, Mediafiles } = post.attributes || {};
-                    const date = Description?.[1]?.children?.[0]?.text || ''; // Ensure Description is not undefined and access safely
-                    const formattedDate = formatFrenchDate(date);
-
+                    const rawDate = Description?.[0]?.children?.[0]?.text;
+        
+                    const formattedDate = formatDate(rawDate); // Use the updated date format function
+                    
                     // Construct image URL
                     const imageUrl = post.attributes.Mediafiles?.data?.[0]?.attributes?.formats?.large?.url
                         ? `${BASE_URL}${post.attributes.Mediafiles.data[0].attributes.formats.large.url}`
@@ -82,16 +103,17 @@ const News = () => {
                         content: content,
                         imageUrl: imageUrl,
                     };
-                });
+                }).filter(news => news.date); // Filter out news items with invalid dates
 
                 // Sort news by date in descending order
                 formattedNews.sort((a, b) => b.date - a.date);
 
                 // Set latest news and news items
                 setLatestNews(formattedNews[0]);
-                setNewsItems(formattedNews.slice(1).concat(staticNewsItems.map(item => ({
+                const staticData = i18n.language === 'fr' ? staticNewsItems : staticNewsItemsar; // Choose static items based on language
+                setNewsItems(formattedNews.slice(1).concat(staticData.map(item => ({
                     ...item,
-                    date: formatFrenchDate(item.date) // Format static dates
+                    date: formatDate(item.date) // Format static dates
                 }))).sort((a, b) => b.date - a.date)); // Sort static news items by date
                 
             } catch (error) {
@@ -103,9 +125,9 @@ const News = () => {
         };
 
         fetchNews();
-    }, []);
+    }, [i18n.language]); // Include i18n.language in dependency array
 
-    if (loading) return <p>Loading...</p>;
+    if (loading) return <p><Preloader /></p>;
     if (error) return <p>Error: {error}</p>;
 
     return (
@@ -113,31 +135,31 @@ const News = () => {
             <Container fluid className="news-content">
                 <Row>
                     <Col>
-                        <h1 className="news-title">Actualités</h1>
+                        <h1 className="news-title">{t('news.newstitle')}</h1>
                     </Col>
                 </Row>
                 <Row>
                     <Col>
                         <p className="news-description">
-                            Explorez les dernières mises à jour sur l'intégration et l'accessibilité des personnes handicapées en Tunisie. Tenez-vous informé des récentes politiques, actions du gouvernement, événements à venir, initiatives locales, et histoires motivantes. Découvrez des outils pratiques et des conseils pour accéder aux différents soutiens disponibles.
+                            {t('news.newsdesc')}
                         </p>
                     </Col>
                 </Row>
                 <Row>
                     <Col>
-                        <h2 className="news-une">A La Une</h2>
+                        <h2 className="news-une">{t('news.topnews')}</h2>
                     </Col>
                 </Row>
                 <Row>
                     <Col>
                         {latestNews && (
                             <Card className="mb-4">
-                                <Card.Img variant="top" src={latestNews.imageUrl} />
+                                <Card.Img className='top-news' variant="top" src={latestNews.imageUrl} />
                                 <Card.Body>
                                     <Card.Title>{latestNews.title}</Card.Title>
                                     <Card.Subtitle className="mb-2 text-muted">
                                         {latestNews.date instanceof Date ? 
-                                            latestNews.date.toLocaleDateString('fr-FR', {
+                                            latestNews.date.toLocaleDateString(i18n.language === 'fr' ? 'fr' : 'ar', {
                                                 day: '2-digit',
                                                 month: 'long',
                                                 year: 'numeric'
@@ -148,9 +170,8 @@ const News = () => {
                                         variant="primary"
                                         href={`/actualites-et-evenements/actualites/${encodeURIComponent(latestNews.title)}`}
                                     >
-                                        Lire plus
+                                        {t('news.button')}
                                     </Button>
-
                                 </Card.Body>
                             </Card>
                         )}
@@ -165,7 +186,7 @@ const News = () => {
                                     <Card.Title>{item.title}</Card.Title>
                                     <Card.Subtitle className="mb-2 text-muted">
                                         {item.date instanceof Date ? 
-                                            item.date.toLocaleDateString('fr-FR', {
+                                            item.date.toLocaleDateString(i18n.language === 'fr' ? 'fr' : 'ar', {
                                                 day: '2-digit',
                                                 month: 'long',
                                                 year: 'numeric'
@@ -173,12 +194,11 @@ const News = () => {
                                     </Card.Subtitle>
                                     <Card.Text className="news-content-desc" dangerouslySetInnerHTML={{ __html: item.content }} />
                                     <Button
-                                    variant="primary"
-                                    href={`/actualites-et-evenements/actualites/${encodeURIComponent(item.title)}`}
-                                >
-                                    Lire plus
-                                </Button>
-
+                                        variant="primary"
+                                        href={`/actualites-et-evenements/actualites/${encodeURIComponent(item.title)}`}
+                                    >
+                                        {t('news.button')}
+                                    </Button>
                                 </Card.Body>
                             </Card>
                         </Col>

@@ -18,3 +18,13 @@
     flex: 1;
     padding: 1rem;
   }
+  /* Add this to your CSS file */
+body.rtl {
+  direction: rtl;
+  text-align: right; /* Optional: Align text to the right */
+}
+
+/* If you need to specifically target certain elements */
+.rtl .some-element {
+  text-align: right; /* Adjust as needed */
+}

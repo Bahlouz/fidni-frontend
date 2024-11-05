@@ -59,13 +59,17 @@ import SingleAccessibility from './Components/SavoirLab/Accessibility/SingleAcce
 import SingleCharte from './Components/SavoirLab/Communication/Charte/SingleCharte';
 import SingleRecommendation from './Components/SavoirLab/Communication/Recommandation/SingleRecommendation';
 import NotFound from './Components/NotFound';
-
-
+import { useTranslation,I18nextProvider } from 'react-i18next';
+import i18n from './i18n';
 function App() {
   const { toggleTheme, theme } = useTheme();
   const [loading, setLoading] = useState(true);
   const [dataFetched, setDataFetched] = useState(false);
   const BASE_URL = 'https://admin.fidni.tn';
+  const { i18n } = useTranslation();
+
+  // Determine direction based on current language
+  const direction = i18n.language === 'ar' ? 'rtl' : 'ltr';
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -98,6 +102,8 @@ function App() {
   
 
   return (
+    <I18nextProvider i18n={i18n}>
+    <div style={{ direction: direction }}>
     <div className={`app ${theme}`}>
       {loading ? <Preloader /> : null}
         <Router> 
@@ -156,8 +162,9 @@ function App() {
           </Routes>
           <Footer />
         </Router>
-
     </div>
+    </div>
+    </I18nextProvider>
   );
 }
 

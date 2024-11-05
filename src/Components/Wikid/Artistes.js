@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import { Artistesitems } from './Artistesitems'; // Import static data
-import "./Wikid.css";
-import "./Artistes.css";
+import { Artistesitemsar } from './Artistesitemsar'; // Import static data
+import './Wikid.css';
+import './Artistes.css';
 
 // Function to extract the first line of HTML content
 const getFirstLine = (htmlContent) => {
@@ -35,6 +37,7 @@ const encodeTitleForURL = (title) => {
 
 const Artistes = () => {
     const location = useLocation();
+    const { t, i18n } = useTranslation();
     const currentPath = location.pathname.split('/').pop(); // Extract current page from URL
 
     const [apiItems, setApiItems] = useState([]);
@@ -82,8 +85,8 @@ const Artistes = () => {
     }, []);
     
     // Combine static and API data
-    const combinedItems = [...Artistesitems, ...apiItems];
-
+    const staticItems = i18n.language === 'fr' ? Artistesitems : Artistesitemsar;
+    const combinedItems = [...staticItems, ...apiItems];
     // Sort combined items by publishedAt date to find the latest story
     const sortedItems = combinedItems.sort((a, b) => 
         new Date(b.attributes?.publishedAt || b.attributes?.publishedAt) - new Date(a.attributes?.publishedAt || a.attributes?.publishedAt)
@@ -94,11 +97,11 @@ const Artistes = () => {
 
     // Updated links based on your provided categories
     const wikidlinks = [
-        { title: 'Les acteurs sociaux et politiques', link: '/savoir-lab/wikiphedia/acteurs-sociaux-politiques', page: 'acteurs-sociaux-politiques' },
-        { title: 'Les artistes', link: '/savoir-lab/wikiphedia/artistes', page: 'artistes' },
-        { title: 'Les chercheurs', link: '/savoir-lab/wikiphedia/chercheurs', page: 'chercheurs' },
-        { title: 'Les entrepreneurs', link: '/savoir-lab/wikiphedia/entrepreneurs', page: 'entrepreneurs' },
-        { title: 'Les sportifs', link: '/savoir-lab/wikiphedia/sportifs', page: 'sportifs' }
+        { title: t('wiki.actorSocialAndPolitical'), link: '/savoir-lab/wikiphedia/acteurs-sociaux-politiques', page: 'acteurs-sociaux-politiques' },
+        { title: t('wiki.artists'), link: '/savoir-lab/wikiphedia/artistes', page: 'artistes' },
+        { title: t('wiki.researchers'), link: '/savoir-lab/wikiphedia/chercheurs', page: 'chercheurs' },
+        { title: t('wiki.entrepreneurs'), link: '/savoir-lab/wikiphedia/entrepreneurs', page: 'entrepreneurs' },
+        { title: t('wiki.athletes'), link: '/savoir-lab/wikiphedia/sportifs', page: 'sportifs' }
     ];
 
     if (loading) return <p>Loading...</p>;
@@ -108,9 +111,9 @@ const Artistes = () => {
         <>
             <div className="background-image-artistes">
                 <div className="overlay-text-artistes">
-                    <h1 className="artistes-titre">Les artistes</h1>
+                    <h1 className="artistes-titre">{t('artistes.title')}</h1>
                     <p className="p-5 artistes-description">
-                        Découvrez des profils détaillés d'artistes talentueux, explorez leurs œuvres, parcours créatifs et contributions au monde de l'art. Laissez-vous inspirer par leurs réalisations et leurs approches uniques.
+                        {t('artistes.description')}
                     </p>
                 </div>
 
@@ -130,22 +133,19 @@ const Artistes = () => {
             <Container className="mt-4">
                 <Row>
                     <Col>
-                        <h1 className="Artistes-title">Histoires des artistes</h1>
+                        <h1 className="Artistes-title">{t('artistes.latest_story')}</h1>
                     </Col>
                 </Row>
                 <Row>
                     <Col>
-                        {/* Display the latest story */}
                         {latestStory.id && (
                             <Card className="mb-4 custom-card">
-                                {/* Handle image rendering for dynamic images */}
                                 {latestStory.attributes?.mediaFiles?.[0] && (
                                     <Card.Img 
                                         className="latest-wikid" 
                                         variant="top" 
                                         src={`${BASE_URL}${latestStory.attributes.mediaFiles[0]}`} 
                                         alt={latestStory.attributes?.Title || latestStory.title}
-                                        onError={() => console.error('Image not found:', latestStory.attributes?.mediaFiles[0])} // Error handling
                                     />
                                 )}
                                 {/* Handle image rendering for static data */}
@@ -159,34 +159,31 @@ const Artistes = () => {
                                 )}
                                 <Card.Body>
                                     <Card.Title>{latestStory.attributes?.Title || latestStory.title}</Card.Title>
-                                    <Card.Subtitle className="mb-2 text-muted">{formatDate(latestStory.attributes?.publishedAt || latestStory.date)}</Card.Subtitle>
+                                    <Card.Subtitle className="mb-2 text-muted">{formatDate(latestStory.attributes?.publishedAt)}</Card.Subtitle>
                                     <Card.Text className="card-text-truncatedd">
                                         {getFirstLine(latestStory.attributes?.content || latestStory.content)}
                                     </Card.Text>
                                     <Button 
-    variant="primary" 
-    href={`/savoir-lab/wikiphedia/${encodeURIComponent(latestStory.attributes?.Title || latestStory.title)}`}
->
-    Lire plus
-</Button>
+                                        variant="primary" 
+                                        href={`/savoir-lab/wikiphedia/${encodeURIComponent(latestStory.attributes?.Title || latestStory.title)}`}
+                                    >
+                                        {t('artistes.read_more')}
+                                    </Button>
                                 </Card.Body>
                             </Card>
                         )}
                     </Col>
                 </Row>
                 <Row>
-                    {/* Display remaining stories */}
                     {sortedItems.slice(1).map(item => (
                         <Col key={item.id} md={4} className="mb-4">
                             <Card className="custom-card h-100">
-                                {/* Handle image rendering for dynamic images */}
                                 {item.attributes?.mediaFiles?.[0] && (
                                     <Card.Img 
                                         variant="top" 
                                         className="wikid-card-image" 
                                         src={`${BASE_URL}${item.attributes.mediaFiles[0]}`} 
                                         alt={item.attributes?.Title || item.title}
-                                        onError={() => console.error('Image not found:', item.attributes?.mediaFiles[0])} // Error handling
                                     />
                                 )}
                                 {/* Handle image rendering for static data */}
@@ -200,16 +197,16 @@ const Artistes = () => {
                                 )}
                                 <Card.Body>
                                     <Card.Title>{item.attributes?.Title || item.title}</Card.Title>
-                                    <Card.Subtitle className="mb-2 text-muted">{formatDate(item.attributes?.publishedAt || item.date)}</Card.Subtitle>
+                                    <Card.Subtitle className="mb-2 text-muted">{formatDate(item.attributes?.publishedAt)}</Card.Subtitle>
                                     <Card.Text className="card-text-truncatedd">
                                         {getFirstLine(item.attributes?.content || item.content)}
                                     </Card.Text>
                                     <Button 
-    variant="primary" 
-    href={`/savoir-lab/wikiphedia/${encodeURIComponent(item.attributes?.Title || item.title)}`}
->
-    Lire plus
-</Button>
+                                        variant="primary" 
+                                        href={`/savoir-lab/wikiphedia/${encodeURIComponent(item.attributes?.Title || item.title)}`}
+                                    >
+                                        {t('artistes.read_more')}
+                                    </Button>
                                 </Card.Body>
                             </Card>
                         </Col>

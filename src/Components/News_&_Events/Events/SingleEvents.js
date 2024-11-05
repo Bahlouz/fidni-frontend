@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Container, Card, Button } from 'react-bootstrap';
 import './SingleEvents.css'; // Import the CSS for single news page
-import { staticEvents as eventsData } from './Events.js'; // Import your events data
+import { eventsitems as eventsData } from './eventsitems'; // Import your events data
+import { eventsitemsar as eventsDataar } from './eventsitemsar'; // Import your events data
 import backnavhead from "../../../Assets/back navhead.jpg";
 
 // Adjust the base URL as needed
