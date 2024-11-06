@@ -59,6 +59,19 @@ const Events = () => {
   const { t, i18n } = useTranslation();
 
   useEffect(() => {
+    const handleLanguageChange = () => {
+      window.location.reload();
+    };
+
+    i18n.on('languageChanged', handleLanguageChange);
+
+    // Cleanup on component unmount
+    return () => {
+      i18n.off('languageChanged', handleLanguageChange);
+    };
+  }, [i18n]);
+  
+  useEffect(() => {
     const fetchEvents = async () => {
       try {
         const response = await fetch(`${BASE_URL}/api/post-blogs?populate=*`);

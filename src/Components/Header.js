@@ -23,13 +23,41 @@ function Header() {
     }
   };
 
+
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   const handleLanguageChange = (event) => {
     const selectedLanguage = event.target.value;
     i18n.changeLanguage(selectedLanguage); // Update the language
 
     // Set document direction based on selected language
     document.documentElement.dir = selectedLanguage === 'ar' ? 'rtl' : 'ltr';
+
+    // Save selected language to localStorage or a cookie for persistence
+    localStorage.setItem('preferredLanguage', selectedLanguage);
   };
+
+  useEffect(() => {
+    // Check if there is a preferred language in localStorage
+    const savedLanguage = localStorage.getItem('preferredLanguage') || 'fr';
+    i18n.changeLanguage(savedLanguage);
+    document.documentElement.dir = savedLanguage === 'ar' ? 'rtl' : 'ltr';
+  }, [i18n]);
 
   useEffect(() => {
     const handleScroll = () => {

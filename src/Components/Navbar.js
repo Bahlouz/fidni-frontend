@@ -78,11 +78,11 @@ function NavBar() {
   
   const manualLinks = [
     {
-      title: t('navigation.home'),
+      title: 'Accueil',
       to: "/"
     },
     {
-      title: t('navigation.services_and_rights'),
+      title: 'Services et Droits',
       subcategories: [
         { title: 'Services', to: "/services-et-droits/services" },
         { title: t('navigation.rights'), to: "/services-et-droits/droits" },

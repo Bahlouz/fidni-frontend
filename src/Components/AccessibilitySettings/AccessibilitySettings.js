@@ -329,11 +329,11 @@ const [voices, setVoices] = useState([]);
 const loadVoices = () => {
   const availableVoices = window.speechSynthesis.getVoices();
   setVoices(availableVoices);
-  console.log(availableVoices); // Log all available voices
+  
 
   // Check for Arabic voices
   const arabicVoices = availableVoices.filter(voice => voice.lang.startsWith('ar'));
-  console.log('Available Arabic Voices:', arabicVoices);
+  
 };
 
 useEffect(() => {
