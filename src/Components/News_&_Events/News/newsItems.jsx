@@ -306,7 +306,7 @@ Il a exhorté les intervenants dans le domaine social à coordonner davantage et
   <p>Des projets pilotes ont &eacute;t&eacute; lanc&eacute;s pour int&eacute;grer les &eacute;l&egrave;ves malvoyants dans les &eacute;coles publiques, comme la cr&eacute;ation de classes sp&eacute;ciales &agrave; Sfax et Bizerte. Gr&acirc;ce &agrave; la pression de la soci&eacute;t&eacute; civile, de nouvelles fili&egrave;res (informatique, &eacute;conomie et gestion) ont &eacute;t&eacute; ajout&eacute;es aux formations existantes.</p>
   <p>Par ailleurs, Essoussi a soulign&eacute; la n&eacute;cessit&eacute; d'identifier les besoins sp&eacute;cifiques des malvoyants ou non-voyants dans les domaines de l&rsquo;&eacute;ducation et de la formation. Cela implique de rep&eacute;rer les d&eacute;faillances et de d&eacute;velopper des strat&eacute;gies adapt&eacute;es pour y r&eacute;pondre. Dans ce contexte, elle a &eacute;voqu&eacute; les difficult&eacute;s psychologiques des enfants non ou mal-voyants, souvent plac&eacute;s en internat d&egrave;s leur jeune &acirc;ge, et a insist&eacute; sur la n&eacute;cessit&eacute; de leur fournir un soutien psychologique et des moyens de transport pour &eacute;viter leur h&eacute;bergement en internat.</p>
   <p>Elle a &eacute;galement plaid&eacute; pour une meilleure formation du personnel &eacute;ducatif aux technologies modernes et pour un suivi m&eacute;dical continu, soulignant que des avanc&eacute;es en ophtalmologie pourraient pr&eacute;venir certaines pathologies visuelles.</p>`,
-        imageUrl: `${process.env.PUBLIC_URL}/events/braille.jpeg`, // Image related to tech innovations
+        imageUrl: `${process.env.PUBLIC_URL}/events/braille.jpg`, // Image related to tech innovations
       },
     
 ];
