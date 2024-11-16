@@ -15,65 +15,74 @@ const getFirstLine = (htmlContent) => {
     return firstLine;
 };
 
-// Function to format date
-const formatDate = (dateString) => {
-    const options = { day: '2-digit', month: 'long', year: '2-digit' };
-    return new Date(dateString).toLocaleDateString('fr-FR', options);
-};
+const tunisianArabicMonths = [
+    'جانفي', 'فيفري', 'مارس', 'أفريل', 'ماي', 'جوان', 
+    'جويلية', 'أوت', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'
+];
 
-// Function to check if the description contains the <artiste> tag
-const containsArtisteTag = (description) => {
-    return description.some(paragraph => 
-        paragraph.children.some(child => child.text === '<artiste>')
-    );
-};
-
-// Function to encode the title for URL
-const encodeTitleForURL = (title) => {
-    return encodeURIComponent(title.toLowerCase().replace(/\s+/g, '-'));
-};
 
 
 
 const Artistes = () => {
+    const { t, i18n } = useTranslation(); // Use i18n for language handling
     const location = useLocation();
-    const { t, i18n } = useTranslation();
     const currentPath = location.pathname.split('/').pop(); // Extract current page from URL
 
     const [apiItems, setApiItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const BASE_URL = 'https://admin.fidni.tn';
+    
+    const formatDate = (dateString) => {
+        const options = { day: '2-digit', year: '2-digit' };
+        const date = new Date(dateString);
+        const day = date.toLocaleDateString('fr-FR', { day: '2-digit' });
+        const year = date.toLocaleDateString('fr-FR', { year: '2-digit' });
+        const monthIndex = date.getMonth();
+        
+        return i18n.language === 'ar'
+            ? `${day} ${tunisianArabicMonths[monthIndex]} ${year}`
+            : date.toLocaleDateString('fr-FR', { ...options, month: 'long' });
+    };
+
+    useEffect(() => {
+        const handleLanguageChange = () => {
+          window.location.reload();
+        };
+    
+        i18n.on('languageChanged', handleLanguageChange);
+    
+        // Cleanup on component unmount
+        return () => {
+          i18n.off('languageChanged', handleLanguageChange);
+        };
+      }, [i18n]);
     // Fetch data from API
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`${BASE_URL}/api/post-blogs?populate=*`);
+                const response = await fetch(`${BASE_URL}/api/wikiphedias?populate=*`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
-    
-                // Filter items based on subcategory 'WikiPhédia' and the presence of <artiste> tag in description
-                const filteredItems = data.data.filter(item => 
-                    item.attributes?.subcategory?.data?.attributes?.name === 'WikiPhédia' &&
-                    containsArtisteTag(item.attributes?.Description || [])
-                );
-    
-                // Map to include media files if available
-                const itemsWithImages = filteredItems.map(item => {
-                    const mediaFiles = item.attributes?.Mediafiles?.data || [];
-                    return {
-                        ...item,
-                        attributes: {
-                            ...item.attributes,
-                            mediaFiles: mediaFiles.map(file => file.attributes?.url || ''), // Extract URLs safely
-                            imageUrl: mediaFiles[0]?.attributes?.url ? `${BASE_URL}${mediaFiles[0].attributes.url}` : '' // Full URL for image
-                        }
-                    };
+
+                const filteredApiData = data.data
+                    .map(post => {
+                        const attributes = post.attributes || {};
+
+                        const title = i18n.language === 'ar' ? attributes.Title_arabic : attributes.Title_french;
+                        const description = i18n.language === 'ar' ? attributes.Description_arabic : attributes.Description_french;
+                        const content = i18n.language === 'ar' ? attributes.Content_arabic : attributes.Content_french;
+                        const imageUrl = attributes.Image?.data?.attributes?.formats?.large?.url 
+                        ? `${BASE_URL}${attributes.Image.data.attributes.formats.large.url}` 
+                        : '';
+
+                    return { ...post, title, description, content, imageUrl };
                 });
+               
     
-                setApiItems(itemsWithImages);
+                setApiItems(filteredApiData);
             } catch (err) {
                 setError(err);
             } finally {
@@ -82,20 +91,26 @@ const Artistes = () => {
         };
     
         fetchData();
-    }, []);
-    
-    // Combine static and API data
+    }, [t,i18n.language]);
+
+    // Determine static items based on the current language
     const staticItems = i18n.language === 'fr' ? Artistesitems : Artistesitemsar;
+
+    // Combine static and API data
     const combinedItems = [...staticItems, ...apiItems];
+
     // Sort combined items by publishedAt date to find the latest story
-    const sortedItems = combinedItems.sort((a, b) => 
-        new Date(b.attributes?.publishedAt || b.attributes?.publishedAt) - new Date(a.attributes?.publishedAt || a.attributes?.publishedAt)
-    );
+    
+const sortedItems = combinedItems.sort((a, b) =>
+    new Date(a.attributes?.publishedAt || a.date) - new Date(b.attributes?.publishedAt || b.date)
+  );
+  
+  // Get the latest story as the last item in the sorted array
+  const latestStory = sortedItems[sortedItems.length - 1] || {};
+  
+  // Filter out the latest story from the list of items to display in the rest of the section
+  const remainingItems = sortedItems.filter(item => item.id !== latestStory.id);
 
-    // Latest story based on sorted items
-    const latestStory = sortedItems[0] || {};
-
-    // Updated links based on your provided categories
     const wikidlinks = [
         { title: t('wiki.actorSocialAndPolitical'), link: '/savoir-lab/wikiphedia/acteurs-sociaux-politiques', page: 'acteurs-sociaux-politiques' },
         { title: t('wiki.artists'), link: '/savoir-lab/wikiphedia/artistes', page: 'artistes' },
@@ -104,8 +119,9 @@ const Artistes = () => {
         { title: t('wiki.athletes'), link: '/savoir-lab/wikiphedia/sportifs', page: 'sportifs' }
     ];
 
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error: {error.message}</p>;
+    if (loading) return <p>{t('ActeurSc.Loading...')}</p>;
+    if (error) return <p>{t('ActeurSc.Error:')} {error.message}</p>;
+
 
     return (
         <>
@@ -137,81 +153,83 @@ const Artistes = () => {
                     </Col>
                 </Row>
                 <Row>
-                    <Col>
-                        {latestStory.id && (
-                            <Card className="mb-4 custom-card">
-                                {latestStory.attributes?.mediaFiles?.[0] && (
-                                    <Card.Img 
-                                        className="latest-wikid" 
-                                        variant="top" 
-                                        src={`${BASE_URL}${latestStory.attributes.mediaFiles[0]}`} 
-                                        alt={latestStory.attributes?.Title || latestStory.title}
-                                    />
-                                )}
-                                {/* Handle image rendering for static data */}
-                                {!latestStory.attributes?.mediaFiles?.[0] && latestStory.imageUrl && (
-                                    <Card.Img 
-                                        className="latest-wikid" 
-                                        variant="top" 
-                                        src={latestStory.imageUrl} 
-                                        alt={latestStory.title}
-                                    />
-                                )}
-                                <Card.Body>
-                                    <Card.Title>{latestStory.attributes?.Title || latestStory.title}</Card.Title>
-                                    <Card.Subtitle className="mb-2 text-muted">{formatDate(latestStory.attributes?.publishedAt)}</Card.Subtitle>
-                                    <Card.Text className="card-text-truncatedd">
-                                        {getFirstLine(latestStory.attributes?.content || latestStory.content)}
-                                    </Card.Text>
-                                    <Button 
-                                        variant="primary" 
-                                        href={`/savoir-lab/wikiphedia/${encodeURIComponent(latestStory.attributes?.Title || latestStory.title)}`}
-                                    >
-                                        {t('artistes.read_more')}
-                                    </Button>
-                                </Card.Body>
-                            </Card>
-                        )}
-                    </Col>
-                </Row>
-                <Row>
-                    {sortedItems.slice(1).map(item => (
-                        <Col key={item.id} md={4} className="mb-4">
-                            <Card className="custom-card h-100">
-                                {item.attributes?.mediaFiles?.[0] && (
-                                    <Card.Img 
-                                        variant="top" 
-                                        className="wikid-card-image" 
-                                        src={`${BASE_URL}${item.attributes.mediaFiles[0]}`} 
-                                        alt={item.attributes?.Title || item.title}
-                                    />
-                                )}
-                                {/* Handle image rendering for static data */}
-                                {!item.attributes?.mediaFiles?.[0] && item.imageUrl && (
-                                    <Card.Img 
-                                        variant="top" 
-                                        className="wikid-card-image" 
-                                        src={item.imageUrl} 
-                                        alt={item.title}
-                                    />
-                                )}
-                                <Card.Body>
-                                    <Card.Title>{item.attributes?.Title || item.title}</Card.Title>
-                                    <Card.Subtitle className="mb-2 text-muted">{formatDate(item.attributes?.publishedAt)}</Card.Subtitle>
-                                    <Card.Text className="card-text-truncatedd">
-                                        {getFirstLine(item.attributes?.content || item.content)}
-                                    </Card.Text>
-                                    <Button 
-                                        variant="primary" 
-                                        href={`/savoir-lab/wikiphedia/${encodeURIComponent(item.attributes?.Title || item.title)}`}
-                                    >
-                                        {t('artistes.read_more')}
-                                    </Button>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    ))}
-                </Row>
+  <Col>
+    {latestStory.id && (
+      <Card className="mb-4 custom-card">
+        {latestStory.attributes?.mediaFiles?.[0] && (
+          <Card.Img 
+            className="latest-wikid" 
+            variant="top" 
+            src={`${BASE_URL}${latestStory.attributes.mediaFiles[0]}`} 
+            alt={latestStory.attributes?.Title || latestStory.title}
+            onError={() => console.error('Image not found:', latestStory.attributes?.mediaFiles[0])}
+          />
+        )}
+        {!latestStory.attributes?.mediaFiles?.[0] && latestStory.imageUrl && (
+          <Card.Img 
+            className="latest-wikid" 
+            variant="top" 
+            src={latestStory.imageUrl} 
+            alt={latestStory.title}
+          />
+        )}
+        <Card.Body>
+          <Card.Title>{latestStory.attributes?.Title || latestStory.title}</Card.Title>
+          <Card.Subtitle className="mb-2 text-muted">{formatDate(latestStory.attributes?.publishedAt || latestStory.date)}</Card.Subtitle>
+          <Card.Text className="card-text-truncatedd">
+            {getFirstLine(latestStory.attributes?.content || latestStory.content)}
+          </Card.Text>
+          <Button 
+            variant="primary" 
+            href={`/savoir-lab/wikiphedia/${encodeURIComponent(latestStory.attributes?.Title || latestStory.title)}`}
+          >
+            {t('sportifs.readMore')}
+          </Button>
+        </Card.Body>
+      </Card>
+    )}
+  </Col>
+</Row>
+
+<Row>
+  {remainingItems.map(item => (
+    <Col key={item.id} md={4} className="mb-4">
+      <Card className="custom-card h-100">
+        {item.attributes?.mediaFiles?.[0] && (
+          <Card.Img
+            className="wikid-card-image"
+            variant="top"
+            src={`${BASE_URL}${item.attributes.mediaFiles[0]}`}
+            alt={item.attributes?.Title || item.title}
+            onError={() => console.error('Image not found:', item.attributes?.mediaFiles[0])}
+          />
+        )}
+        {!item.attributes?.mediaFiles?.[0] && item.imageUrl && (
+          <Card.Img 
+            className="wikid-card-image"
+            variant="top"
+            src={item.imageUrl}
+            alt={item.title}
+          />
+        )}
+        <Card.Body>
+          <Card.Title>{item.attributes?.Title || item.title}</Card.Title>
+          <Card.Subtitle className="mb-2 text-muted">{formatDate(item.attributes?.publishedAt || item.date)}</Card.Subtitle>
+          <Card.Text className="card-text-truncated">
+            {getFirstLine(item.attributes?.content || item.content)}
+          </Card.Text>
+          <Button
+            variant="primary"
+            href={`/savoir-lab/wikiphedia/${encodeURIComponent(item.attributes?.Title || item.title)}`}
+          >
+            {t('sportifs.readMore')}
+          </Button>
+        </Card.Body>
+      </Card>
+    </Col>
+  ))}
+</Row>
+
             </Container>
         </>
     );

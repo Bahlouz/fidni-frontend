@@ -8,46 +8,48 @@ const Accessibility = () => {
   const [apiData, setApiData] = useState([]);
   const BASE_URL = 'https://admin.fidni.tn';
     const textDirection = i18n.language === 'ar' ? 'rtl' : 'ltr';
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`${BASE_URL}/api/post-blogs?populate=*`);
-        const data = await response.json();
-        console.log('API Response:', JSON.stringify(data, null, 2));
-
-        // Function to extract text content from the nested Description
-        const extractDescriptionText = (descriptionBlocks) => {
-          if (!descriptionBlocks) return '';
-          return descriptionBlocks
-            .map(block => block.children?.map(child => child.text).join('') || '')
-            .join(' ');
-        };
-
-        // Filter API data by subcategory name "Accessibilité"
-        const filteredApiData = data.data
-          ?.filter(post =>
-            post.attributes?.subcategory?.data?.attributes?.name === 'Accessibilité'
-          )
-          .map(post => ({
-            title: post.attributes?.Title || 'No Title',
-            description: extractDescriptionText(post.attributes?.Description || []),
-            link: `/savoir-lab/accessibilite/${encodeURIComponent(post.attributes?.Title || 'No Title')}`
-          })) || [];
-
-        console.log('Filtered API Data:', filteredApiData);
-
-        // Combine static cardData with filtered API data
-        const cardData = t('accessibilityPage.cardData', { returnObjects: true });
-        setApiData([...cardData, ...filteredApiData]);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, [t]); // Added t as a dependency
+    useEffect(() => {
+      const handleLanguageChange = () => {
+        window.location.reload();
+      };
+  
+      i18n.on('languageChanged', handleLanguageChange);
+  
+      // Cleanup on component unmount
+      return () => {
+        i18n.off('languageChanged', handleLanguageChange);
+      };
+    }, [i18n]);
+  
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(`${BASE_URL}/api/accessibilites?populate=*`);
+          const data = await response.json();
+  
+          const apiCardData = data.data.map(post => {
+            const titleKey = i18n.language === 'ar' ? post.attributes.Title_arabic : post.attributes.Title_french;
+            const descriptionKey = i18n.language === 'ar' ? post.attributes.Description_arabic : post.attributes.Description_french;
+            const contentKey = i18n.language === 'ar' ? post.attributes.Content_arabic : post.attributes.Content_french;
+  
+            return {
+              title: titleKey,
+              description: descriptionKey, // Ensure safe handling of description
+              link: `/savoir-lab/accessibilite/${encodeURIComponent(titleKey)}`
+            };
+          });
+          const cardData = t('accessibilityPage.cardData', { returnObjects: true });
+          setApiData([...cardData, ...apiCardData]);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+  
+      fetchData();
+    }, [i18n.language]); // Depend on the language change to re-fetch data
 
   return (
+    
     <Container fluid className="Accessibility-container">
       <div className="background-image-Accessibility">
         <div className="p-5 overlay-text-Accessibility" style={{ direction: textDirection, textAlign: textDirection === 'rtl' ? 'right' : 'left' }}>

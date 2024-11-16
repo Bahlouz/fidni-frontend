@@ -1,48 +1,87 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Button } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const SingleRecommendation = () => {
+  const [post, setPost] = useState(null);
+  
   const { title } = useParams(); // Extract the title from the URL parameters
-  const [recommendation, setRecommendation] = useState(null);
+  const [charte, setCharte] = useState(null); // Track the charte data
   const BASE_URL = 'https://admin.fidni.tn';
-  useEffect(() => {
-    const fetchRecommendation = async () => {
-      try {
-        const response = await fetch(`${BASE_URL}/api/post-blogs?populate[subcategory][populate]=*&filters[Title][$eq]=${title}`);
-        const data = await response.json();
-        const fetchedRecommendations = data.data; // Array of recommendations
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const { t, i18n } = useTranslation();
+  const decodedTitle = decodeURIComponent(title);
+  const textDirection = i18n.language === 'ar' ? 'rtl' : 'ltr';
 
-        if (fetchedRecommendations.length > 0) {
-          // Assuming we need to select the first recommendation from the result
-          const fetchedRecommendation = fetchedRecommendations[0];
-          setRecommendation(fetchedRecommendation);
-        } else {
-          console.error('Recommendation not found');
+  useEffect(() => {
+    const fetchPost = async () => {
+      setLoading(true);
+      setError(null); // Reset error state
+
+      try {
+        // Fetch data from the API based on the decoded title
+        const response = await fetch(`${BASE_URL}/api/communication-inclusives?populate=*`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
-      } catch (error) {
-        console.error('Error fetching recommendation:', error);
+
+        const data = await response.json();
+
+        // Find the post in the API data
+        const apiPost = data.data.find(item => item.attributes.Title_french === decodedTitle || item.attributes.Title_arabic === decodedTitle);
+
+        if (apiPost) {
+          // Extract the data for both languages
+          const { Title_french, Title_arabic, Description_french, Description_arabic, Content_french, Content_arabic } = apiPost.attributes;
+          
+          // Set post state with the selected language's data
+          const titleKey = i18n.language === 'ar' ? Title_arabic : Title_french;
+          const descriptionKey = i18n.language === 'ar' ? Description_arabic : Description_french;
+          const contentKey = i18n.language === 'ar' ? Content_arabic : Content_french;
+
+          setPost({
+            title: titleKey,
+            description: descriptionKey,
+            content: contentKey
+          });
+
+          // Set charte state with attributes directly for easier access
+          setCharte(apiPost.attributes);
+        } else {
+          // If not found in API, handle accordingly (you can set a fallback state if needed)
+          setCharte(null);
+        }
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchRecommendation();
-  }, [title]);
+    fetchPost();
+  }, [decodedTitle, i18n.language]);
 
-  if (!recommendation) {
-    return <Container>Loading...</Container>;
-  }
+  // Loading, error, or post not found UI
+  if (loading) return <Container>{t('loading')}</Container>;
+  if (error) return <Container>{t('error')}: {error}</Container>;
+
+  // Ensure charte is available before rendering
+  if (!charte) return <Container>{t('charte_not_found')}</Container>;
 
   return (
     <Container fluid className="Recommandation-container">
       <div className="background-image-Recommandation">
-        <div className="p-5 overlay-text-Recommandation">
-          <h1 className="Recommandation-titre">{recommendation.attributes.Title}</h1>
+        <div className="p-5 overlay-text-Recommandation"  style={{ direction: textDirection, textAlign: textDirection === 'rtl' ? 'right' : 'left' }}>
+          <h1 className="Recommandation-titre">{i18n.language === 'ar' ? charte.Title_arabic : charte.Title_french}</h1>
         </div>
       </div>
       <Container className="p-5">
         <div
+          style={{ direction: textDirection, textAlign: textDirection === 'rtl' ? 'right' : 'left' }}
           className="Recommandation-content"
-          dangerouslySetInnerHTML={{ __html: recommendation.attributes.content }}
+          dangerouslySetInnerHTML={{ __html: i18n.language === 'ar' ? charte.Content_arabic : charte.Content_french }}
         />
         <Button variant="secondary" href="/savoir-lab/recommandations/adoption">Retour à la liste</Button>
       </Container>

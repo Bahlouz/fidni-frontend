@@ -1,52 +1,87 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Button } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import './Accessibility.css'; // Ensure this file includes styles for your component
 
 const SingleAccessibility = () => {
+  const { t ,i18n} = useTranslation();
   const { title } = useParams(); // Extract the title from the URL parameters
   const [post, setPost] = useState(null);
   const BASE_URL = 'https://admin.fidni.tn';
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const textDirection = i18n.language === 'ar' ? 'rtl' : 'ltr';
+  const decodedTitle = decodeURIComponent(title);
+
   useEffect(() => {
     const fetchPost = async () => {
-      try {
-        const response = await fetch(`${BASE_URL}/api/post-blogs?populate[subcategory][populate]=*&filters[Title][$eq]=${title}`);
-        const data = await response.json();
-        const fetchedPosts = data.data; // Array of posts
+      setLoading(true);
+      setError(null); // Reset error state
 
-        if (fetchedPosts.length > 0) {
-          // Assuming we need to select the first post from the result
-          const fetchedPost = fetchedPosts[0];
-          setPost(fetchedPost);
-        } else {
-          console.error('Post not found');
+      try {
+        // Fetch data from the API based on the decoded title
+        const response = await fetch(`${BASE_URL}/api/accessibilites?populate=*`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
-      } catch (error) {
-        console.error('Error fetching post:', error);
+
+        const data = await response.json();
+
+        // Find the post in the API data
+        const apiPost = data.data.find(item => item.attributes.Title_french === decodedTitle || item.attributes.Title_arabic === decodedTitle);
+
+        if (apiPost) {
+          const { Title_french, Title_arabic, Description_french, Description_arabic, Content_french, Content_arabic } = apiPost.attributes;
+          
+          // Extract data based on language preference
+          const titleKey = i18n.language === 'ar' ? Title_arabic : Title_french;
+          const descriptionKey = i18n.language === 'ar' ? Description_arabic : Description_french;
+          const contentKey = i18n.language === 'ar' ? Content_arabic : Content_french;
+
+          setPost({
+            title: titleKey,
+            description: descriptionKey,
+            content: contentKey
+          });
+        } else {
+          // If not found in API, use static data (for fallback purposes)
+          // Add your fallback static data logic here
+        }
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchPost();
-  }, [title]);
+  }, [decodedTitle, i18n.language]);
 
+  // Loading, error, or post not found UI
+  if (loading) return <Container>{t('loading')}</Container>;
+  if (error) return <Container>{t('error')}: {error}</Container>;
+
+  // Check if post is loaded
   if (!post) {
-    return <Container>Loading...</Container>;
+    return <Container>{t('postNotFound')}</Container>;
   }
 
   return (
     <Container fluid className="Accessibility-container">
       <div className="background-image-Accessibility">
         <div className="p-5 overlay-text-Accessibility">
-          <h1 className="Accessibility-title">{post.attributes.Title}</h1>
+          <h1 className="Accessibility-title" style={{ direction: textDirection, textAlign: textDirection === 'rtl' ? 'right' : 'left' }}>{post.title}</h1>
         </div>
       </div>
       <Container className="p-5">
         <div
+        style={{ direction: textDirection, textAlign: textDirection === 'rtl' ? 'right' : 'left' }}
           className="Accessibility-content"
-          dangerouslySetInnerHTML={{ __html: post.attributes.content }}
+          dangerouslySetInnerHTML={{ __html: post.content }} // Render HTML content safely
         />
         <Button variant="secondary" href="/savoir-lab/accessibilite">
-          Retour à la liste
+          {t('retour')}
         </Button>
       </Container>
     </Container>

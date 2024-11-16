@@ -160,48 +160,67 @@ const VideoPlayer = ({ url, title, description, isExpanded, onToggle }) => {
 };
 
 const VideoPlayerList = () => {
-  const { t,i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [videos, setVideos] = useState([]);
   const [expanded, setExpanded] = useState({});
   const BASE_URL = 'https://admin.fidni.tn';
 
+  useEffect(() => {
+    const handleLanguageChange = () => {
+      window.location.reload();
+    };
+
+    i18n.on('languageChanged', handleLanguageChange);
+
+    // Cleanup on component unmount
+    return () => {
+      i18n.off('languageChanged', handleLanguageChange);
+    };
+  }, [i18n]);
+
   const toggleDescription = (index) => {
-    setExpanded(prev => ({ ...prev, [index]: !prev[index] }));
+    setExpanded((prev) => ({ ...prev, [index]: !prev[index] }));
   };
 
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        const response = await fetch(`${BASE_URL}/api/post-blogs?populate=*`);
+        const response = await fetch(`${BASE_URL}/api/videos?populate=*`);
         const data = await response.json();
 
-        const fetchedVideos = data.data
-          .filter((post) => {
-            const subcategory = post.attributes?.subcategory?.data?.attributes?.name;
-            return subcategory === 'Vidéo';
-          })
-          .map((post) => ({
-            url: post.attributes.content,
-            title: post.attributes.Title,
-            description: post.attributes.Description?.[0]?.children?.[0]?.text || '',
-          }));
+        const fetchedVideos = data.data.map((post) => {
+          const lang = i18n.language;
+          const title =
+            lang === 'fr'
+              ? post.attributes.Title_french
+              : lang === 'ar'
+              ? post.attributes.Title_arabic
+              : post.attributes.Title;
 
-        // Select local videos based on the current language
+          const description =
+            lang === 'fr'
+              ? post.attributes.Description_french
+              : lang === 'ar'
+              ? post.attributes.Description_arabic
+              : post.attributes.Description;
+
+          return {
+            url: post.attributes.URL_of_the_video,
+            title,
+            description,
+          };
+        });
+
         const localData = i18n.language === 'fr' ? localVideos : localVideosar;
         const combinedVideos = [...localData, ...fetchedVideos];
         setVideos(combinedVideos);
       } catch (error) {
-        console.error("Error fetching video data:", error);
+        console.error('Error fetching video data:', error);
       }
     };
 
     fetchVideos();
-  }, [i18n.language]); // Fetch videos when language changes
-
-  const changeLanguage = (lang) => {
-    i18n.changeLanguage(lang);
-    window.location.reload(); // Refresh page on language change
-  };
+  }, [i18n.language]);
 
   return (
     <div>
@@ -209,9 +228,8 @@ const VideoPlayerList = () => {
         <img src={backvideo} alt="Background" />
       </div>
       <div className="page-header">
-        <h1 className='video-page-title'>{t('videos.title')}</h1>
-        <p className='video-page-description'>{t('videos.description')}</p>
-        
+        <h1 className="video-page-title">{t('videos.title')}</h1>
+        <p className="video-page-description">{t('videos.description')}</p>
       </div>
       <Row className="videos-list">
         {videos.map((video, index) => (

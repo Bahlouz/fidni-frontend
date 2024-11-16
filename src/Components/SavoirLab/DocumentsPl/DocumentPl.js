@@ -3,7 +3,6 @@ import { Container, Row, Col, Card } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import './DocumentPl.css';
 
-
 export const pdfList = [
     {
         title: 'document_pl.pdf_list.title1',
@@ -26,55 +25,68 @@ export const pdfList = [
 ];
 
 const DocumentPl = () => {
-    const { t,i18n } = useTranslation();
-  const textDirection = i18n.language === 'ar' ? 'rtl' : 'ltr';
+    const { t, i18n } = useTranslation();
+    const textDirection = i18n.language === 'ar' ? 'rtl' : 'ltr';
     const [fetchedData, setFetchedData] = useState([]);
     const [loading, setLoading] = useState(true);
 
     const BASE_URL = 'https://admin.fidni.tn';
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch(`${BASE_URL}/api/post-blogs?populate=*`);
-                const data = await response.json();
+        const handleLanguageChange = () => {
+            window.location.reload();
+        };
 
-                const filteredData = data.data.filter(item =>
-                    item.attributes.subcategory?.data?.attributes?.name === 'Documents de plaidoyer'
-                );
+        i18n.on('languageChanged', handleLanguageChange);
 
-                const formattedData = filteredData.map(item => ({
-                    title: item.attributes.Title,
-                    description: item.attributes.Description.map(desc => desc.children.map(child => child.text).join('')).join('\n'),
-                    link: item.attributes.Mediafiles?.data?.[0]?.attributes?.url
-                        ? `${BASE_URL}${item.attributes.Mediafiles.data[0].attributes.url}`
+        return () => {
+            i18n.off('languageChanged', handleLanguageChange);
+        };
+    }, [i18n]);
+
+    useEffect(() => {
+        const fetchData = () => {
+            fetch(`${BASE_URL}/api/documents-de-plaidoyers?populate=*`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const fetchedDoc = data.data.map(post => ({
+                        title: i18n.language === 'fr' ? post.attributes.Title_french : post.attributes.Title_arabic,
+                        description: i18n.language === 'fr' ? post.attributes.Description_french : post.attributes.Description_arabic,
+                        link: post.attributes.Preview_image_and_file?.data?.find(file => file.attributes.mime === "application/pdf")
+                        ? `${BASE_URL}${post.attributes.Preview_image_and_file.data.find(file => file.attributes.mime === "application/pdf").attributes.url}`
                         : '',
-                    imageUrl: item.attributes.Mediafiles?.data?.[1]?.attributes?.formats?.medium?.url
-                        ? `${BASE_URL}${item.attributes.Mediafiles.data[1].attributes.formats.medium.url}`
-                        : ''
-                }));
+                        imageUrl: post.attributes.Preview_image_and_file?.data?.[1]?.attributes?.formats?.large?.url 
+                            ? `${BASE_URL}${post.attributes.Preview_image_and_file.data[1].attributes.formats.large.url}` 
+                            : ''   
+                    }));
 
-                setFetchedData(formattedData);
-                setLoading(false);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-                setLoading(false);
-            }
+                    const combinedData = [
+                        ...pdfList.map(card => ({
+                            title: t(card.title),
+                            description: t(card.description),
+                            link: card.link,
+                            imageUrl: card.imageUrl
+                        })),
+                        ...fetchedDoc
+                    ];
+
+                    setFetchedData(combinedData);
+                    setLoading(false);
+                })
+                .catch(error => console.error('Error fetching data:', error));
         };
 
         fetchData();
-    }, []);
+    }, [i18n.language, t]);
 
     const handlePdfOpen = (pdfLink) => {
         window.open(pdfLink, '_blank');
     };
-
-    const combinedData = [...pdfList.map(card => ({
-        title: t(card.title),
-        description: t(card.description),
-        link: card.link,
-        imageUrl:card.imageUrl
-      })),, ...fetchedData];
 
     if (loading) return <p>Loading...</p>;
 
@@ -89,7 +101,7 @@ const DocumentPl = () => {
                     </p>
                 </div>
                 <Row className="pdf-list">
-                    {combinedData.map((pdf, index) => (
+                    {fetchedData.map((pdf, index) => (
                         <Col key={index} xs={12} className="mb-4">
                             <Card className="card-plaidoyer">
                                 <Card.Body className="d-flex align-items-start">

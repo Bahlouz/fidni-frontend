@@ -12,41 +12,61 @@ export const cardData = [
 ];
 
 const Charte = () => {
-  const { t,i18n } = useTranslation();
+  
+  const { t, i18n } = useTranslation();
   const textDirection = i18n.language === 'ar' ? 'rtl' : 'ltr';
   const [apiData, setApiData] = useState([]);
   const [combinedData, setCombinedData] = useState([]);
   const BASE_URL = 'https://admin.fidni.tn';
 
+
+  useEffect(() => {
+    const handleLanguageChange = () => {
+      window.location.reload();
+    };
+
+    i18n.on('languageChanged', handleLanguageChange);
+
+    // Cleanup on component unmount
+    return () => {
+      i18n.off('languageChanged', handleLanguageChange);
+    };
+  }, [i18n]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${BASE_URL}/api/post-blogs?populate=*`);
+        const response = await fetch(`${BASE_URL}/api/communication-inclusives?populate=*`);
         const data = await response.json();
 
-        const extractDescriptionText = (descriptionBlocks) => {
-          if (!descriptionBlocks) return '';
-          return descriptionBlocks
-            .map(block => block.children?.map(child => child.text).join('') || '')
-            .join(' ');
-        };
-
+        // Filter data where 'Choose' attribute is equal to 'charte'
         const filteredApiData = data.data
-          ?.filter(post =>
-            post.attributes?.subcategory?.data?.attributes?.name === 'Communication inclusive' &&
-            (extractDescriptionText(post.attributes?.Description || []).includes('<charte>'))
-          )
-          .map(post => ({
-            title: post.attributes?.Title || t('defaultTitle'),
-            description: extractDescriptionText(post.attributes?.Description || []).replace(/<[^>]*>/g, ''),
-            link: `/savoir-lab/communication-inclusive/charte-nationale/${encodeURIComponent(post.attributes?.Title || 'No Title')}`
-          })) || [];
+          ?.filter(post => post.attributes?.Choose === 'charte')
+          .map(post => {
+            const attributes = post.attributes || {};
 
-        setCombinedData([...cardData.map(card => ({
-          title: t(card.titleKey),
-          description: t(card.descriptionKey),
-          link: card.link
-        })), ...filteredApiData]);
+            // Get the title and description based on language preference
+            const title = i18n.language === 'ar' ? attributes.Title_arabic : attributes.Title_french;
+            const description = i18n.language === 'ar' ? attributes.Description_arabic : attributes.Description_french;
+
+            // Return formatted data
+            return {
+              title,
+              description: description.replace(/<[^>]*>/g, ''), // Clean HTML tags
+              link: `/savoir-lab/communication-inclusive/charte-nationale/${encodeURIComponent(title || 'No Title')}`
+            };
+          }) || [];
+
+        // Combine the static card data and fetched API data
+        setCombinedData([
+          ...cardData.map(card => ({
+            title: t(card.titleKey),
+            description: t(card.descriptionKey),
+            link: card.link
+          })),
+          ...filteredApiData
+        ]);
+
         setApiData(filteredApiData);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -54,7 +74,7 @@ const Charte = () => {
     };
 
     fetchData();
-  }, [t]); // Ensure translations are updated if the language changes
+  }, [t, i18n.language]); // Ensure translations and language are updated
 
   return (
     <Container fluid className="droits-container">
@@ -73,7 +93,7 @@ const Charte = () => {
               <Card.Text className="droit-card-description">{card.description}</Card.Text>
               <Button variant="primary" className="droit-card-button" href={card.link}>
                 <span className="droits-button-text">{t('charte.learnMore')}</span>
-                <span className="droits-button-icon">→</span>
+                <span className="droits-button-icon">{t('arrow.arrow')}</span>
               </Button>
             </Card.Body>
           </Card>

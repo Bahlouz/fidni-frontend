@@ -11,51 +11,60 @@ export const cardData = [
   },
 ];
 const Recommandation = () => {
+  const { t, i18n } = useTranslation();
+  const textDirection = i18n.language === 'ar' ? 'rtl' : 'ltr';
   const [apiData, setApiData] = useState([]);
   const [combinedData, setCombinedData] = useState([]);
   const BASE_URL = 'https://admin.fidni.tn';
-  const { t,i18n } = useTranslation();
-  const textDirection = i18n.language === 'ar' ? 'rtl' : 'ltr';
+
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`${BASE_URL}/api/post-blogs?populate=*`);
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data = await response.json();
+    const handleLanguageChange = () => {
+      window.location.reload();
+    };
 
-        console.log('Fetched data:', data); // Debugging
+    i18n.on('languageChanged', handleLanguageChange);
 
-        // Function to extract text content from the nested Description
-        const extractDescriptionText = (descriptionBlocks) => {
-          if (!descriptionBlocks) return ''; // Check if descriptionBlocks is null or undefined
-          return descriptionBlocks
-            .map(block => block.children?.map(child => child.text).join('') || '')
-            .join(' ');
-        };
+    // Cleanup on component unmount
+    return () => {
+      i18n.off('languageChanged', handleLanguageChange);
+    };
+  }, [i18n]);
 
-        // Filter API data by subcategory name "Recommandations" and specific tags
-        const filteredApiData = (data.data || [])
-          .filter(post =>
-            post.attributes?.subcategory?.data?.attributes?.name === 'Communication inclusive' &&
-            extractDescriptionText(post.attributes?.Description || []).includes('<recommendation>')
-          )
-          .map(post => ({
-            title: post.attributes?.Title || 'No Title',
-            description: extractDescriptionText(post.attributes?.Description || []).replace(/<[^>]*>/g, ''), // Clean up the description text
-            link: `/savoir-lab/communication-inclusive/recommandations/${encodeURIComponent(post.attributes?.Title || 'No Title')}`
-          }));
+  useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(`${BASE_URL}/api/communication-inclusives?populate=*`);
+          const data = await response.json();
 
-        console.log('Filtered API data:', filteredApiData); // Debugging
+          // Filter data where 'Choose' attribute is equal to 'charte'
+          const filteredApiData = data.data
+            ?.filter(post => post.attributes?.Choose === 'recommendation')
+            .map(post => {
+              const attributes = post.attributes || {};
 
-        // Combine static data with API data
-        setCombinedData([...cardData.map(card => ({
-          title: t(card.titleKey),
-          description: t(card.descriptionKey),
-          link: card.link
-        })), ...filteredApiData]);
+            // Get the title and description based on language preference
+            const title = i18n.language === 'ar' ? attributes.Title_arabic : attributes.Title_french;
+            const description = i18n.language === 'ar' ? attributes.Description_arabic : attributes.Description_french;
+
+            // Return formatted data
+            return {
+              title,
+              description: description.replace(/<[^>]*>/g, ''), // Clean HTML tags
+              link: `/savoir-lab/communication-inclusive/charte-nationale/${encodeURIComponent(title || 'No Title')}`
+            };
+          }) || [];
+
+        // Combine the static card data and fetched API data
+        setCombinedData([
+          ...cardData.map(card => ({
+            title: t(card.titleKey),
+            description: t(card.descriptionKey),
+            link: card.link
+          })),
+          ...filteredApiData
+        ]);
+
         setApiData(filteredApiData);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -63,7 +72,8 @@ const Recommandation = () => {
     };
 
     fetchData();
-  }, []);
+  }, [t, i18n.language]); // Ensure translations and language are updated
+
 
   return (
     <Container fluid className="Recommandation-container">

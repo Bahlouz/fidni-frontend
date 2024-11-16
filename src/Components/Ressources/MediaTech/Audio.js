@@ -3,42 +3,63 @@ import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import './audio.css';
 import { useTranslation } from 'react-i18next';
 
-
 const staticAudioEpisodes = [
-  // Add more static episodes here
+  // Add more static episodes here if needed
 ];
 
 const Audio = () => {
-  const { t } = useTranslation(); // Use translation hook
+  const { t, i18n } = useTranslation(); // Use translation hook
   const [episodes, setEpisodes] = useState([]);
   const [expandedDescriptionId, setExpandedDescriptionId] = useState(null);
   const BASE_URL = 'https://admin.fidni.tn';
 
   useEffect(() => {
+    const handleLanguageChange = () => {
+      window.location.reload();
+    };
+
+    i18n.on('languageChanged', handleLanguageChange);
+
+    // Cleanup on component unmount
+    return () => {
+      i18n.off('languageChanged', handleLanguageChange);
+    };
+  }, [i18n]);
+
+  useEffect(() => {
     const fetchAudioEpisodes = async () => {
       try {
-        const response = await fetch(`${BASE_URL}/api/post-blogs?populate=*`);
+        const response = await fetch(`${BASE_URL}/api/audio-and-podcasts?populate=*`);
         const data = await response.json();
 
         const filteredEpisodes = data.data
-          .filter((post) => {
-            const subcategory = post.attributes?.subcategory?.data?.attributes?.name;
-            const description = post.attributes?.Description?.[0]?.children?.[0]?.text;
-            return subcategory === 'Audio & Podcast' && description?.includes('<audio>');
-          })
+          .filter((post) => post.attributes?.Choose === 'Audio') // Filter by "Audio" category
           .map((post) => {
-            const mediafiles = post.attributes.Mediafiles?.data || [];
-            const audioFile = mediafiles.find(file => file.attributes.mime.startsWith('audio'));
-            const imageFile = mediafiles.find(file => file.attributes.mime.startsWith('image'));
-            const imageUrl = imageFile 
-                    ? `${BASE_URL}${imageFile.attributes.formats.large.url}` : '';
+            const lang = i18n.language;
+
+            // Determine appropriate title and description based on language
+            const title = lang === 'fr'
+              ? post.attributes.Title_french
+              : lang === 'ar'
+              ? post.attributes.Title_arabic
+              : post.attributes.Title;
+
+            const description = lang === 'fr'
+              ? post.attributes.Content_french
+              : lang === 'ar'
+              ? post.attributes.Content_arabic
+              : post.attributes.Content;
+
+            const imageUrl = `${BASE_URL}${post.attributes.Image?.data?.attributes?.formats?.medium?.url || post.attributes.Image?.data?.attributes?.url}`;
+            const audioUrl = `${BASE_URL}${post.attributes.Audio_File?.data?.attributes?.url}`;
+
             return {
               id: post.id,
-              title: post.attributes.Title,
-              date: post.attributes.Description?.[1]?.children?.[0]?.text || 'Unknown date',
-              description: post.attributes.content,
-              audioUrl: audioFile ? `${audioFile.attributes.url}` : '',
-              downloadUrl: audioFile ? `${audioFile.attributes.url}` : '', // Ensure the URL is correct
+              title,
+              date: post.attributes.Date_JJ_MMMM_AA || 'Unknown date',
+              description,
+              audioUrl,
+              downloadUrl: audioUrl,
               imageUrl,
             };
           });
@@ -46,12 +67,12 @@ const Audio = () => {
         // Merge fetched episodes with static ones
         setEpisodes([...staticAudioEpisodes, ...filteredEpisodes]);
       } catch (error) {
-        console.error("Error fetching audio data:", error);
+        console.error('Error fetching audio data:', error);
       }
     };
 
     fetchAudioEpisodes();
-  }, []);
+  }, [i18n.language]);
 
   const toggleDescription = (id) => {
     setExpandedDescriptionId(expandedDescriptionId === id ? null : id);
@@ -68,7 +89,7 @@ const Audio = () => {
         {episodes.map((episode) => (
           <Col md={4} key={episode.id} className="mb-4">
             <Card className="h-100">
-              <Card.Img className="podcast-img-card" variant="top" src={`${episode.imageUrl}`} alt={episode.title} />
+              <Card.Img className="podcast-img-card" variant="top" src={episode.imageUrl} alt={episode.title} />
               <Card.Body>
                 <Card.Title>{episode.title}</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">{episode.date}</Card.Subtitle>
@@ -79,13 +100,13 @@ const Audio = () => {
                   {expandedDescriptionId === episode.id ? t('audio.showLess') : t('audio.showMore')}
                 </Button>
                 <audio controls className="audio-player-podcast-audio">
-                  <source src={`${BASE_URL}${episode.audioUrl}`} type="audio/mpeg" />
+                  <source src={episode.audioUrl} type="audio/mpeg" />
                   {t('audio.audioNotSupported')}
                 </audio>
                 <Button 
                   variant="primary" 
-                  href={`${BASE_URL}${episode.downloadUrl}`}  // Full URL of the file
-                  download={`${BASE_URL}${episode.downloadUrl}`}  // Ensure download attribute has a filename
+                  href={episode.downloadUrl}  // Full URL of the file
+                  download={episode.downloadUrl.split('/').pop()}  // Ensure download attribute has a filename
                 >
                   {t('audio.download')}
                 </Button>

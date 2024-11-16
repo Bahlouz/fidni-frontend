@@ -2,7 +2,7 @@ export const newsItems = [
     {
         id: 3,
         title: "Saïed honore les héros olympiques : Kattoussi, Ferjani et Jendoubi décorés pour leurs exploits à Paris 2024",
-        date: "17 Août 2024",
+        formattedDate: "17/08/2024",
         content: `Le Président de la République Kais Saied a décerné ce vendredi l’insigne de première classe de l’Ordre national du Mérite sportif aux athlètes Firas Kattoussi, Fares Ferjani et Mohamed Khalil Jendoubi pour leur exploits aux Jeux Olympiques de Paris 2024.
 
 Le chef de l’État a exhorté les athlètes décorés à déployer davantage d’efforts pour hisser haut le drapeau national, soulignant qu’en dépit des ressources et des moyens limitées, la volonté de briller et d’obtenir les premières places a pallié tous les obstacles.
@@ -15,7 +15,7 @@ Pour rappel, Firas Kattousi a décroché la médaille d’or du Taekwondo aux Je
     {
         id: 4,
         title: "Tunisie : Un taux de croissance de 0,6 au premier semestre 2024",
-        date: "17 Août 2024",
+        formattedDate: "17/08/2024",
         content: `La Tunisie a enregistré une croissance économique de 1% au deuxième trimestre 2024 et une croissance cumulative de 0,6% au premier semestre.
 
 
@@ -30,7 +30,7 @@ Ainsi, pour le premier semestre de l’année, l’économie tunisienne affiche 
     {
         id: 6,
         title: "Le rôle historique du tribunal administratif pour rendre justice aux candidats refusés par l’Isie",
-        date: "16 Août 2024",
+        formattedDate: "16/08/2024",
         content: `Sur les 117 prétendants à la candidature pour la présidentielle, seuls seize ont déposé leurs dossiers. Sur les seize, seuls trois ont vu leurs dossiers validés par l’instance électorale. Six ont jeté l’éponge et sept ont déposé des recours devant le Tribunal administratif espérant qu’il leur rende justice et les remette dans la course présidentielle. S’il est très improbable que les juges administratifs rendent justice pour les six, l’espoir demeure encore pour quelques-uns d’entre eux. 
 
  
@@ -92,7 +92,7 @@ Au-delà de l’aspect purement technico-juridique, il y a aussi un aspect polit
     {
         id: 3,
         title: "Personnes en situation de handicap : des changements nécessaires dans les médias maintenant !",
-        date: "27 août 2024",
+        formattedDate: "27/08/2024",
         content: `Les médias façonnent les perceptions et les attitudes du public, ce qui a un impact particulier sur les personnes handicapées, qui représentent 16 % de la population mondiale. En adoptant une approche explicite des questions de handicap dans les politiques éditoriales et la programmation, en produisant un contenu accessible et en encourageant des pratiques inclusives sur le lieu de travail, les professionnels des médias peuvent faire évoluer les attitudes de la société à l'égard des personnes handicapées.Pour soutenir le développement des organisations médiatiques, l'UNESCO lance un manuel pratique et une série de vidéos sur l'égalité des personnes handicapées dans les médias. Ces ressources seront présentées lors de la Conférence internationale sur l'inclusion des personnes handicapées : Exploiter l'impact transformationnel du sport paralympique, qui aura lieu à Paris, en France, les 27 et 28 août 2024.  
 
 L'événement, organisé par l'UNESCO et le Comité international paralympique à l'occasion des Jeux paralympiques de Paris 2024, est axé sur l'exploitation du para-sport en tant que catalyseur pour faire progresser l'égalité des personnes handicapées, est. 
@@ -107,7 +107,7 @@ Animée par Sophie Morgan, présentatrice de télévision britannique et Défens
     {
         id: 3,
         title: "Intégrer l'accessibilité et l'inclusivité dans l'IA et les technologies numériques",
-        date: "20 août 2024",
+        formattedDate: "20/08/2024",
         content: `<body>
 
     <p>Alors que les technologies numériques remodèlent tous les secteurs de la société, il est crucial de s'assurer que les avancées technologiques profitent à tous les pays et à toutes les communautés de manière égale, sans laisser personne de côté. Le Programme Information pour tous (PIPT) de l'UNESCO s'est engagé à relever les défis importants posés par les fractures numériques mondiales, en contribuant à l'examen du SMSI+20 et au processus du Pacte numérique mondial des Nations Unies. À cette fin, les domaines prioritaires du PIPT, à savoir l'information pour le développement et l'accessibilité de l'information, offrent un forum de discussion politique multipartite pour les réflexions sur la réduction des fractures linguistiques et de genre, le renforcement d'une connectivité significative et la promotion de l'accessibilité et de l'inclusivité dans l'IA.</p>
@@ -137,7 +137,7 @@ Animée par Sophie Morgan, présentatrice de télévision britannique et Défens
     {
         id: 3,
         title: "Le Comité des droits des personnes handicapées ouvre les travaux de sa trente et unième session",
-        date: "12 août 2024",
+        formattedDate: "12/08/2024",
         content: `<!DOCTYPE html>
 <html lang="fr">
 
@@ -196,7 +196,7 @@ Animée par Sophie Morgan, présentatrice de télévision britannique et Défens
     {
         id: 3,
         title: "Le ministre des Affaires sociales prend ses fonctions à la tête du ministère",
-        date: "26 août 2024",
+        formattedDate: "26/08/2024",
         content: `Le ministre des Affaires sociales, Issam Lahmar, a pris lundi 26 Août 2024, ses fonctions à la tête du ministère, succédant à Kamel Maddouri, désigné chef du gouvernement depuis le 7 août 2024.
 A cette occasion, Lahmar a affirmé son engagement à accélérer le rythme d’exécution des programmes et projets sociaux dans les différents domaines d’intervention du ministère afin de réaliser les résultats escomptés conformément aux aspirations et attentes du citoyen et au rôle social de l’Etat.
 Il a exhorté les intervenants dans le domaine social à coordonner davantage et à identifier les priorités et les objectifs dans le cadre de plans concrets (TAP).
@@ -206,7 +206,7 @@ Il a exhorté les intervenants dans le domaine social à coordonner davantage et
     {
         id: 3,
         title: "Une ligne de crédit sans intérêt pour les personnes handicapées : le président de l'association IBSAR réagit",
-        date: "1 novembre 2024", 
+        formattedDate: "01/11/2024", 
         content: `<p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;font-size:11.0pt;font-family:"Calibri",sans-serif;'><span style="font-size:19px;line-height:107%;">Le Comit&eacute; national paralympique tunisien a organis&eacute; le samedi 26 octobre 2024 la Journ&eacute;e nationale paralympique &agrave; Sidi Bouzid en pr&eacute;sence de membres des centres sp&eacute;cialis&eacute;s, des personnes handicap&eacute;es et d&rsquo;entraineurs. Des dizaines d&rsquo;athl&egrave;tes issus de plusieurs associations actives &agrave; Sidi Bouzid et &agrave; Kasserine ont brill&eacute; par leur pr&eacute;sence &agrave; cette journ&eacute;e paralympique.&nbsp;</span></p>
 <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;font-size:11.0pt;font-family:"Calibri",sans-serif;'><span style="font-size:19px;line-height:107%;">Selon ses organisateurs, cet &eacute;v&eacute;nement repr&eacute;sente une occasion importante pour le d&eacute;veloppement des sports paralympiques dans les r&eacute;gions int&eacute;rieures.&nbsp;</span></p>
 <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;font-size:11.0pt;font-family:"Calibri",sans-serif;'><span style="font-size:19px;line-height:107%;">Cette manifestation a &eacute;galement pour objectif de promouvoir l&apos;inclusion et la pratique du sport pour les personnes handicap&eacute;es. Il s&rsquo;agit en outre d&rsquo;encourager les athl&egrave;tes et les clubs &agrave; continuer de s&apos;investir dans les activit&eacute;s sportives.</span></p>
@@ -221,7 +221,7 @@ Il a exhorté les intervenants dans le domaine social à coordonner davantage et
     {
         id: 3,
         title: "Le projet de loi de finances 2025 : vers une meilleure inclusion économique des personnes handicapées ?",
-        date: "24 octobre 2024", 
+        formattedDate: "24/10/2024", 
         content: `<p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:normal;font-size:16px;font-family:"Aptos",sans-serif;text-align:justify;'><span style="font-family:Calibri;color:#222222;background:white;">Le projet de loi de finances pour l&rsquo;ann&eacute;e 2025&nbsp;</span><span style="font-family:Calibri;color:black;background:white;">qui vient d&rsquo;etre d&eacute;pos&eacute; par le gouvernement aupr&egrave;s de l&rsquo;Assembl&eacute;e des repr&eacute;sentants du peuple (ARP) et du Conseil national des r&eacute;gions et des districts&nbsp;</span><span style="font-family:Calibri;color:#222222;background:white;">vient d&rsquo;annoncer une s&eacute;rie de mesures visant &agrave; am&eacute;liorer les conditions de vie des personnes handicap&eacute;es en Tunisie. D&egrave;s ses premi&egrave;res lignes, le texte affiche une volont&eacute; de renforcer le r&ocirc;le social de l&rsquo;&Eacute;tat, en introduisant notamment des financements sp&eacute;cialement d&eacute;di&eacute;s &agrave; l&apos;inclusion &eacute;conomique des personnes handicap&eacute;es, leur offrant ainsi des opportunit&eacute;s de cr&eacute;ation de projets et une int&eacute;gration plus solide dans le tissu &eacute;conomique et social.</span></p>
 <p style='margin-top:0cm;margin-right:0cm;margin-bottom:10.0pt;margin-left:0cm;line-height:115%;font-size:16px;font-family:"Aptos",sans-serif;'><span style="font-family:Calibri;color:#222222;">&laquo; La pr&eacute;sentation du projet de loi de finances pour 2025 s&apos;inscrit dans le cadre du renforcement des fondements de l&apos;&Eacute;tat social et de l&apos;am&eacute;lioration du soutien aux cat&eacute;gories vuln&eacute;rables et &agrave; faible revenu. Cela inclut la protection sociale pour les travailleuses agricoles, l&apos;assurance contre la perte d&apos;emploi pour des raisons &eacute;conomiques, l&apos;exon&eacute;ration d&apos;imp&ocirc;ts pour les b&eacute;n&eacute;ficiaires de pensions d&apos;invalidit&eacute; et d&apos;orphelins, ainsi que le soutien &agrave; l&apos;inclusion &eacute;conomique des personnes handicap&eacute;es, tout en renfor&ccedil;ant le pouvoir d&apos;achat des cat&eacute;gories modestes et moyennes &raquo;, peut-on lire dans le tout premier paragraphe de pr&eacute;sentation du projet de loi.</span></p>
 <p style='margin-top:0cm;margin-right:0cm;margin-bottom:10.0pt;margin-left:0cm;line-height:115%;font-size:16px;font-family:"Aptos",sans-serif;'><span style="font-family:Calibri;color:#222222;">Le projet de loi pr&eacute;voit ainsi des mesures pour acc&eacute;l&eacute;rer l&apos;autonomie financi&egrave;re des personnes handicap&eacute;es. Cela inclut, entre autres, l&apos;exon&eacute;ration des taxes sur les &eacute;quipements essentiels pour les institutions sp&eacute;cialis&eacute;es et la mise en place de lignes de financement sans int&eacute;r&ecirc;ts, visant &agrave; am&eacute;liorer leur qualit&eacute; de vie et leur ind&eacute;pendance.</span></p>
@@ -239,7 +239,7 @@ Il a exhorté les intervenants dans le domaine social à coordonner davantage et
     {
         id: 3,
         title: "Mobilité des personnes handicapées : l’amendement du décret n° 2023-751, une urgence",
-        date: "28 octobre 2024", 
+        formattedDate: "28/10/2024", 
         content: `<p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:115%;font-size:16px;font-family:"Aptos",sans-serif;'><span style="font-family:Calibri;color:#050505;">Les infrastructures de transport public en Tunisie ne sont malheureusement pas encore adapt&eacute;es aux personnes handicap&eacute;es : ni les bus, ni les trains, ni m&ecirc;me les taxis ne permettent d&rsquo;accueillir facilement de fauteuils roulants, ce qui renforce la d&eacute;pendance aux v&eacute;hicules personnels pour garantir la mobilit&eacute; de ces personnes. C&rsquo;est dans ce contexte que l&apos;Association Ibsar a r&eacute;cemment organis&eacute; une rencontre intitul&eacute;e &quot;L&apos;avantage fiscal pour les voitures destin&eacute;es aux personnes handicap&eacute;es&quot;. Cet &eacute;v&eacute;nement a rassembl&eacute; des acteurs de la soci&eacute;t&eacute; civile, des membres de l&rsquo;association ainsi des &eacute;lus. L&rsquo;objectif &eacute;tait de lancer un plaidoyer en faveur de l&rsquo;acc&egrave;s des personnes handicap&eacute;es &agrave; un transport garantissant leur dignit&eacute; et leur vie priv&eacute;e.</span></p>
 <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:115%;font-size:16px;font-family:"Aptos",sans-serif;'><span style="font-family:Calibri;color:#050505;">&nbsp;</span></p>
 <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:115%;font-size:16px;font-family:"Aptos",sans-serif;'><span style="font-family:Calibri;color:#050505;">Le pr&eacute;sident de l&rsquo;Association Ibsar, Mohamed Mansouri, a d&eacute;clar&eacute; lors de cette rencontre que les personnes handicap&eacute;es rencontrent de nombreuses difficult&eacute;s en ce qui concerne la mobilit&eacute;, en raison des lacunes dans les infrastructures qui ne leur permettent pas de se d&eacute;placer de mani&egrave;re confortable et digne. Dans ce contexte, il a appel&eacute; les autorit&eacute;s comp&eacute;tentes &agrave; prendre des mesures facilitantes pour l&apos;importation de voitures sp&eacute;cifiques aux personnes handicap&eacute;es. Il a soulign&eacute; que cette d&eacute;marche permettra aux personnes handicap&eacute;es d&apos;acc&eacute;der plus facilement &agrave; tous les services. Cette mesure constituerait une porte d&apos;entr&eacute;e vers l&apos;autonomisation &eacute;conomique de ce groupe vuln&eacute;rable et favoriserait la cr&eacute;ation d&apos;emplois.</span></p>
@@ -261,7 +261,7 @@ Il a exhorté les intervenants dans le domaine social à coordonner davantage et
     {
         id: 3,
         title: "Journée nationale paralympique à Sidi Bouzid",
-        date: "29 octobre 2024", 
+        formattedDate: "29/10/2024", 
         content: `<p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;font-size:11.0pt;font-family:"Calibri",sans-serif;'><span style="font-size:16px;line-height:107%;">Le Comit&eacute; national paralympique tunisien a organis&eacute; le samedi 26 octobre 2024 la Journ&eacute;e nationale paralympique &agrave; Sidi Bouzid en pr&eacute;sence de membres des centres sp&eacute;cialis&eacute;s, des personnes handicap&eacute;es et d&rsquo;entraineurs. Des dizaines d&rsquo;athl&egrave;tes issus de plusieurs associations actives &agrave; Sidi Bouzid et &agrave; Kasserine ont brill&eacute; par leur pr&eacute;sence &agrave; cette journ&eacute;e paralympique.&nbsp;</span></p>
 <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;font-size:11.0pt;font-family:"Calibri",sans-serif;'><span style="font-size:16px;line-height:107%;">Selon ses organisateurs, cet &eacute;v&eacute;nement repr&eacute;sente une occasion importante pour le d&eacute;veloppement des sports paralympiques dans les r&eacute;gions int&eacute;rieures.&nbsp;</span></p>
 <p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;font-size:11.0pt;font-family:"Calibri",sans-serif;'><span style="font-size:16px;line-height:107%;">Cette manifestation a &eacute;galement pour objectif de promouvoir l&apos;inclusion et la pratique du sport pour les personnes handicap&eacute;es. Il s&rsquo;agit en outre d&rsquo;encourager les athl&egrave;tes et les clubs &agrave; continuer de s&apos;investir dans les activit&eacute;s sportives.</span></p>
@@ -274,7 +274,7 @@ Il a exhorté les intervenants dans le domaine social à coordonner davantage et
     {
         id: 3,
         title: "Quelles solutions pour une meilleure représentativité des personnes handicapées dans les médias tunisiens ?",
-        date: "24 octobre 2024", 
+        formattedDate: "24/10/2024", 
         content: `<p>Le 19 juillet 2024, l'UNESCO, en collaboration avec des partenaires m&eacute;diatiques et des organisations nationales d&eacute;fendant les droits des personnes handicap&eacute;es, a lanc&eacute; une coalition d&eacute;di&eacute;e &agrave; la promotion des droits des personnes en situation de handicap, en particulier en ce qui concerne l'acc&egrave;s &agrave; l'information et aux m&eacute;dias. Cette initiative vise &agrave; garantir une couverture m&eacute;diatique fond&eacute;e sur les principes des droits de l'homme, tout en luttant contre les st&eacute;r&eacute;otypes et les repr&eacute;sentations d&eacute;gradantes des personnes en situation de handicap.&nbsp;</p>
 <p>Une r&eacute;union de coordination s&rsquo;est tenue jeudi 17 octobre 2024 au si&egrave;ge du bureau de l'UNESCO &agrave; Tunis, en pr&eacute;sence des membres de la coalition nationale des organisations et &eacute;tablissements m&eacute;diatiques engag&eacute;s en faveur d&rsquo;une communication inclusive des personnes handicap&eacute;es en Tunisie.</p>
 <p>Les intervenants ont dress&eacute;, lors de cette r&eacute;union, l&rsquo;&eacute;tat des lieux du traitement m&eacute;diatique des questions li&eacute;es aux personnes handicap&eacute;es en Tunisie. Ils ont soulign&eacute; la tr&egrave;s faible repr&eacute;sentativit&eacute; des personnes handicap&eacute;es dans les m&eacute;dias tunisiens. Selon eux, les personnes handicap&eacute;es sont rarement visibles dans les programmes m&eacute;diatiques et que, lorsque c'est le cas, elles sont g&eacute;n&eacute;ralement pr&eacute;sent&eacute;es sous un angle st&eacute;r&eacute;otyp&eacute;, soit comme objets de compassion, soit comme h&eacute;ros.</p>
@@ -296,7 +296,7 @@ Il a exhorté les intervenants dans le domaine social à coordonner davantage et
     {
         id: 4,
         title: "Appel à une réforme urgente de l'éducation des non-voyants dans le monde arabe",
-        date: '4 novembre 2024',
+        formattedDate: '04/11/2024',
         content: `
     <p>Des acteurs de la soci&eacute;t&eacute; civile ont lanc&eacute; un appel urgent en faveur d'une r&eacute;forme du syst&egrave;me &eacute;ducatif pour les personnes non-voyantes dans le monde arabe. Malgr&eacute; les progr&egrave;s r&eacute;alis&eacute;s dans leur int&eacute;gration scolaire et professionnelle, des obstacles majeurs subsistent, notamment l'absence de politiques &eacute;ducatives unifi&eacute;es et coh&eacute;rentes. La fragmentation des approches entrave l&rsquo;acc&egrave;s &eacute;gal &agrave; l&rsquo;&eacute;ducation et compromet l'exercice de leurs droits fondamentaux, notamment celui &agrave; une &eacute;ducation de qualit&eacute; adapt&eacute;e &agrave; leurs besoins sp&eacute;cifiques. Ce constat alarmant a &eacute;t&eacute; mis en lumi&egrave;re lors du Congr&egrave;s sur le d&eacute;veloppement de l'&eacute;ducation des non-voyants dans le monde arabe, organis&eacute; les 4 et 5 novembre &agrave; Tunis.</p>
   <p><strong>Unification des politiques &eacute;ducatives : une n&eacute;cessit&eacute;</strong></p>

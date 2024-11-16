@@ -1,50 +1,86 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Button } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const SingleDroits = () => {
-  const { title } = useParams(); // Extract the title from the URL parameters
+  const { title } = useParams(); // Extract the encoded title from the URL parameters
+  const { t, i18n } = useTranslation();
   const [post, setPost] = useState(null);
   const BASE_URL = 'https://admin.fidni.tn';
+  const textDirection = i18n.language === 'ar' ? 'rtl' : 'ltr';
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  // Decode the title parameter
+  const decodedTitle = decodeURIComponent(title);
+
   useEffect(() => {
     const fetchPost = async () => {
-      try {
-        const response = await fetch(`${BASE_URL}/api/post-blogs?populate[subcategory][populate]=*&filters[Title][$eq]=${title}`);
-        const data = await response.json();
-        const fetchedPosts = data.data; // Array of posts
+      setLoading(true);
+      setError(null); // Reset error state
 
-        if (fetchedPosts.length > 0) {
-          // Assuming we need to select the first post from the result
-          const fetchedPost = fetchedPosts[0];
-          setPost(fetchedPost);
-        } else {
-          console.error('Post not found');
+      try {
+        // Fetch data from the API based on the decoded title
+        const response = await fetch(`${BASE_URL}/api/droits?populate=*`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
-      } catch (error) {
-        console.error('Error fetching post:', error);
+
+        const data = await response.json();
+
+        // Find the post in the API data
+        const apiPost = data.data.find(item => item.attributes.Title_french === decodedTitle || item.attributes.Title_arabic === decodedTitle);
+
+        if (apiPost) {
+          const { Title_french, Title_arabic, Description_french, Description_arabic, Content_french, Content_arabic } = apiPost.attributes;
+          
+          // Extract data based on language preference
+          const titleKey = i18n.language === 'ar' ? Title_arabic : Title_french;
+          const descriptionKey = i18n.language === 'ar' ? Description_arabic : Description_french;
+          const contentKey = i18n.language === 'ar' ? Content_arabic : Content_french;
+
+          setPost({
+            title: titleKey,
+            description: descriptionKey,
+            content: contentKey
+          });
+        } else {
+          // If not found in API, use static data (for fallback purposes)
+  
+        }
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchPost();
-  }, [title]);
+  }, [decodedTitle, i18n.language]);
 
-  if (!post) {
-    return <Container>Loading...</Container>;
-  }
+  // Loading, error, or post not found UI
+  if (loading) return <Container>{t('loading')}</Container>;
+  if (error) return <Container>{t('error')}: {error}</Container>;
 
   return (
     <Container fluid className="droits-container">
       <div className="background-image-droits">
-        <div className="p-5 overlay-text-droits">
-          <h1 className="droits-titre">{post.attributes.Title}</h1>
+        <div
+          className="p-5 overlay-text-droits"
+          style={{ direction: textDirection, textAlign: textDirection === 'rtl' ? 'right' : 'left' }}
+        >
+          <h1 className="droits-titre">{post.title}</h1>
         </div>
       </div>
       <Container className="p-5">
         <div
+        style={{ direction: textDirection, textAlign: textDirection === 'rtl' ? 'right' : 'left' }}
           className="droits-content"
-          dangerouslySetInnerHTML={{ __html: post.attributes.content }}
+          dangerouslySetInnerHTML={{ __html: post.content }} // Render HTML content safely
         />
-        <Button variant="secondary" href="/services-et-droits/droits">Retour à la liste</Button>
+        <Button variant="secondary" href="/savoir-lab/accessibilite">
+          {t('retour')}
+        </Button> 
       </Container>
     </Container>
   );

@@ -7,48 +7,64 @@ import { podcastEpisodes } from './podcastEpisodes';
 import { podcastEpisodesar } from './podcastEpisodesar';
 
 const Podcast = () => {
-  const { t, i18n } = useTranslation(); // Use useTranslation hook
+  const { t, i18n } = useTranslation(); // Use translation hook
   const [episodes, setEpisodes] = useState([]);
   const [expandedDescriptionId, setExpandedDescriptionId] = useState(null);
   const BASE_URL = 'https://admin.fidni.tn';
 
   useEffect(() => {
+    const handleLanguageChange = () => {
+      window.location.reload();
+    };
+
+    i18n.on('languageChanged', handleLanguageChange);
+
+    // Cleanup on component unmount
+    return () => {
+      i18n.off('languageChanged', handleLanguageChange);
+    };
+  }, [i18n]);
+
+  useEffect(() => {
     const fetchPodcasts = async () => {
       try {
-        const lang = i18n.language === 'fr' ? '' : 'ar'; // Determine language
-        const response = await fetch(`${BASE_URL}/api/post-blogs?populate=*`);
+        const response = await fetch(`${BASE_URL}/api/audio-and-podcasts?populate=*`);
         const data = await response.json();
 
         const filteredEpisodes = data.data
-          .filter((post) => {
-            const subcategory = post.attributes?.subcategory?.data?.attributes?.name;
-            const description = post.attributes?.Description?.[0]?.children?.[0]?.text;
-            return subcategory === 'Audio & Podcast' && description?.includes('<podcast>');
-          })
+          .filter((post) => post.attributes?.Choose === 'Podcast') // Filter by "Audio" category
           .map((post) => {
-            const mediafiles = post.attributes.Mediafiles?.data || [];
-            const audioFile = mediafiles.find(file => file.attributes.mime.startsWith('audio'));
-            const imageFile = mediafiles.find(file => file.attributes.mime.startsWith('image'));
+            const lang = i18n.language;
 
-            const imageUrl = imageFile 
-              ? `${BASE_URL}${imageFile.attributes.formats.large.url}` : '';
-              
-            const audioUrl = audioFile ? `${BASE_URL}${audioFile.attributes.url}` : '';
-            const downloadUrl = audioUrl ? `${BASE_URL}${audioFile.attributes.url}` : '';
-            
+            // Determine appropriate title and description based on language
+            const title = lang === 'fr'
+              ? post.attributes.Title_french
+              : lang === 'ar'
+              ? post.attributes.Title_arabic
+              : post.attributes.Title;
+
+            const description = lang === 'fr'
+              ? post.attributes.Content_french
+              : lang === 'ar'
+              ? post.attributes.Content_arabic
+              : post.attributes.Content;
+
+            const imageUrl = `${BASE_URL}${post.attributes.Image?.data?.attributes?.formats?.medium?.url || post.attributes.Image?.data?.attributes?.url}`;
+            const audioUrl = `${BASE_URL}${post.attributes.Audio_File?.data?.attributes?.url}`;
+
             return {
               id: post.id,
-              title: post.attributes.Title,
-              date: post.attributes.Description?.[1]?.children?.[0]?.text || 'Unknown date',
-              description: post.attributes.content,
+              title,
+              date: post.attributes.Date_JJ_MMMM_AA || 'Unknown date',
+              description,
               audioUrl,
-              downloadUrl,
+              downloadUrl: audioUrl,
               imageUrl,
             };
           });
 
         // Merge fetched episodes with static ones based on language
-        const staticEpisodes = lang === 'ar' ? podcastEpisodesar : podcastEpisodes;
+        const staticEpisodes = i18n.language === 'ar' ? podcastEpisodesar : podcastEpisodes;
         setEpisodes([...staticEpisodes, ...filteredEpisodes]);
       } catch (error) {
         console.error(t('podcast.error'), error); // Use translation for error message
