@@ -84,14 +84,14 @@ const AppuiActeurs = () => {
             className="lexique-image" 
           />
           <a 
-            href={`${process.env.PUBLIC_URL}/pdfs/Fiche 7 word.pdf` }
+            href={`${process.env.PUBLIC_URL}/pdfs/fiches/Fiche 7 word.pdf` }
             download
             target="_blank" 
             rel="noopener noreferrer"
           >
             <img 
               className="download-button-guide" 
-              href={`${process.env.PUBLIC_URL}/pdfs/Fiche 7 word.pdf` }
+              href={`${process.env.PUBLIC_URL}/pdfs/fiches/Fiche 7 word.pdf` }
               target="_blank"
               src={downloadimg} 
               alt={t('AppuiActeurs.lexique.preview.download.link')} 
@@ -100,7 +100,7 @@ const AppuiActeurs = () => {
           </a>
         </div>
         <a 
-          href={`${process.env.PUBLIC_URL}/pdfs/Fiche 7 word.pdf` }
+          href={`${process.env.PUBLIC_URL}/pdfs/fiches/Fiche 7 word.pdf` }
           className="french-link"
           terget="_blank"
           rel="noopener noreferrer"
@@ -108,7 +108,7 @@ const AppuiActeurs = () => {
           {t('AppuiActeurs.fr.accederLexiqueFrancais')}
         </a>
         <a 
-          href={`${process.env.PUBLIC_URL}/pdfs/Fiche 7  Comprendre l'Importance de l'Accessibilité pour promouvoir l’inclusivité_VAR.pdf` }
+          href={`${process.env.PUBLIC_URL}/pdfs/fiches/Fiche 7  Comprendre l'Importance de l'Accessibilité pour promouvoir l’inclusivité_VAR.pdf` }
           className="french-link"
           terget="_blank"
           rel="noopener noreferrer"
@@ -185,14 +185,14 @@ const AppuiActeurs = () => {
             className="lexique-image" 
           />
           <a 
-            href={`${process.env.PUBLIC_URL}/pdfs/Fiche 8 word.pdf` }
+            href={`${process.env.PUBLIC_URL}/pdfs/fiches/Fiche 8 word.pdf` }
             download
             target="_blank" 
             rel="noopener noreferrer"
           >
             <img 
               className="download-button-guide" 
-              href={`${process.env.PUBLIC_URL}/pdfs/Fiche 8 word.pdf` }
+              href={`${process.env.PUBLIC_URL}/pdfs/fiches/Fiche 8 word.pdf` }
               target="_blank"
               src={downloadimg} 
               alt={t('AppuiActeurs.lexique.preview.download.link')}  
@@ -201,7 +201,7 @@ const AppuiActeurs = () => {
           </a>
         </div>
         <a 
-          href={`${process.env.PUBLIC_URL}/pdfs/Fiche 8 word.pdf` }
+          href={`${process.env.PUBLIC_URL}/pdfs/fiches/Fiche 8 word.pdf` }
           className="french-link"
           terget="_blank"
           rel="noopener noreferrer"
@@ -209,7 +209,7 @@ const AppuiActeurs = () => {
           {t('AppuiActeurs.fr.accederLexiqueFrancais')}
         </a>
         <a 
-          href={`${process.env.PUBLIC_URL}/pdfs/Fiche 8 Réaliser un reportage sur l’accessibilité des Espaces Publics Urbains_ VAR.pdf` }
+          href={`${process.env.PUBLIC_URL}/pdfs/fiches/Fiche 8 Réaliser un reportage sur l’accessibilité des Espaces Publics Urbains_ VAR.pdf` }
           className="french-link"
           terget="_blank"
           rel="noopener noreferrer"
@@ -334,14 +334,14 @@ const AppuiActeurs = () => {
             className="lexique-image" 
           />
           <a 
-            href={`${process.env.PUBLIC_URL}/pdfs/Fiche 9 word.pdf` }
+            href={`${process.env.PUBLIC_URL}/pdfs/fiches/Fiche 9 word.pdf` }
             download
             target="_blank" 
             rel="noopener noreferrer"
           >
             <img 
               className="download-button-guide" 
-              href={`${process.env.PUBLIC_URL}/pdfs/Fiche 9 word.pdf` }
+              href={`${process.env.PUBLIC_URL}/pdfs/fiches/Fiche 9 word.pdf` }
               target="_blank"
               src={downloadimg} 
               alt={t('AppuiActeurs.lexique.preview.download.link')}  
@@ -350,7 +350,7 @@ const AppuiActeurs = () => {
           </a>
         </div>
         <a 
-          href={`${process.env.PUBLIC_URL}/pdfs/Fiche 9 word.pdf` }
+          href={`${process.env.PUBLIC_URL}/pdfs/fiches/Fiche 9 word.pdf` }
           className="french-link"
           terget="_blank"
           rel="noopener noreferrer"
@@ -358,7 +358,7 @@ const AppuiActeurs = () => {
           {t('AppuiActeurs.fr.accederLexiqueFrancais')}
         </a>
         <a 
-          href={`${process.env.PUBLIC_URL}/pdfs/Fiche 9 grille Pratique pour les Journalistes pour le monitoring de l'Accessibilité des Services Numériques Publics_VAR.pdf` }
+          href={`${process.env.PUBLIC_URL}/pdfs/fiches/Fiche 9 grille Pratique pour les Journalistes pour le monitoring de l'Accessibilité des Services Numériques Publics_VAR.pdf` }
           className="french-link"
           terget="_blank"
           rel="noopener noreferrer"

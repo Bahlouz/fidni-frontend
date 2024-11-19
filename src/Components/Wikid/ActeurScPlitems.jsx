@@ -27,7 +27,7 @@ Yosri Mzati est lui-même en situation de handicap, ce qui a façonné de maniè
         imageUrl: `${process.env.PUBLIC_URL}/wikiphedia/yosri.jpg`,
     },
     {
-        id: 1,
+        id: 2,
         title: "De la Résilience à l’Impact : Le Parcours Inspirant de Basma Essouissi",
         date: "",
         content: `<b>De la Résilience à l’Impact : Le Parcours Inspirant de Basma Essouissi</b><br/><br/>

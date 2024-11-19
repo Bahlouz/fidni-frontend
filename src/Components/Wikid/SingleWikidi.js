@@ -6,14 +6,15 @@ import { Artistesitems } from './Artistesitems';
 import { Chercheursitems } from './Chercheursitems';
 import { Entrepreneursitems } from './Entrepreneursitems';
 import { Sportifsitems } from './Sportifsitems';
-import backnavhead from "../../Assets/back navhead.jpg";
-import Preloader from '../Preloader';
-import ActeurScPl from './ActeurScPl';
 import { ActeurScPlitemsar } from './ActeurScPlitemsar';
 import { Artistesitemsar } from './Artistesitemsar';
 import { Chercheursitemsar } from './Chercheursitemsar';
 import { Entrepreneursitemsar } from './Entrepreneursitemsar';
 import { Sportifsitemsar } from './Sportifsitemsar';
+import { useTranslation } from 'react-i18next';
+import backnavhead from "../../Assets/back navhead.jpg";
+import Preloader from '../Preloader';
+
 // Define the categories of static items
 const categories = {
   ActeurScPl: ActeurScPlitems,
@@ -21,7 +22,7 @@ const categories = {
   Chercheurs: Chercheursitems,
   Entrepreneurs: Entrepreneursitems,
   Sportifs: Sportifsitems,
-  ActeurScPlar:ActeurScPlitemsar,
+  ActeurScPlar: ActeurScPlitemsar,
   Artistesar: Artistesitemsar,
   Chercheursar: Chercheursitemsar,
   Entrepreneursar: Entrepreneursitemsar,
@@ -38,18 +39,19 @@ const tagToCategory = {
 };
 
 const SingleWikidi = () => {
+  const { t, i18n } = useTranslation(); // Use i18n for language handling
   const [storyItem, setStoryItem] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const BASE_URL = 'https://admin.fidni.tn';
-  const { storyTitle: encodedTitle } = useParams();  // Get the encoded title from the URL
-  const storyTitle = decodeURIComponent(encodedTitle);  // Decode the title
+  const { storyTitle: encodedTitle } = useParams(); // Get the encoded title from the URL
+  const storyTitle = decodeURIComponent(encodedTitle); // Decode the title
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         // Fetch data from the API
-        const response = await fetch(`${BASE_URL}/api/post-blogs?populate=*`);
+        const response = await fetch(`${BASE_URL}/api/wikiphedias?populate=*`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -60,25 +62,22 @@ const SingleWikidi = () => {
 
         // Find item in the API data by matching title
         const apiItem = apiItems.find(item =>
-          normalizeTitle(item.attributes?.Title || '') === normalizeTitle(storyTitle)
+          i18n.language === 'ar'
+            ? (item.attributes?.Title_arabic || '') === storyTitle
+            : (item.attributes?.Title_french || '') === storyTitle
         );
 
         if (apiItem) {
-          // Extract the tag from the description
-          const descriptionText = apiItem.attributes.Description
-            .flatMap(part => part.children.map(child => child.text))
-            .join(' ');
-          const tag = Object.keys(tagToCategory).find(t => descriptionText.includes(`<${t}>`));
-          
-          const category = tagToCategory[tag] || "Inconnu";
+          // Extract the category
+          const category = apiItem.attributes.Choose || 'Inconnu';
 
           // If found in API, set it to state
           setStoryItem({
-            title: apiItem.attributes.Title,
-            date: new Date(apiItem.attributes.publishedAt).toLocaleDateString('fr-FR'),
-            content: apiItem.attributes.content,
-            imageUrl: apiItem.attributes.Mediafiles?.data?.[0]?.attributes?.formats?.large?.url
-              ? `${BASE_URL}${apiItem.attributes.Mediafiles.data[0].attributes.formats.large.url}`
+            title: i18n.language === 'ar' ? apiItem.attributes.Title_arabic : apiItem.attributes.Title_french,
+    
+            content: i18n.language === 'ar' ? apiItem.attributes.Content_arabic : apiItem.attributes.Content_french,
+            imageUrl: apiItem.attributes.Image?.data?.attributes?.formats?.large?.url
+              ? `${BASE_URL}${apiItem.attributes.Image.data.attributes.formats.large.url}`
               : '',
             category,
           });
@@ -95,40 +94,15 @@ const SingleWikidi = () => {
     };
 
     fetchData();
-  }, [storyTitle]);
+  }, [storyTitle, i18n.language]);
 
-  // Function to find the story item in the static categories
-  const normalizeTitle = (title) => {
-    return decodeURIComponent(
-      title
-        .replace(/-/g, ' ')        // Replace dashes with spaces
-        .replace(/:/g, '')         // Remove colons
-        .toLowerCase()
-        .trim()                    // Trim any extra spaces
-    );
-  };
-  
   const findStoryItem = (title) => {
-    const normalizedTitle = normalizeTitle(title);  // Normalize the title from the URL
-    console.log('Finding normalized story:', normalizedTitle);
-    
-    for (const [category, items] of Object.entries(categories)) {
-      console.log('Checking category:', category);
-      const item = items.find(item => {
-        const normalizedItemTitle = normalizeTitle(item.title);
-        console.log('Comparing:', normalizedItemTitle, 'with', normalizedTitle);
-        return normalizedItemTitle === normalizedTitle;
-      });
+    for (const items of Object.values(categories)) {
+      const item = items.find(item => item.title === title);
       if (item) {
-        console.log('Story found in category:', category);
-        return {
-          ...item,
-          category,
-        };
+        return item;
       }
     }
-    
-    console.log('Story not found');
     return null;
   };
 
@@ -142,7 +116,7 @@ const SingleWikidi = () => {
 
   if (loading) return <Preloader />;
   if (error) return <div>Error: {error.message}</div>;
-  if (!storyItem) return <div>Histoire non trouvée</div>;
+  if (!storyItem) return <div>{t('Histoire non trouvée')}</div>;
 
   return (
     <>
@@ -155,14 +129,13 @@ const SingleWikidi = () => {
             <Card.Img variant="top" src={storyItem.imageUrl} className="single-wikidi" />
           )}
           <Card.Body>
-            <Card.Title className="single-wikidi-title">{storyItem.title}</Card.Title>
-            <Card.Subtitle className="mb-2 text-muted">{storyItem.date}</Card.Subtitle>
+            <Card.Title className="single-wikidi-title">{storyItem.title}</Card.Title>  
             <Card.Text
               className="single-wikidi-content"
               dangerouslySetInnerHTML={{ __html: formatDescription(storyItem.content) }}
             />
             <Card.Footer>
-              <small className="text-muted">Catégorie: {storyItem.category}</small>
+              <small className="text-muted">{t('Catégorie')}: {storyItem.category}</small>
             </Card.Footer>
           </Card.Body>
         </Card>

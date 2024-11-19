@@ -136,11 +136,16 @@ console.log(t('accessible_event_description'));  // Should return the descriptio
                 <p className="text-center mt-3">No image available</p>
             )}
             <Card.Body>
-                <Card.Title 
-                    style={{ direction: textDirection, textAlign: textDirection === 'rtl' ? 'right' : 'left' }}
-                >
-                    {opportunity.title}
-                </Card.Title>
+            <Card.Title
+    id={`${opportunity.title}`}
+    style={{
+        direction: textDirection,
+        textAlign: textDirection === 'rtl' ? 'right' : 'left',
+    }}
+>
+    {opportunity.title}
+</Card.Title>
+
                 <Card.Text 
                     style={{ direction: textDirection, textAlign: textDirection === 'rtl' ? 'right' : 'left' }}
                 >

@@ -141,7 +141,7 @@ const Blog = () => {
                   <div className="no-image-placeholder">{t('blog.noImage')}</div>
                 )}
                 <Card.Body className="post-content-unique">
-                  <Link to={`/blog/${post.attributes.titre}`} className="post-link">
+                  <Link to={`/blog/${encodeURIComponent(post.attributes.titre)}`} className="post-link">
                     <Card.Title className="post-title-unique">{post.attributes.titre || t('blog.postLink')}</Card.Title>
                   </Link>
                   <Card.Text>

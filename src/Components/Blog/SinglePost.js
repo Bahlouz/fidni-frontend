@@ -9,12 +9,13 @@ const SinglePost = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const BASE_URL = 'https://admin.fidni.tn';
+  const decodedTitle = decodeURIComponent(postTitle);
 
   const fetchPost = async () => {
     setLoading(true); // Start loading
     setError(null); // Reset error state
     try {
-      const response = await fetch(`${BASE_URL}/api/blogs?filters[titre][$eq]=${postTitle}&populate=*`);
+      const response = await fetch(`${BASE_URL}/api/blogs?populate=*`);
       if (!response.ok) {
         throw new Error('Post not found');
       }

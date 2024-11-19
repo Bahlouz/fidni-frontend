@@ -68,6 +68,7 @@ const Artistes = () => {
                 const data = await response.json();
 
                 const filteredApiData = data.data
+                    ?.filter(post => post.attributes?.Choose === 'Les artistes')
                     .map(post => {
                         const attributes = post.attributes || {};
 
@@ -175,7 +176,6 @@ const sortedItems = combinedItems.sort((a, b) =>
         )}
         <Card.Body>
           <Card.Title>{latestStory.attributes?.Title || latestStory.title}</Card.Title>
-          <Card.Subtitle className="mb-2 text-muted">{formatDate(latestStory.attributes?.publishedAt || latestStory.date)}</Card.Subtitle>
           <Card.Text className="card-text-truncatedd">
             {getFirstLine(latestStory.attributes?.content || latestStory.content)}
           </Card.Text>
@@ -214,7 +214,6 @@ const sortedItems = combinedItems.sort((a, b) =>
         )}
         <Card.Body>
           <Card.Title>{item.attributes?.Title || item.title}</Card.Title>
-          <Card.Subtitle className="mb-2 text-muted">{formatDate(item.attributes?.publishedAt || item.date)}</Card.Subtitle>
           <Card.Text className="card-text-truncated">
             {getFirstLine(item.attributes?.content || item.content)}
           </Card.Text>

@@ -18,7 +18,7 @@ import Blog from './Components/Blog/Blog';
 import Events from './Components/News_&_Events/Events/Events';
 import News from './Components/News_&_Events/News/News'
 import AudioPodcast from './Components/Ressources/MediaTech/AudioPodcast';
-
+import EPUB3 from './Components/For_You/EPUB3';
 import Opportunities from './Components/For_You/Opportunities';
 import AccessibilityFeatures from './Components/AccessibilityFeatures/AccessibilityFeatures';
 import { ThemeProvider } from './Context/ThemeContext';
@@ -121,6 +121,7 @@ function App() {
           <Route path="/savoir-lab/wikiphedia/:storyTitle" Component={SingleWikidi} />
           <Route path='/savoir-lab/savoir-lab' Component={SavoirLab} />
           <Route path='/savoir-lab/accessibilite' Component={Accessibility} />
+          <Route path='/services-et-droits/bibliotheque-epub3' Component={EPUB3} />
           <Route
           path="/savoir-lab/accessibilite/:title"
           element={<SingleAccessibility />}

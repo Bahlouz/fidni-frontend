@@ -1,6 +1,6 @@
 export const Sportifsitems = [
     {
-        id: 1,
+        id: 7,
         title: "Walid Ktila, l'étoile tunisienne de l’handisport : Un Champion Paralympique",
         date: "",
         content: `<b>Introduction</b><br/><br/>
@@ -40,7 +40,7 @@ export const Sportifsitems = [
         imageUrl: `${process.env.PUBLIC_URL}/wikiphedia/wael.jpg`,
     },
     {
-        id: 2,
+        id: 6,
         title: "Maroua Brahmi : Une Championne Paralympique Tunisienne Inspirante",
         date: "",
         content: `
@@ -96,7 +96,7 @@ export const Sportifsitems = [
         imageUrl: `${process.env.PUBLIC_URL}/wikiphedia/maroua.jpg`,
     },
     {
-        id: 3,
+        id:1,
         title: "Maher Rahmani : Un Champion Paralympique Tunisien en Aviron",
         date: "",
         content: `<p style="margin-top:0pt; margin-bottom:8pt">
@@ -166,7 +166,7 @@ export const Sportifsitems = [
         imageUrl: `${process.env.PUBLIC_URL}/wikiphedia/maher.png`,
     },
     {
-        id: 4,
+        id: 2,
         title: "Fathi Zouinkhi : L'Étoile du Para-Triathlon Africain et Arabe",
         date: "",
         content: `<p style="margin-top:0pt; margin-bottom:8pt">
@@ -204,7 +204,7 @@ export const Sportifsitems = [
         imageUrl: `${process.env.PUBLIC_URL}/wikiphedia/fathi.png`,
     },
     {
-        id: 4,
+        id: 3,
         title: "Ahmed Ben Moslah : Portrait d’un Champion Paralympique",
         date: "",
         content: `
@@ -289,7 +289,7 @@ export const Sportifsitems = [
         imageUrl: `${process.env.PUBLIC_URL}/wikiphedia/maher1.jpg`,
     },
 	{
-        id: 4,
+        id: 5,
         title: "Wajdi Boukhili: retour sur le parcours exceptionnel d’un champion paralympique",
         date: "31 Octobre 2024",
         content: `<p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;font-size:11.0pt;font-family:"Calibri",sans-serif;'><span style="font-size:16px;line-height:107%;font-family:Aptos;">Wajdi Boukhili &eacute;tait parmi les noms qui ont brill&eacute; lors des Jeux paralympiques de Paris 2024 en d&eacute;crochant la m&eacute;daille d&rsquo;or du marathon dans la cat&eacute;gorie T12 le 8 septembre dernier portant ainsi le bilan de la d&eacute;l&eacute;gation tunisienne &agrave; 11 m&eacute;dailles &agrave; savoir<span style="color:black;background:white;">&nbsp;5 m&eacute;dailles d&apos;or, 3 m&eacute;dailles d&apos;argent et 3 m&eacute;dailles de bronze</span>.&nbsp;</span></p>

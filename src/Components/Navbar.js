@@ -15,21 +15,23 @@ import { Artistesitems } from './Wikid/Artistesitems';
 import { Chercheursitems } from './Wikid/Chercheursitems';
 import { Entrepreneursitems } from './Wikid/Entrepreneursitems';
 import { Sportifsitems } from './Wikid/Sportifsitems';
+import { ActeurScPlitemsar } from './Wikid/ActeurScPlitemsar';
+import { Artistesitemsar } from './Wikid/Artistesitemsar';
+import { Chercheursitemsar } from './Wikid/Chercheursitemsar';
+import { Entrepreneursitemsar } from './Wikid/Entrepreneursitemsar';
+import { Sportifsitemsar } from './Wikid/Sportifsitemsar';
 import {cardData as droitsdata } from './For_You/Droits';
 import {cardData as servicesdata} from './For_You/Services';
 import { eventsitems } from "./News_&_Events/Events/eventsitems";
+import { eventsitemsar } from "./News_&_Events/Events/eventsitemsar";
 import { newsItems } from "./News_&_Events/News/newsItems";
+import { newsItemsar } from "./News_&_Events/News/newsItemsar";
 import {volunteerOpportunities} from "./For_You/Opportunities";
 import {cardData as chartedata} from "./SavoirLab/Communication/Charte/Charte";
 import {cardData as recommandtaionsdata} from "./SavoirLab/Communication/Recommandation/Recommandation";
 import {pdfList} from "./SavoirLab/DocumentsPl/DocumentPl";
 import { useTranslation } from 'react-i18next';
-
-// Define your manual links here
-
-
-  // Define your manual links here, utilizing the translation keys
-  
+import { staticpages } from "./staticpages";
 
 function NavBar() {
   const { t,i18n } = useTranslation();
@@ -44,7 +46,8 @@ function NavBar() {
       subcategories: [
         { title: 'الخدمات', to: '/services-et-droits/services' },
         { title: 'الحقوق', to: '/services-et-droits/droits' },
-        { title: 'فرص التطوع', to: '/services-et-droits/opportunites' }
+        { title: 'فرص التطوع', to: '/services-et-droits/opportunites' },
+        {title : 'مكتبة EPUB3', to:'services-et-droits/bibliotheque-epub3'}
       ]
     },
     {
@@ -86,7 +89,8 @@ function NavBar() {
       subcategories: [
         { title: 'Services', to: "/services-et-droits/services" },
         { title: t('navigation.rights'), to: "/services-et-droits/droits" },
-        { title: t('navigation.opportunities'), to: "/services-et-droits/opportunites" }
+        { title: t('navigation.opportunities'), to: "/services-et-droits/opportunites" },
+        { title: t('navigation.epub'),to:"services-et-droits/bibliotheque-epub3"}
       ]
     },
     {
@@ -148,68 +152,247 @@ function NavBar() {
   };
   
   const handleSearchInputChange = async (event) => {
-    const query = event.target.value;
+    const query = event.target.value.trim();
     setSearchQuery(query);
   
+    if (!query) {
+      setSuggestions([]);
+      setSearchOpen(false);
+      return;
+    }
+  
     try {
+      const apiEndpoints = [
+        {
+          url: `${BASE_URL}/api/wikiphedias?populate=*`,
+          format: (post) => ({
+            title: i18n.language === "ar" ? post.attributes?.Title_arabic : post.attributes?.Title_french,
+            link: `/savoir-lab/wikiphedia/${formatTitleForURL(
+              i18n.language === "ar" ? post.attributes.Title_arabic : post.attributes.Title_french
+            )}`,
+          }),
+        },
+        {
+          url: `${BASE_URL}/api/opportunites?populate=*`,
+          format: (post) => ({
+            title: i18n.language === "ar" ? post.attributes?.Title_arabic : post.attributes?.Title_french,
+            link: `/services-et-droits/opportunites#${formatTitleForURL(
+              i18n.language === "ar" ? post.attributes.Title_arabic : post.attributes.Title_french
+            )}`,
+          }),
+        },
+        {
+          url: `${BASE_URL}/api/actualites?populate=*`,
+          format: (post) => ({
+            title: i18n.language === "ar" ? post.attributes?.Title_arabic : post.attributes?.Title_french,
+            link: `/actualites-et-evenements/actualites/${formatTitleForURL(
+              i18n.language === "ar" ? post.attributes.Title_arabic : post.attributes.Title_french
+            )}`,
+          }),
+        },
+        {
+          url: `${BASE_URL}/api/evenements?populate=*`,
+          format: (post) => ({
+            title: i18n.language === "ar" ? post.attributes?.Title_arabic : post.attributes?.Title_french,
+            link: `/actualites-et-evenements/evenements/${formatTitleForURL(
+              i18n.language === "ar" ? post.attributes.Title_arabic : post.attributes.Title_french
+            )}`,
+          }),
+        },
+        {
+          url: `${BASE_URL}/api/droits?populate=*`,
+          format: (post) => ({
+            title: i18n.language === "ar" ? post.attributes?.Title_arabic : post.attributes?.Title_french,
+            link: `/services-et-droits/droits/${formatTitleForURL(
+              i18n.language === "ar" ? post.attributes.Title_arabic : post.attributes.Title_french
+            )}`,
+          }),
+        },
+        {
+          url: `${BASE_URL}/api/accessibilites?populate=*`,
+          format: (post) => ({
+            title: i18n.language === "ar" ? post.attributes?.Title_arabic : post.attributes?.Title_french,
+            link: `/savoir-lab/accessibilite/${formatTitleForURL(
+              i18n.language === "ar" ? post.attributes.Title_arabic : post.attributes.Title_french
+            )}`,
+          }),
+        },
+        {
+          url: `${BASE_URL}/api/communication-inclusives?populate=*`,
+          format: (post) => ({
+            title: i18n.language === "ar" ? post.attributes?.Title_arabic : post.attributes?.Title_french,
+            link:
+              post.attributes.Choose === "Charte"
+                ? `/savoir-lab/communication-inclusive/charte-nationale/${formatTitleForURL(
+                    i18n.language === "ar" ? post.attributes.Title_arabic : post.attributes.Title_french
+                  )}`
+                : `/savoir-lab/communication-inclusive/recommandations/${formatTitleForURL(
+                    i18n.language === "ar" ? post.attributes.Title_arabic : post.attributes.Title_french
+                  )}`,
+          }),
+        },
+        {
+          url: `${BASE_URL}/api/bibliotheque-epub-3s?populate=*`,
+          format: (post) => ({
+            title: i18n.language === "ar" ? post.attributes?.Title_arabic : post.attributes?.Title_french,
+            link: `/services-et-droits/bibliotheque-epub3`,
+          }),
+        },
+        {
+          url: `${BASE_URL}/api/services?populate=*`,
+          format: (post) => ({
+            title: i18n.language === "ar" ? post.attributes?.title_arabic : post.attributes?.title_french,
+            link: `/services-et-droits/services/`,
+          }),
+        },
+        {
+          url: `${BASE_URL}/api/audio-and-podcasts?populate=*`,
+          format: (post) => ({
+            title: i18n.language === "ar" ? post.attributes?.Title_arabic : post.attributes?.Title_french,
+            link: `/mediatheque/audio-podcast`,
+          }),
+        },
+        {
+          url: `${BASE_URL}/api/videos?populate=*`,
+          format: (post) => ({
+            title: i18n.language === "ar" ? post.attributes?.Title_arabic : post.attributes?.Title_french,
+            link: `/mediatheque/video`,
+          }),
+        },
+        {
+          url: `${BASE_URL}/api/documents-de-plaidoyers?populate=*`,
+          format: (post) => ({
+            title: i18n.language === "ar" ? post.attributes?.Title_arabic : post.attributes?.Title_french,
+            link: `/savoir-lab/documents-de-plaidoyer`,
+          }),
+        },
+      ];
+  
       let apiSuggestions = [];
-      if (query.trim() !== '') {
-        // Fetch from API
-        const response = await axios.get(`${BASE_URL}/api/post-blogs?populate=*`);
-        const blogPosts = response.data.data;
   
-        // Filter blog posts by title
-        const filteredPosts = blogPosts.filter(post =>
-          post.attributes.Title.toLowerCase().includes(query.toLowerCase())
-        );
+      // Fetch and process data from each API
+      for (const endpoint of apiEndpoints) {
+        const response = await axios.get(endpoint.url);
+        const data = response.data?.data || [];
   
-        apiSuggestions = filteredPosts.map(post => {
-          const subcategory = post.attributes.subcategory?.data?.attributes?.name || 'No Subcategory';
-          const subLink = getSubcategoryLink(subcategory);
-          const formattedTitle = formatTitleForURL(post.attributes.Title);
+        const formattedSuggestions = data
+          .filter(post => post.attributes?.Title_french && post.attributes.Title_french.toLowerCase().includes(query.toLowerCase()))
+          .map(endpoint.format);
   
-          return {
-            title: post.attributes.Title,
-            subcategory: subcategory,
-            link: `${subLink}/${formattedTitle}`
-          };
-        });
+        apiSuggestions = [...apiSuggestions, ...formattedSuggestions];
       }
   
-      // Search in static data
-      const staticSuggestions = [
-        ...ActeurScPlitems,
-        ...Artistesitems,
-        ...Chercheursitems,
-        ...Entrepreneursitems,
-        ...Sportifsitems,
-        ...droitsdata,
-        ...servicesdata,
-        ...eventsitems,
-        ...newsItems,
-        ...volunteerOpportunities,
-        ...chartedata,
-        ...recommandtaionsdata,
-        ...pdfList
-      ]
-        .filter(item =>
-          item.title.toLowerCase().includes(query.toLowerCase())
+      // Filter static data
+      const droitsSuggestions = droitsdata
+  .filter(item => item?.title && item.title.toLowerCase().includes(query.toLowerCase()))
+  .map(item => ({
+    title: item.title,
+    link: `/droits/${formatTitleForURL(item.title)}`, // Specific link logic for droitsdata
+  }));
+
+const servicesSuggestions = servicesdata
+  .filter(item => item?.title && item.title.toLowerCase().includes(query.toLowerCase()))
+  .map(item => ({
+    title: item.title,
+    link: `/services/${formatTitleForURL(item.title)}`, // Specific link logic for servicesdata
+  }));
+
+const volunteerSuggestions = volunteerOpportunities
+  .filter(item => item?.title && item.title.toLowerCase().includes(query.toLowerCase()))
+  .map(item => ({
+    title: item.title,
+    link: `/volunteer/${formatTitleForURL(item.title)}`, // Specific link logic for volunteerOpportunities
+  }));
+
+const charteSuggestions = chartedata
+  .filter(item => item?.title && item.title.toLowerCase().includes(query.toLowerCase()))
+  .map(item => ({
+    title: item.title,
+    link: `/charte/${formatTitleForURL(item.title)}`, // Specific link logic for chartedata
+  }));
+
+const recommandationsSuggestions = recommandtaionsdata
+  .filter(item => item?.title && item.title.toLowerCase().includes(query.toLowerCase()))
+  .map(item => ({
+    title: item.title,
+    link: `/recommandations/${formatTitleForURL(item.title)}`, // Specific link logic for recommandationsdata
+  }));
+const staticPagesSuggestions = staticpages
+  .filter(item => item?.title && item.title.toLowerCase().includes(query.toLowerCase()))
+  .map(item => ({
+    title: item.title,
+    link: item.link, // Use the provided link directly from staticpages
+  }));
+
+const pdfSuggestions = pdfList
+  .filter(item => item?.title && item.title.toLowerCase().includes(query.toLowerCase()))
+  .map(item => ({
+    title: t(item.title),
+    link: `/savoir-lab/documents-de-plaidoyer`, // Specific link logic for pdfList
+  }));
+
+const staticSuggestions = [
+  ...droitsSuggestions,
+  ...servicesSuggestions,
+  ...volunteerSuggestions,
+  ...charteSuggestions,
+  ...recommandationsSuggestions,
+  ...pdfSuggestions,
+];
+
+
+        const staticeventsSuggestions = (
+          (i18n.language === "ar" ? eventsitemsar : eventsitems) || [] // Fallback to an empty array
         )
-        .map(item => ({
-          title: item.title,
-          subcategory: item.subcategory || 'Static Data',
-          link: item.link || '#' // Update with actual link logic if available
-        }));
+          .filter(item => item?.title?.toLowerCase()?.includes(query?.toLowerCase() || "")) // Safeguard all values
+          .map(item => ({
+            title: item.title,
+            link: `/actualites-et-evenements/evenements/${formatTitleForURL(item.title)}`, // Adjusted URL
+          }));
+        
+
+          const staticnewsSuggestions = (
+            (i18n.language === "ar" ? newsItemsar : newsItems) || [] // Ensure fallback to an empty array
+          )
+            .filter(item => item?.title?.toLowerCase()?.includes(query?.toLowerCase() || "")) // Safeguard all possible undefined values
+            .map(item => ({
+              title: item.title,
+              link: `/actualites-et-evenements/actualites/${formatTitleForURL(item.title)}`, // Generate the link
+            }));
+          
+        const staticwikiSuggestions = [
+          ...ActeurScPlitems,
+          ...Artistesitems,
+          ...Chercheursitems,
+          ...Entrepreneursitems,
+          ...Sportifsitems,
+          ...ActeurScPlitemsar,
+          ...Artistesitemsar,
+          ...Chercheursitemsar,
+          ...Entrepreneursitemsar,
+          ...Sportifsitemsar,
+        ]
+          .filter(item => item?.title && item.title.toLowerCase().includes(query.toLowerCase()))
+          .map(item => ({
+            title: item.title,
+            link: `/savoir-lab/wikiphedia/${formatTitleForURL(item.title)}`// Use the actual link logic if available
+          }));
+        
   
       // Combine API and static data suggestions
-      const combinedSuggestions = [...staticSuggestions, ...apiSuggestions];
+      const combinedSuggestions = [...staticSuggestions, ...apiSuggestions,...staticwikiSuggestions,...staticeventsSuggestions,...staticnewsSuggestions,...staticPagesSuggestions];
   
+      // Set state
       setSuggestions(combinedSuggestions);
-      setSearchOpen(true);
+      setSearchOpen(combinedSuggestions.length > 0);
     } catch (error) {
+      console.error('Error fetching suggestions:', error);
       setSuggestions([]);
+      setSearchOpen(false);
     }
   };
+  
+  
   
   
 
@@ -234,13 +417,31 @@ function NavBar() {
     }
   };
 
-
+  
   const handleSuggestionClick = (link) => {
-    window.location.href = link; // Navigate to the blog post
-    setSearchQuery("");
-    setSuggestions([]);
-    setSearchOpen(false);
+    if (link.includes('#')) {
+      // Extract the ID after the hash
+      const [path, hash] = link.split('#');
+      const targetElement = document.getElementById(hash);
+  
+      if (targetElement) {
+        // Scroll to the target element
+        const navbarHeight = document.querySelector('nav').offsetHeight;
+        const offset = targetElement.offsetTop - navbarHeight - 70; // Adjust based on navbar height
+        window.scrollTo({
+          top: offset,
+          behavior: 'smooth',
+        });
+      } else {
+        // If the element doesn't exist, navigate to the page
+        window.location.href = path;
+      }
+    } else {
+      // Navigate to the link for non-anchor suggestions
+      window.location.href = link;
+    }
   };
+  
   
   useEffect(() => {
     const handleScroll = () => {
@@ -408,15 +609,14 @@ function NavBar() {
             <Button variant="outline-success" type="submit">{t('search')}</Button>
           </Form>
           {suggestions.length > 0 && (
-            <ul className="search-suggestions">
-              {suggestions.map((suggestion, index) => (
-              <li key={index} onClick={() => handleSuggestionClick(suggestion.link)}>
-                {suggestion.title} <span className="subcategory">{suggestion.subcategory}</span>
-              </li>
-            ))}
-
-            </ul>
-          )}
+  <ul className="search-suggestions">
+    {suggestions.map((suggestion, index) => (
+      <li key={index} onClick={() => handleSuggestionClick(suggestion.link)}>
+        {t(suggestion.title)} <span className="subcategory">{suggestion.subcategory}</span>
+      </li>
+    ))}
+  </ul>
+)}
         </div>
       )}
     </div>

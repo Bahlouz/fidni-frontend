@@ -51,7 +51,7 @@ const Recommandation = () => {
             return {
               title,
               description: description.replace(/<[^>]*>/g, ''), // Clean HTML tags
-              link: `/savoir-lab/communication-inclusive/charte-nationale/${encodeURIComponent(title || 'No Title')}`
+              link: `/savoir-lab/communication-inclusive/recommandations/${encodeURIComponent(title || 'No Title')}`
             };
           }) || [];
 

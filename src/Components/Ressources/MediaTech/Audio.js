@@ -92,7 +92,7 @@ const Audio = () => {
               <Card.Img className="podcast-img-card" variant="top" src={episode.imageUrl} alt={episode.title} />
               <Card.Body>
                 <Card.Title>{episode.title}</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">{episode.date}</Card.Subtitle>
+                
                 <Card.Text>
                   {expandedDescriptionId === episode.id ? episode.description : `${episode.description.substring(0, 200)}...`}
                 </Card.Text>
