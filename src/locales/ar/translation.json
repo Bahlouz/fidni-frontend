@@ -1,8 +1,8 @@
 {
   "bibepub3": {
-  "title": "مكتبة EPUB3",
+  "title": "مكتبة",
   "description": "ستجدون في هذا القسم معلومات وموارد تتعلق بوثائق EPUB3، بما في ذلك أدلة، أمثلة، وملفات قابلة للتنزيل.",
-  "showepub": "تحميل EPUB3"
+  "showepub": "تحميل "
 },
   "retour":"العودة إلى القائمة",
   "search": "بحث",
@@ -105,7 +105,7 @@
     "services": "الخدمات",
     "rights": "الحقوق",
     "opportunities": "الفرص",
-    "epub":"مكتبة EPUB3",
+    "epub":"مكتبة",
     "savoir_lab": "مختبر المعرفة",
     "accessibility": "إمكانية الوصول",
     "inclusive_communication": "التواصل الشامل",

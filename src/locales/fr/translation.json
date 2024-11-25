@@ -1,9 +1,9 @@
 
 {
   "bibepub3": {
-  "title": "Bibliothèque EPUB3",
+  "title": "Bibliothèque",
   "description": "Vous allez trouver dans cette section des informations et des ressources concernant les documents EPUB3, y compris des guides, des exemples et des fichiers à télécharger.",
-  "showepub": "Télécharger EPUB3"
+  "showepub": "Télécharger "
 },
   "retour":"Retour à la liste",
   "search":"Rechercher",
@@ -106,7 +106,7 @@
     "services": "Services",
     "rights": "Droits",
     "opportunities": "Opportunités",
-    "epub":"Bibliothèque EPUB3",
+    "epub":"Bibliothèque",
     "savoir_lab": "Savoir Lab",
     "accessibility": "Accessibilité",
     "inclusive_communication": "Communication inclusive",

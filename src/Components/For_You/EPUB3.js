@@ -40,12 +40,13 @@ const EPUB3 = () => {
                     const fetchedDoc = data.data.map(post => ({
                         title: i18n.language === 'fr' ? post.attributes.Title_french : post.attributes.Title_arabic,
                         description: i18n.language === 'fr' ? post.attributes.Description_french : post.attributes.Description_arabic,
-                        link: post.attributes.Preview_image_and_file?.data?.find(file => file.attributes.mime === "application/epub+zip")
-                            ? `${BASE_URL}${post.attributes.Preview_image_and_file.data.find(file => file.attributes.mime === "application/epub+zip").attributes.url}`
-                            : '',
+                        link: post.attributes.Preview_image_and_file?.data?.length > 0
+                        ? `${BASE_URL}${post.attributes.Preview_image_and_file.data[0].attributes.url}`  // Use the URL of the first file
+                        : '',
+
                         imageUrl: post.attributes.Preview_image_and_file?.data?.[1]?.attributes?.formats?.large?.url 
                             ? `${BASE_URL}${post.attributes.Preview_image_and_file.data[1].attributes.formats.large.url}` 
-                            : `${BASE_URL}${post.attributes.Preview_image_and_file.data[0].attributes.formats.large.url}`
+                            : ``
                     }));
                 
                     const combinedData = [
