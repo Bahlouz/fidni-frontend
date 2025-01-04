@@ -7,7 +7,7 @@ import backnavhead from "../Assets/back navhead.jpg";
 const ContactUs = () => {
   const { t } = useTranslation(); // Hook to access translation
   const [alert, setAlert] = useState({ show: false, message: '', variant: '' });
-  const BASE_URL = 'http://localhost:1338';
+  const BASE_URL = 'https://admin.fidni.tn';
 
   const handleSubmit = async (e) => {
     e.preventDefault();

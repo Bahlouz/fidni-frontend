@@ -13,7 +13,7 @@ const EPUB3 = () => {
     const [fetchedData, setFetchedData] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const BASE_URL = 'http://localhost:1338';
+    const BASE_URL = 'https://admin.fidni.tn';
 
     useEffect(() => {
         const handleLanguageChange = () => {
@@ -43,7 +43,7 @@ const EPUB3 = () => {
                         link: post.attributes.Preview_image_and_file?.data?.length > 0
                         ? `${BASE_URL}${post.attributes.Preview_image_and_file.data[0].attributes.url}`  // Use the URL of the first file
                         : '',
-
+                    
                         imageUrl: post.attributes.Preview_image_and_file?.data?.[1]?.attributes?.formats?.large?.url 
                             ? `${BASE_URL}${post.attributes.Preview_image_and_file.data[1].attributes.formats.large.url}` 
                             : ``

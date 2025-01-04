@@ -7,7 +7,7 @@ const SingleDroits = () => {
   const { title } = useParams(); // Extract the encoded title from the URL parameters
   const { t, i18n } = useTranslation();
   const [post, setPost] = useState(null);
-  const BASE_URL = 'http://localhost:1338';
+  const BASE_URL = 'https://admin.fidni.tn';
   const textDirection = i18n.language === 'ar' ? 'rtl' : 'ltr';
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

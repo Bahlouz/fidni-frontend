@@ -30,7 +30,7 @@ const DocumentPl = () => {
     const [fetchedData, setFetchedData] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const BASE_URL = 'http://localhost:1338';
+    const BASE_URL = 'https://admin.fidni.tn';
 
     useEffect(() => {
         const handleLanguageChange = () => {

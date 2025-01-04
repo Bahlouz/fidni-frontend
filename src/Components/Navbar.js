@@ -132,7 +132,7 @@ function NavBar() {
   const { loading, error, categories = [], subcategoriesNoCategory = [] } = useCategoriesAndSubCategories();
   const location = useLocation();
   const searchInputRef = useRef(null);
-  const BASE_URL = 'http://localhost:1338';
+  const BASE_URL = 'https://admin.fidni.tn';
 
   const getSubcategoryLink = (subcategoryName) => {
     for (const link of manualLinks) {

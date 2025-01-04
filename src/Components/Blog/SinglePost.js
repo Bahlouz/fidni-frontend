@@ -8,7 +8,7 @@ const SinglePost = () => {
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const BASE_URL = 'http://localhost:1338';
+  const BASE_URL = 'https://admin.fidni.tn';
   const decodedTitle = decodeURIComponent(postTitle);
 
   const fetchPost = async () => {

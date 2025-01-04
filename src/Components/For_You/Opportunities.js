@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import './Opportunities.css';
 import backnavhead from "../../Assets/back navhead.jpg";
 
-const BASE_URL = 'http://localhost:1338';
+const BASE_URL = 'https://admin.fidni.tn';
 
 // Define the local volunteer opportunities with keys for translations
 export const volunteerOpportunities = [

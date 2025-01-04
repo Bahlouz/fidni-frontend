@@ -8,7 +8,7 @@ const Blog = () => {
   const [posts, setPosts] = useState([]);
   const { t ,i18n} = useTranslation(); 
   const textDirection = i18n.language === 'ar' ? 'rtl' : 'ltr';
-  const BASE_URL = 'http://localhost:1338';
+  const BASE_URL = 'https://admin.fidni.tn';
   const [show, setShow] = useState(false);
   const [formData, setFormData] = useState({
     nometprenom: '',

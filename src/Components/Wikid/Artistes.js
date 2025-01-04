@@ -31,7 +31,7 @@ const Artistes = () => {
     const [apiItems, setApiItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const BASE_URL = 'http://localhost:1338';
+    const BASE_URL = 'https://admin.fidni.tn';
     
     const formatDate = (dateString) => {
         const options = { day: '2-digit', year: '2-digit' };

@@ -6,7 +6,7 @@ import { newsItemsar } from './newsItemsar';
 import { useTranslation } from 'react-i18next';
 import Preloader from '../../Preloader';
 
-const BASE_URL = 'http://localhost:1338';
+const BASE_URL = 'https://admin.fidni.tn';
 const tunisianArabicMonths = [
     'جانفي', 'فيفري', 'مارس', 'أفريل', 'ماي', 'جوان',
     'جويلية', 'أوت', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'

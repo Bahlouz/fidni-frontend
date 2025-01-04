@@ -65,7 +65,7 @@ function App() {
   const { toggleTheme, theme } = useTheme();
   const [loading, setLoading] = useState(true);
   const [dataFetched, setDataFetched] = useState(false);
-  const BASE_URL = 'http://localhost:1338';
+  const BASE_URL = 'https://admin.fidni.tn';
   const { i18n } = useTranslation();
 
   // Determine direction based on current language

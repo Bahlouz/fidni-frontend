@@ -19,7 +19,7 @@ export const cardData = [
 const Droits = () => {
   const { t, i18n } = useTranslation();
   const [apiData, setApiData] = useState([]);
-  const BASE_URL = 'http://localhost:1338';
+  const BASE_URL = 'https://admin.fidni.tn';
   const textDirection = i18n.language === 'ar' ? 'rtl' : 'ltr';
 
   useEffect(() => {
