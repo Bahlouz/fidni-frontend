@@ -163,7 +163,7 @@ const VideoPlayerList = () => {
   const { t, i18n } = useTranslation();
   const [videos, setVideos] = useState([]);
   const [expanded, setExpanded] = useState({});
-  const BASE_URL = 'https://admin.fidni.tn';
+  const BASE_URL = 'http://localhost:1338';
 
   useEffect(() => {
     const handleLanguageChange = () => {

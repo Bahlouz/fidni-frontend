@@ -43,7 +43,7 @@ const SingleWikidi = () => {
   const [storyItem, setStoryItem] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const BASE_URL = 'https://admin.fidni.tn';
+  const BASE_URL = 'http://localhost:1338';
   const { storyTitle: encodedTitle } = useParams(); // Get the encoded title from the URL
   const storyTitle = decodeURIComponent(encodedTitle); // Decode the title
 

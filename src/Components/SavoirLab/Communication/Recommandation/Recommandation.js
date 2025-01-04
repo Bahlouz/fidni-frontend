@@ -15,7 +15,7 @@ const Recommandation = () => {
   const textDirection = i18n.language === 'ar' ? 'rtl' : 'ltr';
   const [apiData, setApiData] = useState([]);
   const [combinedData, setCombinedData] = useState([]);
-  const BASE_URL = 'https://admin.fidni.tn';
+  const BASE_URL = 'http://localhost:1338';
 
 
   useEffect(() => {

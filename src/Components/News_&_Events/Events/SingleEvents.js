@@ -14,7 +14,7 @@ const SingleEvents = () => {
     const [eventItem, setEventItem] = useState(null); // State to store the event item
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const BASE_URL = 'https://admin.fidni.tn'; // Replace with your API base URL
+    const BASE_URL = 'http://localhost:1338'; // Replace with your API base URL
 
     const formatDate = (dateString) => {
         if (!dateString) return 'Invalid Date';

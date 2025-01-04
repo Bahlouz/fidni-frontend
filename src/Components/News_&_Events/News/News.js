@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button,Pagination  } from 'react-bootstrap';
 import './News.css';
 import { newsItems as staticNewsItems } from './newsItems';
 import { newsItemsar } from './newsItemsar';
 import { useTranslation } from 'react-i18next';
 import Preloader from '../../Preloader';
 
-const BASE_URL = 'https://admin.fidni.tn';
+const BASE_URL = 'http://localhost:1338';
 const tunisianArabicMonths = [
     'جانفي', 'فيفري', 'مارس', 'أفريل', 'ماي', 'جوان',
     'جويلية', 'أوت', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'
@@ -17,7 +17,9 @@ const News = () => {
     const [apiItems, setApiItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 9; // Number of items per page
+  
     const staticItems = i18n.language === 'fr' ? staticNewsItems : newsItemsar;
     const textDirection = i18n.language === 'ar' ? 'rtl' : 'ltr';
 
@@ -108,84 +110,101 @@ const News = () => {
     const latestStory = sortedItems[0]; // Get the latest story
     const remainingItems = sortedItems.slice(1); // Remaining stories
 
-    if (loading) return <Preloader />;
-    if (error) return <p>Error: {error}</p>;
+    const totalPages = Math.ceil(remainingItems.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedItems = remainingItems.slice(startIndex, startIndex + itemsPerPage);
 
-    return (
-        <Container fluid className="news-container" style={{ direction: textDirection }}>
-            <Container fluid className="news-content">
-                <Row>
-                    <Col>
-                        <h1 className="news-title">{t('news.newstitle')}</h1>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <p className="news-description">{t('news.newsdesc')}</p>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <h2 className="news-une">{t('news.topnews')}</h2>
-                    </Col>
-                </Row>
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
-                {/* Latest Story */}
-                {latestStory && (
-                    <Row>
-                        <Col>
-                            <Card className="mb-4">
-                                <Card.Img className="top-news" variant="top" src={latestStory.imageUrl} />
-                                <Card.Body>
-                                    <Card.Title>{latestStory.title}</Card.Title>
-                                    <Card.Subtitle className="mb-2 text-muted">
-                                        {formatDate(latestStory.formattedDate)}
-                                    </Card.Subtitle>
-                                    <Card.Text
-                                        className="news-content-desc"
-                                        dangerouslySetInnerHTML={{ __html: latestStory.content }}
-                                    />
-                                    <Button
-                                        variant="primary"
-                                        href={`/actualites-et-evenements/actualites/${encodeURIComponent(latestStory.title)}`}
-                                    >
-                                        {t('news.button')}
-                                    </Button>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    </Row>
-                )}
+  if (loading) return <Preloader />;
+  if (error) return <p>Error: {error}</p>;
 
-                {/* Remaining Items */}
-                <Row>
-                    {remainingItems.map((item) => (
-                        <Col md={4} key={item.id} className="mb-4">
-                            <Card className="h-100">
-                                <Card.Img className="img-news" variant="top" src={item.imageUrl} />
-                                <Card.Body>
-                                    <Card.Title>{item.title}</Card.Title>
-                                    <Card.Subtitle className="mb-2 text-muted">
-                                        {formatDate(item.formattedDate)}
-                                    </Card.Subtitle>
-                                    <Card.Text
-                                        className="news-content-desc"
-                                        dangerouslySetInnerHTML={{ __html: item.content }}
-                                    />
-                                    <Button
-                                        variant="primary"
-                                        href={`/actualites-et-evenements/actualites/${encodeURIComponent(item.title)}`}
-                                    >
-                                        {t('news.button')}
-                                    </Button>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    ))}
-                </Row>
-            </Container>
-        </Container>
-    );
+  return (
+    <Container fluid className="news-container" style={{ direction: textDirection }}>
+      <Container fluid className="news-content">
+        {/* Latest Story */}
+        {latestStory && (
+          <Row>
+            <Col>
+              <Card className="mb-4">
+                <Card.Img className="top-news" variant="top" src={latestStory.imageUrl} />
+                <Card.Body>
+                  <Card.Title>{latestStory.title}</Card.Title>
+                  <Card.Subtitle className="mb-2 text-muted">
+                    {formatDate(latestStory.formattedDate)}
+                  </Card.Subtitle>
+                  <Card.Text
+                    className="news-content-desc"
+                    dangerouslySetInnerHTML={{ __html: latestStory.content }}
+                  />
+                  <Button
+                    variant="primary"
+                    href={`/actualites-et-evenements/actualites/${encodeURIComponent(latestStory.title)}`}
+                  >
+                    {t('news.button')}
+                  </Button>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+        )}
+
+        {/* Paginated Items */}
+        <Row>
+          {paginatedItems.map((item) => (
+            <Col md={4} key={item.id} className="mb-4">
+              <Card className="h-100">
+                <Card.Img className="img-news" variant="top" src={item.imageUrl} />
+                <Card.Body>
+                  <Card.Title>{item.title}</Card.Title>
+                  <Card.Subtitle className="mb-2 text-muted">
+                    {formatDate(item.formattedDate)}
+                  </Card.Subtitle>
+                  <Card.Text
+                    className="news-content-desc"
+                    dangerouslySetInnerHTML={{ __html: item.content }}
+                  />
+                  <Button
+                    variant="primary"
+                    href={`/actualites-et-evenements/actualites/${encodeURIComponent(item.title)}`}
+                  >
+                    {t('news.button')}
+                  </Button>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+
+        {/* Pagination Controls */}
+        <Row>
+          <Col>
+            <Pagination className="justify-content-center">
+              <Pagination.Prev
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+              />
+              {[...Array(totalPages)].map((_, index) => (
+                <Pagination.Item
+                  key={index}
+                  active={currentPage === index + 1}
+                  onClick={() => handlePageChange(index + 1)}
+                >
+                  {index + 1}
+                </Pagination.Item>
+              ))}
+              <Pagination.Next
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+              />
+            </Pagination>
+          </Col>
+        </Row>
+      </Container>
+    </Container>
+  );
 };
 
 export default News;

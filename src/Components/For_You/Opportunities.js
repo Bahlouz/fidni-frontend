@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import './Opportunities.css';
 import backnavhead from "../../Assets/back navhead.jpg";
 
-const BASE_URL = 'https://admin.fidni.tn';
+const BASE_URL = 'http://localhost:1338';
 
 // Define the local volunteer opportunities with keys for translations
 export const volunteerOpportunities = [
@@ -85,7 +85,7 @@ const Opportunities = () => {
             })
             .catch(error => {
                 setError(error);
-                console.error("There was an error fetching the opportunities!", error);
+               
             })
             .finally(() => {
                 setLoading(false);
@@ -99,9 +99,7 @@ const Opportunities = () => {
     if (error) {
         return <p>Error: {error.message}</p>;
     }
-    console.log(t('accessible_event'));  // Should return the translated string, e.g., "Accessible Event"
-console.log(t('oit'));               // Should return "Organization of Information Technology"
-console.log(t('accessible_event_description'));  // Should return the description
+    
 
     return (
         <>

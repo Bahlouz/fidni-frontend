@@ -8,7 +8,7 @@ const Blog = () => {
   const [posts, setPosts] = useState([]);
   const { t ,i18n} = useTranslation(); 
   const textDirection = i18n.language === 'ar' ? 'rtl' : 'ltr';
-  const BASE_URL = 'https://admin.fidni.tn';
+  const BASE_URL = 'http://localhost:1338';
   const [show, setShow] = useState(false);
   const [formData, setFormData] = useState({
     nometprenom: '',
@@ -133,10 +133,10 @@ const Blog = () => {
           <div className="all-posts-grid-unique">
             {posts.map((post) => (
               <Card key={post.attributes.titre} className="post-unique">
-                {post.attributes.file?.data?.[0]?.attributes?.formats?.large?.url ? (
-                  <Card.Img className="post-image-unique" variant="top" src={`${BASE_URL}${post.attributes.file.data[0].attributes.formats.large.url}`} />
-                ) : post.attributes.file?.data?.[0]?.attributes?.formats?.thumbnail?.url ? (
-                  <Card.Img className="post-image-unique" variant="top" src={`${BASE_URL}${post.attributes.file.data[0].attributes.formats.thumbnail.url}`}/>
+                {post.attributes.files?.data?.[0]?.attributes?.formats?.large?.url ? (
+                  <Card.Img className="post-image-unique" variant="top" src={`${BASE_URL}${post.attributes.files.data[0].attributes.formats.large.url}`} />
+                ) : post.attributes.files?.data?.[0]?.attributes?.formats?.thumbnail?.url ? (
+                  <Card.Img className="post-image-unique" variant="top" src={`${BASE_URL}${post.attributes.files.data[0].attributes.formats.thumbnail.url}`}/>
                 ) : (
                   <div className="no-image-placeholder">{t('blog.noImage')}</div>
                 )}

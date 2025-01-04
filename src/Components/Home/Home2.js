@@ -6,6 +6,7 @@ import DescriptionOfConcept from "../About/Description/Description";
 import { useTranslation } from "react-i18next"; // Import the hook
 
 const Counter = ({ targetNumber }) => {
+  
   const [count, setCount] = useState(0);
   const { ref, inView } = useInView({
     triggerOnce: true,
@@ -38,7 +39,7 @@ const Counter = ({ targetNumber }) => {
 
 function Home2() {
   const { t, i18n } = useTranslation(); // Initialize translation
-
+  
   // Determine alignment and direction based on current language
   const textAlignment = i18n.language === 'ar' ? 'text-right' : 'text-left';
   const direction = i18n.language === 'ar' ? 'rtl' : 'ltr';
@@ -46,6 +47,7 @@ function Home2() {
   const latestNews = newsItems[0]; // Assuming the first item is the latest news
 
   return (
+    <>
     <Container fluid className="d-flex justify-content-center align-items-center p-0" style={{ minHeight: '100vh', direction: direction }}>
       <section>
         <section className={`statistics-section ${textAlignment} text-center`}>
@@ -76,6 +78,8 @@ function Home2() {
         </section>
       </section>
     </Container>
+    
+  </>
   );
 }
 

@@ -11,7 +11,7 @@ const Audio = () => {
   const { t, i18n } = useTranslation(); // Use translation hook
   const [episodes, setEpisodes] = useState([]);
   const [expandedDescriptionId, setExpandedDescriptionId] = useState(null);
-  const BASE_URL = 'https://admin.fidni.tn';
+  const BASE_URL = 'http://localhost:1338';
 
   useEffect(() => {
     const handleLanguageChange = () => {

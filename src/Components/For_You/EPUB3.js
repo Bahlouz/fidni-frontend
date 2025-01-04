@@ -13,7 +13,7 @@ const EPUB3 = () => {
     const [fetchedData, setFetchedData] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const BASE_URL = 'https://admin.fidni.tn';
+    const BASE_URL = 'http://localhost:1338';
 
     useEffect(() => {
         const handleLanguageChange = () => {

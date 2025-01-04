@@ -8,7 +8,7 @@ const SinglePost = () => {
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const BASE_URL = 'https://admin.fidni.tn';
+  const BASE_URL = 'http://localhost:1338';
   const decodedTitle = decodeURIComponent(postTitle);
 
   const fetchPost = async () => {
@@ -21,7 +21,7 @@ const SinglePost = () => {
       }
       const data = await response.json();
   
-      console.log('API Response:', data); // Check the API response
+   
   
       // Check if the post exists
       if (data.data.length > 0) {
@@ -33,7 +33,7 @@ const SinglePost = () => {
           author: apiPost.nometprenom || 'Unknown',
           content: apiPost.content || [],
           // Extract the image URL from the 'thumbnail' format
-          imageUrl: apiPost.file?.data?.[0]?.attributes?.formats?.thumbnail?.url || '',
+          imageUrl: apiPost.files?.data?.[0]?.attributes?.url || '',
         };
         setPost(postData); // Set the post data
       } else {

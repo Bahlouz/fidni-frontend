@@ -65,7 +65,7 @@ function App() {
   const { toggleTheme, theme } = useTheme();
   const [loading, setLoading] = useState(true);
   const [dataFetched, setDataFetched] = useState(false);
-  const BASE_URL = 'https://admin.fidni.tn';
+  const BASE_URL = 'http://localhost:1338';
   const { i18n } = useTranslation();
 
   // Determine direction based on current language
@@ -74,7 +74,6 @@ function App() {
     const fetchData = async () => {
       try {
         const [blogsResponse, categoriesResponse, subcategoriesResponse] = await Promise.all([
-          fetch(`${BASE_URL}/api/post-blogs?populate=*`),
           fetch(`${BASE_URL}/api/categories?populate=*`),
           fetch(`${BASE_URL}/api/subcategories?populate=*&filters[category][$null]=true`)
         ]);
@@ -145,7 +144,7 @@ function App() {
           <Route path='/services-et-droits/droits' Component={Droits} />
           <Route
           path="/services-et-droits/droits/:title"
-          element={<SingleDroits />}
+          element={<SingleDroits />}  
         />
           <Route path='/services-et-droits/services' Component={Services} />
           <Route path="/services-et-droits/convention" Component={Convention} />

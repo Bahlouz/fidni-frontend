@@ -6,7 +6,7 @@ const useCategoriesAndSubCategories = () => {
   const [subcategoriesNoCategory, setSubcategoriesNoCategory] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const BASE_URL = 'https://admin.fidni.tn';
+  const BASE_URL = 'http://localhost:1338';
   useEffect(() => {
     const fetchCategoriesAndSubCategories = async () => {
       setLoading(true);

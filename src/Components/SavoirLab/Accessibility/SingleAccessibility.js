@@ -8,7 +8,7 @@ const SingleAccessibility = () => {
   const { t ,i18n} = useTranslation();
   const { title } = useParams(); // Extract the title from the URL parameters
   const [post, setPost] = useState(null);
-  const BASE_URL = 'https://admin.fidni.tn';
+  const BASE_URL = 'http://localhost:1338';
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const textDirection = i18n.language === 'ar' ? 'rtl' : 'ltr';
