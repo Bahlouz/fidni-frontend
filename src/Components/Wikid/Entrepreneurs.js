@@ -73,7 +73,7 @@ const Entrepreneurs = () => {
                         const content = i18n.language === 'ar' ? attributes.Content_arabic : attributes.Content_french;
                         const imageUrl = attributes.Image?.data?.attributes?.formats?.large?.url 
                         ? `${BASE_URL}${attributes.Image.data.attributes.formats.large.url}` 
-                        : `${BASE_URL}${attributes.Image.data.attributes.formats.small.url}`;
+                        : ``;
 
                     return { ...post, title, description, content, imageUrl };
                 });
