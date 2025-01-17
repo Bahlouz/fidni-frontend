@@ -47,7 +47,7 @@ function NavBar() {
         { title: 'الخدمات', to: '/services-et-droits/services' },
         { title: 'الحقوق', to: '/services-et-droits/droits' },
         { title: 'فرص التطوع', to: '/services-et-droits/opportunites' },
-        {title : 'مكتبة', to:'services-et-droits/bibliotheque'}
+        {title : 'مكتبة', to:'services-et-droits/bibliotheque-epub3'}
       ]
     },
     {

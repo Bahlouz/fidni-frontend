@@ -37,17 +37,28 @@ const EPUB3 = () => {
                     return response.json();
                 })
                 .then(data => {
-                    const fetchedDoc = data.data.map(post => ({
-                        title: i18n.language === 'fr' ? post.attributes.Title_french : post.attributes.Title_arabic,
-                        description: i18n.language === 'fr' ? post.attributes.Description_french : post.attributes.Description_arabic,
-                        link: post.attributes.Preview_image_and_file?.data?.length > 0
-                        ? `${BASE_URL}${post.attributes.Preview_image_and_file.data[0].attributes.url}`  // Use the URL of the first file
-                        : '',
+                    const fetchedDoc = data.data.map(post => {
+                        const files = post.attributes.Preview_image_and_file?.data || [];
+                        
+                        // Find the first valid link
+                        const link = files.find(file => file.attributes.url)
+                            ? `${BASE_URL}${files.find(file => file.attributes.url).attributes.url}`
+                            : '';
                     
-                        imageUrl: post.attributes.Preview_image_and_file?.data?.[1]?.attributes?.formats?.large?.url 
-                            ? `${BASE_URL}${post.attributes.Preview_image_and_file.data[1].attributes.formats.large.url}` 
-                            : ``
-                    }));
+                        // Find the first valid image URL
+                        const imageFile = files.find(file => file.attributes.formats?.large?.url);
+                        const imageUrl = imageFile
+                            ? `${BASE_URL}${imageFile.attributes.formats.large.url}`
+                            : '';
+                    
+                        return {
+                            title: i18n.language === 'fr' ? post.attributes.Title_french : post.attributes.Title_arabic,
+                            description: i18n.language === 'fr' ? post.attributes.Description_french : post.attributes.Description_arabic,
+                            link,
+                            imageUrl,
+                        };
+                    });
+                    
                 
                     const combinedData = [
                         ...pdfList.map(card => ({
