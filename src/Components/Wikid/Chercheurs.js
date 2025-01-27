@@ -176,7 +176,7 @@ const sortedItems = combinedItems.sort((a, b) =>
         <Card.Body>
           <Card.Title>{latestStory.attributes?.Title || latestStory.title}</Card.Title>
           <Card.Text className="card-text-truncatedd">
-            {getFirstLine(latestStory.attributes?.content || latestStory.content)}
+            
           </Card.Text>
           <Button 
             variant="primary" 
@@ -214,7 +214,7 @@ const sortedItems = combinedItems.sort((a, b) =>
         <Card.Body>
           <Card.Title>{item.attributes?.Title || item.title}</Card.Title>
           <Card.Text className="card-text-truncated">
-            {getFirstLine(item.attributes?.content || item.content)}
+            
           </Card.Text>
           <Button
             variant="primary"

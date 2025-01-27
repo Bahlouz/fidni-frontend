@@ -177,7 +177,7 @@ const remainingItems = sortedItems.filter(item => item.id !== latestStory.id);
         <Card.Body>
           <Card.Title>{latestStory.attributes?.Title || latestStory.title}</Card.Title>
           <Card.Text className="card-text-truncatedd">
-            {getFirstLine(latestStory.attributes?.content || latestStory.content)}
+            
           </Card.Text>
           <Button 
             variant="primary" 
@@ -215,7 +215,7 @@ const remainingItems = sortedItems.filter(item => item.id !== latestStory.id);
         <Card.Body>
           <Card.Title>{item.attributes?.Title || item.title}</Card.Title>
           <Card.Text className="card-text-truncated">
-            {getFirstLine(item.attributes?.content || item.content)}
+            
           </Card.Text>
           <Button
             variant="primary"
